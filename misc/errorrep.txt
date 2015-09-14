@@ -1,0 +1,20 @@
+Error Report (Broken Links, etc)
+--------------------------------
+pkhack.moonside.net
+Jan 16 2003
+
+A *** indicates the error has been fixed
+
+*** Documentation, 0x40200 Area Notes link; the file is 40200notes.txt (link is to 40200NOTES.txt)
+*** Documentation, PSI Damage link; the file is psidmg.txt (link is to psidamage.txt)
+*** Chrestomathy, 1F 21; About the 1F 21 Teleport Table; the file is 1F21table.txt (link is to 1f21table.txt)
+    Chrestomathy, 19 22; window says "undefined"
+    Chrestomathy, 19 23; window says "undefined"
+    Chrestomathy, 1F F1; window says "undefined"
+    Chrestomathy, 1F F2; window says "undefined"
+    Chrestomathy, 1C 10; window says "undefined"
+    Chrestomathy, 1D 14; window says "undefined"
+*** Community, Bios, Tomato; the file is tomato_meeellla.gif (link is to tomato_meeellla.jpg)
+*** Get Started, Math Crash Course; EB ROM is 3,146,240 bytes, not 3,153,920
+
+    Downloads not checked for errors

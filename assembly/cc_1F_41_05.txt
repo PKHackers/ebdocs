@@ -1,0 +1,205 @@
+C4/334A: C2 31        REP #$31          Flags and direct page madness
+C4/334C: 0B           PHD 
+C4/334D: 48           PHA 
+C4/334E: 7B           TDC 
+C4/334F: 69 EE FF     ADC #$FFEE
+C4/3352: 5B           TCD 
+C4/3353: 68           PLA 
+C4/3354: 85 02        STA $02           Store A at $02, multiply A by 2, transfer to X
+C4/3356: 0A           ASL 
+C4/3357: AA           TAX 
+C4/3358: AD 77 98     LDA $9877         A = $9877, X = 0x02
+C4/335B: 4A           LSR               Divide by eight, clear carry, add $C3E232 (0x3E432) (0x0001)
+C4/335C: 4A           LSR 
+C4/335D: 4A           LSR 
+C4/335E: 18           CLC 
+C4/335F: 7F 30 E2 C3  ADC $C3E230,X
+C4/3363: 85 10        STA $10           Store result in $10.
+C4/3365: A5 02        LDA $02           A = 1
+C4/3367: C9 04 00     CMP #$0004        Always not equal in this case
+C4/336A: D0 10        BNE $337C
+C4/336C: AD 7B 98     LDA $987B
+C4/336F: 1A           INC 
+C4/3370: 4A           LSR 
+C4/3371: 4A           LSR 
+C4/3372: 4A           LSR 
+C4/3373: 18           CLC 
+C4/3374: 7F 40 E2 C3  ADC $C3E240,X
+C4/3378: 85 04        STA $04
+C4/337A: 80 0D        BRA $3389
+C4/337C: AD 7B 98     LDA $987B         A = $987B, X = 0x02
+C4/337F: 4A           LSR               Divide by eight, clear carry, add $C3E242 (0x3E442) (0xFFFF)
+C4/3380: 4A           LSR 
+C4/3381: 4A           LSR 
+C4/3382: 18           CLC 
+C4/3383: 7F 40 E2 C3  ADC $C3E240,X
+C4/3387: 85 04        STA $04           Store A at $04
+C4/3389: A5 02        LDA $02           Store 0x01 at $0E
+C4/338B: 85 0E        STA $0E
+C4/338D: AC 89 98     LDY $9889         Y = $9889
+C4/3390: A5 04        LDA $04           A = ($987B / 8) + 0xFFFF.
+C4/3392: 0A           ASL               Multiply by eight.
+C4/3393: 0A           ASL 
+C4/3394: 0A           ASL 
+C4/3395: AA           TAX               X = 8 * (($987B / 8) + 0xFFFF)
+C4/3396: A5 10        LDA $10           A = ($9877 / 8) + 0x0001
+C4/3398: 0A           ASL 
+C4/3399: 0A           ASL 
+C4/339A: 0A           ASL               A = 8 * (($9877 / 8) + 0x0001)
+C4/339B: 22 D7 5C C0  JSR $C05CD7       A = 8 * (($9877 / 8) + 0x0001); X = 8 * (($987B / 8) + 0xFFFF)
+
+C0/5CD7: C2 31        REP #$31
+C0/5CD9: 0B           PHD 
+C0/5CDA: 48           PHA 
+C0/5CDB: 7B           TDC 
+C0/5CDC: 69 EC FF     ADC #$FFEC
+C0/5CDF: 5B           TCD 
+C0/5CE0: 68           PLA 
+C0/5CE1: 86 04        STX $04
+C0/5CE3: 85 12        STA $12
+C0/5CE5: A6 22        LDX $22
+C0/5CE7: 86 10        STX $10
+C0/5CE9: 9C A4 5D     STZ $5DA4
+C0/5CEC: 98           TYA 
+C0/5CED: 0A           ASL 
+C0/5CEE: AA           TAX 
+C0/5CEF: BD 6E 2B     LDA $2B6E,X
+C0/5CF2: 85 02        STA $02
+C0/5CF4: 0A           ASL 
+C0/5CF5: 85 0E        STA $0E
+C0/5CF7: A6 0E        LDX $0E
+C0/5CF9: A5 12        LDA $12
+C0/5CFB: 38           SEC 
+C0/5CFC: FF 1F 2A C4  SBC $C42A1F,X
+C0/5D00: A8           TAY 
+C0/5D01: 8C AC 5D     STY $5DAC
+C0/5D04: A6 0E        LDX $0E
+C0/5D06: A5 04        LDA $04
+C0/5D08: 38           SEC 
+C0/5D09: FF 41 2A C4  SBC $C42A41,X
+C0/5D0D: A6 0E        LDX $0E
+C0/5D0F: 18           CLC 
+C0/5D10: 7F EB 2A C4  ADC $C42AEB,X
+C0/5D14: 85 0E        STA $0E
+C0/5D16: 8D AE 5D     STA $5DAE
+C0/5D19: A6 10        LDX $10
+C0/5D1B: 8A           TXA 
+C0/5D1C: C9 01 00     CMP #$0001
+C0/5D1F: F0 25        BEQ $5D46
+C0/5D21: C9 00 00     CMP #$0000
+C0/5D24: F0 27        BEQ $5D4D
+C0/5D26: C9 03 00     CMP #$0003
+C0/5D29: F0 2C        BEQ $5D57
+C0/5D2B: C9 02 00     CMP #$0002
+C0/5D2E: F0 2D        BEQ $5D5D
+C0/5D30: C9 05 00     CMP #$0005
+C0/5D33: F0 32        BEQ $5D67
+C0/5D35: C9 04 00     CMP #$0004
+C0/5D38: F0 34        BEQ $5D6E
+C0/5D3A: C9 07 00     CMP #$0007
+C0/5D3D: F0 39        BEQ $5D78
+C0/5D3F: C9 06 00     CMP #$0006
+C0/5D42: F0 3A        BEQ $5D7E
+C0/5D44: 80 40        BRA $5D86
+C0/5D46: A6 02        LDX $02
+C0/5D48: A5 0E        LDA $0E
+C0/5D4A: 20 D0 56     JSR $56D0
+C0/5D4D: A6 02        LDX $02
+C0/5D4F: AD AC 5D     LDA $5DAC
+C0/5D52: 20 03 55     JSR $5503
+C0/5D55: 80 2F        BRA $5D86
+C0/5D57: A6 02        LDX $02
+C0/5D59: 98           TYA 
+C0/5D5A: 20 9C 55     JSR $559C
+C0/5D5D: A6 02        LDX $02
+C0/5D5F: AD AE 5D     LDA $5DAE
+C0/5D62: 20 D0 56     JSR $56D0
+C0/5D65: 80 1F        BRA $5D86
+C0/5D67: A6 02        LDX $02
+C0/5D69: A5 0E        LDA $0E
+C0/5D6B: 20 39 56     JSR $5639
+C0/5D6E: A6 02        LDX $02
+C0/5D70: AD AC 5D     LDA $5DAC
+C0/5D73: 20 9C 55     JSR $559C
+C0/5D76: 80 0E        BRA $5D86
+C0/5D78: A6 02        LDX $02
+C0/5D7A: 98           TYA 
+C0/5D7B: 20 03 55     JSR $5503
+C0/5D7E: A6 02        LDX $02
+C0/5D80: AD AE 5D     LDA $5DAE
+C0/5D83: 20 39 56     JSR $5639
+C0/5D86: AD A4 5D     LDA $5DA4
+C0/5D89: 2B           PLD 
+C0/5D8A: 6B           RTL 
+
+C4/339F: 29 82 00     AND #$0082
+C4/33A2: C9 82 00     CMP #$0082
+C4/33A5: D0 16        BNE $33BD
+C4/33A7: A5 02        LDA $02
+C4/33A9: 0A           ASL 
+C4/33AA: AA           TAX 
+C4/33AB: BF 30 E2 C3  LDA $C3E230,X
+C4/33AF: 18           CLC 
+C4/33B0: 65 10        ADC $10
+C4/33B2: 85 10        STA $10
+C4/33B4: A5 04        LDA $04
+C4/33B6: 18           CLC 
+C4/33B7: 7F 40 E2 C3  ADC $C3E240,X
+C4/33BB: 85 04        STA $04
+C4/33BD: A6 04        LDX $04
+C4/33BF: A5 10        LDA $10
+C4/33C1: 22 77 74 C0  JSR $C07477
+C4/33C5: C2 20        REP #$20
+C4/33C7: 29 FF 00     AND #$00FF
+C4/33CA: AA           TAX 
+C4/33CB: E0 FF 00     CPX #$00FF
+C4/33CE: D0 0F        BNE $33DF
+C4/33D0: A6 04        LDX $04
+C4/33D2: A5 10        LDA $10
+C4/33D4: 1A           INC 
+C4/33D5: 22 77 74 C0  JSR $C07477
+C4/33D9: C2 20        REP #$20
+C4/33DB: 29 FF 00     AND #$00FF
+C4/33DE: AA           TAX 
+C4/33DF: E0 FF 00     CPX #$00FF
+C4/33E2: D0 0F        BNE $33F3
+C4/33E4: A6 04        LDX $04
+C4/33E6: A5 10        LDA $10
+C4/33E8: 3A           DEC 
+C4/33E9: 22 77 74 C0  JSR $C07477
+C4/33ED: C2 20        REP #$20
+C4/33EF: 29 FF 00     AND #$00FF
+C4/33F2: AA           TAX 
+C4/33F3: E0 FF 00     CPX #$00FF
+C4/33F6: F0 44        BEQ $343C
+C4/33F8: E0 05 00     CPX #$0005
+C4/33FB: D0 3F        BNE $343C
+C4/33FD: A9 00 00     LDA #$0000
+C4/3400: 85 06        STA $06
+C4/3402: A9 CF 00     LDA #$00CF
+C4/3405: 85 08        STA $08
+C4/3407: AD BC 5D     LDA $5DBC
+C4/340A: 29 FF 7F     AND #$7FFF
+C4/340D: 18           CLC 
+C4/340E: 65 06        ADC $06
+C4/3410: 85 06        STA $06
+C4/3412: AD BE 5D     LDA $5DBE
+C4/3415: 8D DC 5D     STA $5DDC
+C4/3418: A5 06        LDA $06
+C4/341A: 85 0A        STA $0A
+C4/341C: A5 08        LDA $08
+C4/341E: 85 0C        STA $0C
+C4/3420: A0 02 00     LDY #$0002
+C4/3423: B7 0A        LDA [$0A],Y
+C4/3425: A8           TAY 
+C4/3426: A7 0A        LDA [$0A]
+C4/3428: 85 06        STA $06
+C4/342A: 84 08        STY $08
+C4/342C: A5 06        LDA $06
+C4/342E: 8D DE 5D     STA $5DDE
+C4/3431: A5 08        LDA $08
+C4/3433: 8D E0 5D     STA $5DE0
+C4/3436: A9 FE FF     LDA #$FFFE
+C4/3439: 8D 62 5D     STA $5D62
+C4/343C: 2B           PLD 
+C4/343D: 6B           RTL 

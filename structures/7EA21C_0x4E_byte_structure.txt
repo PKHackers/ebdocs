@@ -1,0 +1,211 @@
+0x4E BYTE STRUCTURE
+-------------------
+Starts at 7EA21C in WRAM.
+Contains enemies in the current battle and stats.
+
+Yes, there are duplications of functionality.
+I'm not totally sure why, but I think they're for in-battle changes.
+
+The resistances ARE in a different order from how they were in the
+enemy data. No idea why, maybe an artifact of the order in which
+elemental attacks were implemented.
+
+Relevant routine:
+C2B6EB - Copies enemy data into 7EA21C for in-battle use?
+
+Observation on shield health:
+  Newly created shields can withstand three hits. Stacking the same type 
+  of shield will increase the number of hits the shield can take by 3, to
+  a maximum of eight hits.
+
+
+
+UPDATE:
+Technically this starts at 7E9FAC, and the first eight 0x4E blocks are 
+used for party members - the Chosen Four and combat NPCs.
+
+
+
+
+
+     00: Character number for the Chosen Four
+         Enemy number for NPCs and enemies
+
+     02: Battle sprite
+
+     04: Current battle action
+
+     06: Current action, out of the four Action slots for enemies
+         - This is used by the "In Order" and "Staggered" battle action sequences.
+         - Legal values are 0-3.
+
+     08: Current battle action's argument
+
+     0A: Current target?
+
+     0B: "The" flag
+
+     0C: Incapacitation flag (LOOK INTO THIS - VERIFY SEMANTICS)
+         - 00 if incapacitated (Unconscious, maybe Diamondized? Other status ailments?)
+         - 01 if alive
+
+     0D: ?
+
+     0E: Ally/Opponent flag
+         - 00 for allies (fighting on your side)
+         - 01 for opponents (attacking you)
+
+     0F: Character number for NPCs ([1C 02] listing)
+         - 0x00 for the Chosen Four and ordinary enemies
+         - 0xD5 for Tiny Li'l Ghost
+         - 0xD7 for Buzz Buzz
+
+     10: Character number for Chosen Four? (redundant?)
+
+11 - 12: HP (current)
+13 - 14: HP (rolling target)
+15 - 16: HP (max)
+17 - 18: PP (current)
+19 - 1A: PP (rolling target)
+1B - 1C: PP (max)
+
+     1D: Status ailments
+         01 = Unconscious
+         02 = Diamondized
+         03 = Paralyzed
+         04 = Nauseous
+         05 = Poisoned
+         06 = Sunstroke
+         07 = Sniffling
+
+     1E: Status ailments
+         01 = Mushroomized
+         02 = Possessed
+
+     1F: Status ailments
+         01 = Asleep
+         02 = Crying
+         03 = Immobilized
+         04 = Solidified
+
+     20: Status ailments
+         01 = Feeling strange
+
+     21: Status ailments
+         "Can't concentrate" countdown
+
+     22: Status ailments
+         01 = Homesick
+
+     23: Current type of shield
+         00 = None
+         01 = PSI reflecting      (PSI Shield Beta)
+         02 = PSI cancelling      (PSI Shield Alpha)
+         03 = Physical reflecting (Shield Beta)
+         04 = Physical blocking   (Shield Alpha)
+
+     24: Guard state
+         00 = Normal
+         01 = On guard
+
+     25: Shield health
+
+26 - 27: Offense
+28 - 29: Defense
+2A - 2B: Speed
+2C - 2D: Guts
+2E - 2F: Luck
+     30: Vitality (0x00 for enemies)
+     31: IQ (Enemy Data Unknown H)
+     32: Offense
+     33: Defense
+     34: Speed
+     35: Guts
+     36: Luck
+     37: Effectiveness of Paralysis    C2B639 used on value before storing
+     38: Effectiveness of PSI Freeze   C2B608 "
+     39: Effectiveness of PSI Flash    C2B639 "
+     3A: Effectiveness of PSI Fire     C2B608 "
+     3B: Effectiveness of Brainshock   C2B639 "
+     3C: Effectiveness of Hypnosis     C2B639 "
+
+         C2/B608: 0 = 99% (255/256)
+                  1 = 70% (179/256)
+                  2 = 40% (102/256)
+                  3 =  5% ( 13/256)
+
+         C2/B639: 0 = 99% (255/256)
+                  1 = 50% (128/256)
+                  2 = 10% ( 26/256)
+                  3 =  0% (  0/256)
+
+         The "Effectiveness of Brainshock" is defined as:
+            0x03 - (Effectiveness of Hypnosis/Brainshock in enemy data)
+         The "Hypnosis/Brainshock" value in enemy data thus results in these effectiveness values:
+
+              |----------|------------|
+              | Hypnosis | Brainshock |
+         |----|----------|------------|
+         | 00 |   99 %   |     0 %    |
+         | 01 |   50 %   |    10 %    |
+         | 02 |   10 %   |    50 %    |
+         | 03 |    0 %   |    99 %    |
+         |----|----------|------------|
+
+3D - 3E: Money
+3F - 42: Experience
+     43: Battle sprite (out of a set of loaded-for-current-battle enemy sprites, it would seem)
+     44: Battle sprite X position
+     45: Battle sprite Y position
+
+     4C: Enemy number
+
+
+
+Starting status (enemy-root + 0x59)
+
+  0x01 --> B8E5 --> X = 0x0002, A = $02, JSR 9CDC --> B92C           PSI Shield Alpha
+  0x02 --> B8EF --> X = 0x0001, A = $02, JSR 9CDC --> B92C           PSI Shield Beta
+  0x03 --> B8F9 --> X = 0x0004, A = $02, JSR 9CDC --> B92C           Shield Alpha
+  0x04 --> B903 --> X = 0x0003, A = $02, JSR 9CDC --> B92C           Shield Beta
+  0x05 --> B90D --> SEP 20, A = 0x01, X = $02, STA $001F,X --> B92C  Asleep
+  0x06 --> B918 --> SEP 20, A = 0x04, X = $02, STA $0021,X --> B92C  Can't concentrate
+  0x07 --> B923 --> SEP 20, A = 0x01, X = $02, STA $0020,X --> B92C  Feeling strange
+  else --> B92C
+
+
+
+"37: Weakness to Paralysis" is used in:
+  C2/8770 (Battle action: Spy)
+  C2/89CE (Battle action: Try to inflict diamondization)
+  C2/8A92 (Battle action: Try to inflict paralysis)
+  C2/8D5A (Battle action: Try to make the target unable to concentrate)
+  C2/9FFE (Battle action: Paralysis A)
+  C2/A902 (Battle action: Try to inflict solidification)
+  C2/A953 (Battle action: Try to inflict poison)
+
+"38: Weakness to PSI Freeze" is used in:
+  C2/8770 (Battle action: Spy)
+  C2/8B6D (Battle action: Try to inflict sniffling)
+  C2/95CF (PSI Freeze (general))
+
+"39: Weakness to PSI Flash" is used in:
+  C2/8770 (Battle action: Spy)
+  C2/8C69 (Battle action: Try to inflict crying)
+  C2/98A1 (Related to weakness to PSI Flash)
+
+"3A: Weakness to PSI Fire" is used in:
+  C2/8770 (Battle action: Spy)
+  C2/900B (Battle action: 350 +- 25% fire damage)
+  C2/957A (PSI Fire (general))
+  C2/A99C (Battle action: 800 +- 25% fire damage)
+
+"3B: Weakness to Brainshock" is used in:
+  C2/8770 (Battle action: Spy)
+  C2/A056 (Battle action: Brainshock A)
+
+"3C: Weakness to Hypnosis" is used in:
+  C2/8770 (Battle action: Spy)
+  C2/9F06 (Battle action: Hypnosis A)
+
+.

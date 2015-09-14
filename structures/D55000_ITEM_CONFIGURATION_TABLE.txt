@@ -1,0 +1,61 @@
+Items Table Format
+By AnyoneEB
+Last updated 2004-11-06.13:52:50-0500
+
+All numbers in hex unless marked as "dec".
+Range | Meaning
+00-18 | Name of item in plain EB text
+  19  | Type of item. See misc/txt/item_types.txt
+1A-1B | Cost of item. If zero, item may not be sold or dropped.
+  1C  | "Ownership" byte. Each bit has a distinct meaning:
+      |   1C|01 = Ness can use
+      |   1C|02 = Paula can use
+      |   1C|04 = Jeff can use
+      |   1C|08 = Poo can use
+      |   1C|10 = Item is source or target of item tranformation
+      |   1C|20 = "Give" command disabled
+      |   1C|40 = Unknown
+      |   1C|80 = Item disappears after use
+1D-1E | Effect. See effects.txt. See action editor.
+  1F  | "Strength" different depending on type. See below.
+  20  | "Extra Power Increase" different depending on type. See below.
+  21  | "Extra Power" different depending on type. See below.
+  22  | "Special" different depending on type. See below.
+23-26 | Text address called when Goods-->Help menu item is selected
+
+Known meanings of bytes 20-23 for various types. If the type or byte
+is not mentioned in this list it is either unknown or unused.
+ITEM TYPE NUMBERS ARE LISTED IN DECIMAL.
+
+Type 4:
+STR = Game Sprite Character Table entry(?)
+
+Type 8 (broken item):
+EPI: IQ required to fix item
+EPW: Index of fixed item
+
+Food Items (types 32, 36, 40, and 44):
+EPI: Regular HP recover
+EPW: Poo HP recover
+
+Armor Items:
+Type 20:
+STR: Defence
+EPW: Speed
+SPE: Protection
+
+Type 24:
+STR: Defence
+EPW: Luck
+SPE: Protection
+
+Type 28:
+STR: Defence
+EPW: Luck
+SPE: Protection
+
+Weapon Items (types 16 and 17):
+STR: Offense
+EPI: Poo Offense (unsure for type 17)
+EPW: Guts (unsure for type 17)
+SPE: Miss Rate

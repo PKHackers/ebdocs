@@ -1,0 +1,319 @@
+  0 - NORMAL - No effect
+  1 - NORMAL - Use item, no effect
+  2 - NORMAL - Use item, no effect
+  3 - NORMAL - Wrong person tries item
+  4 - NORMAL - Bash command
+  5 - NORMAL - Shoot command
+  6 - NORMAL - Spy command
+  7 - NORMAL - Pray command
+  8 - NORMAL - Guard command
+  9 - NORMAL - No effect
+ 10 - PSI - PSI FAVORITE Alpha
+ 11 - PSI - PSI FAVORITE Beta
+ 12 - PSI - PSI FAVORITE Gamma
+ 13 - PSI - PSI FAVORITE Omega
+ 14 - PSI - PSI Fire Alpha
+ 15 - PSI - PSI Fire Beta
+ 16 - PSI - PSI Fire Gamma
+ 17 - PSI - PSI Fire Omega
+ 18 - PSI - PSI Freeze Alpha
+ 19 - PSI - PSI Freeze Beta
+ 20 - PSI - PSI Freeze Gamma
+ 21 - PSI - PSI Freeze Omega
+ 22 - PSI - PSI Thunder Alpha
+ 23 - PSI - PSI Thunder Beta
+ 24 - PSI - PSI Thunder Gamma
+ 25 - PSI - PSI Thunder Omega
+ 26 - PSI - PSI Flash Alpha
+ 27 - PSI - PSI Flash Beta
+ 28 - PSI - PSI Flash Gamma
+ 29 - PSI - PSI Flash Omega
+ 30 - PSI - PSI Starstorm Alpha
+ 31 - PSI - PSI Starstorm Beta
+ 32 - PSI - Lifeup Alpha
+ 33 - PSI - Lifeup Beta
+ 34 - PSI - Lifeup Gamma
+ 35 - PSI - Lifeup Omega
+ 36 - PSI - Healing Alpha
+ 37 - PSI - Healing Beta
+ 38 - PSI - Healing Gamma
+ 39 - PSI - Healing Omega
+ 40 - PSI - Shield Alpha
+ 41 - PSI - Shield Beta
+ 42 - PSI - Shield Sigma
+ 43 - PSI - Shield Omega
+ 44 - PSI - PSI Shield Alpha
+ 45 - PSI - PSI Shield Beta
+ 46 - PSI - PSI Shield Sigma
+ 47 - PSI - PSI Shield Omega
+ 48 - PSI - Offense up Alpha
+ 49 - PSI - Offense up Beta
+ 50 - PSI - Defense down Alpha
+ 51 - PSI - Defense down Beta
+ 52 - PSI - Hypnosis Alpha
+ 53 - PSI - Hypnosis Beta
+ 54 - PSI - Magnet Alpha
+ 55 - PSI - Magnet Beta
+ 56 - PSI - Paralysis Alpha
+ 57 - PSI - Paralysis Beta
+ 58 - PSI - Brainshock Alpha
+ 59 - PSI - Brainshock Beta
+ 60 - PSI - Teleport Alpha
+ 61 - PSI - Teleport Beta
+ 62 - CALL - Call for help
+ 63 - CALL - Sow seeds around
+ 64 - NORMAL - Explode into bits
+ 65 - NORMAL - Burst into flames
+ 66 - NORMAL - Steal an item
+ 67 - NORMAL - Freeze you in time
+ 68 - NORMAL - Glare with one's eerie eyes
+ 69 - NORMAL - Generate a mysterious electric field
+ 70 - NORMAL - Stumble, but fire a strange beam
+ 71 - NORMAL - Burp and blow nauseating breath
+ 72 - NORMAL - Sting with one's poison stinger
+ 73 - NORMAL - Give the kiss of death
+ 74 - NORMAL - Exhale one's arctic-cold breath
+ 75 - NORMAL - Scatter some spores
+ 76 - NORMAL - Possess in a frightening manner
+ 77 - NORMAL - Sprinkle wonderful-smelling powder
+ 78 - NORMAL - Scatter some mold spores
+ 79 - NORMAL - Employ a binding attack
+ 80 - NORMAL - Spit out a sticky mucus
+ 81 - NORMAL - Spew Fly Honey out of his mouth
+ 82 - NORMAL - Shoot spider silk out of its body
+ 83 - NORMAL - Say something really scary
+ 84 - NORMAL - Do something very mysterious
+ 85 - NORMAL - Disrupt your senses
+ 86 - NORMAL - Size up the situation
+ 87 - NORMAL - Exhale a blast of stinky breath
+ 88 - NORMAL - Summon a storm
+ 89 - NORMAL - Spill some scalding hot espresso
+ 90 - NORMAL - Play a haunting melody
+ 91 - NORMAL - Dispense an extinguising blast
+ 92 - NORMAL - Use a Crashing Boom Bang attack
+ 93 - NORMAL - Shoot out a spray of fire
+ 94 - NORMAL - Breathe fire
+ 95 - NORMAL - Make something spin around
+ 96 - NORMAL - Lose one's temper
+ 97 - NORMAL - Say something nasty
+ 98 - NORMAL - Use a vacuum attack
+ 99 - NORMAL - Replenish a fuel supply
+100 - NORMAL - Bite using poisonous fangs
+101 - NORMAL - Fire a missile, making oneself dizzy
+102 - NORMAL - Start a continuous attack
+103 - NORMAL - Be on guard
+104 - NORMAL - Spew out a flaming fireball
+105 - NORMAL - Rush in and inter-twine with target
+106 - NORMAL - Attack with a crushing chop
+107 - NORMAL - Grapple and use a submission hold
+108 - NORMAL - Rev and accelerate
+109 - NORMAL - Brandish a knife
+110 - NORMAL - Tear into target
+111 - NORMAL - Use a biting attack
+112 - NORMAL - Claw with one's sharp nails
+113 - NORMAL - Swing one's tail very hard
+114 - NORMAL - Growl and lunge forward
+115 - NORMAL - Wield a shopping bag
+116 - NORMAL - Swing a club
+117 - NORMAL - Generate a tornado
+118 - NORMAL - Spray a gigantic blast of water
+119 - NORMAL - Flash a menacing smile
+120 - NORMAL - Start laughing hysterically
+121 - NORMAL - Edge closer
+122 - NORMAL - Whisper, "3..."
+123 - NORMAL - Murmur, "2..."
+124 - NORMAL - Mutter,"1..."
+125 - NORMAL - Fall down
+126 - NORMAL - Be absentminded
+127 - NORMAL - Generate a burst steam
+128 - NORMAL - Be wobbly
+129 - NORMAL - Be reeling
+130 - NORMAL - Have a big grin on one's face
+131 - NORMAL - Take deep breaths for the next assault
+132 - NORMAL - Send a greeting
+133 - NORMAL - Make a piercing howl
+134 - NORMAL - Say "tick-tock"
+135 - ITEM - Food Effect
+136 - ITEM - Food Effect (Restore HP)
+137 - ITEM - Food Effect (Restore HP)
+138 - ITEM - Food Effect (Restore HP)
+139 - ITEM - Food Effect (Restore HP)
+140 - ITEM - Item [Hand-Aid]
+141 - ITEM - Food Effect (Restore HP)
+142 - ITEM - Food Effect (Recover PP)
+143 - ITEM - Food Effect (Recover PP)
+144 - ITEM - Food Effect (Restore HP)
+145 - ITEM - Food Effect (Defense up 1)
+146 - ITEM - Food Effect (Restore HP)
+147 - ITEM - Food Effect (Restore HP)
+148 - ITEM - Food Effect
+149 - ITEM - Item [Wet Towel]
+150 - ITEM - Item [Refreshing herb]
+151 - ITEM - Item [Secret herb]
+152 - ITEM - Item [Cup of Lifenoodles]
+153 - ITEM - Item [Unknown]
+154 - ITEM - Food Effect (IQ up 1)
+155 - ITEM - Food Effect (Guts up 1)
+156 - ITEM - Food Effect (Speed up 1)
+157 - ITEM - Food Effect (Vitality up 1)
+158 - ITEM - Food Effect (Luck up 1)
+159 - ITEM - Use the item [Counter-PSI unit]
+160 - ITEM - Use the item [Shield Killer]
+161 - ITEM - Use the item [HP-Sucker]
+162 - ITEM - Lash out with the item [Mummy Wrap]
+163 - ITEM - Fire the item [Bottle Rocket]
+164 - ITEM - Fire the item [Big Bottle Rocket]
+165 - ITEM - Fire the item [Multi Bottle Rocket]
+166 - ITEM - Lash out with the item [Handbag strap]
+167 - ITEM - Throw the item [Bomb]
+168 - ITEM - Throw the item [Super Bomb]
+169 - ITEM - Use the item [Slime Generator]
+170 - ITEM - Use the item [Yogurt Dispenser]
+171 - ITEM - Take out a snake and throw it [Snake bag]
+172 - ITEM - Throw the item [Pair of Dirty socks]
+173 - ITEM - Throw the item [Stag Beetle
+174 - ITEM - Use the item [Toothbrush]
+175 - ITEM - Use the item [Pharaoh's Curse]
+176 - ITEM - Use the item [Hungry HP-Sucker]
+177 - ITEM - Sprinkle the item [Bag of Dragonite]
+178 - ITEM - Spray a blast of [Insecticide Spray]
+179 - ITEM - Spray a blast of [Xterminator Spray]
+180 - ITEM - Spray a blast of [Rust promoter]
+181 - ITEM - Spray a blast of [Rust Promoter DX]
+182 - ITEM - Use the item [Sudden guts pill]
+183 - ITEM - Use the item [Defense spray]
+184 - ITEM - Use the item [Defense Shower]
+185 - ITEM - Use the item [Teleport Box]
+186 - ITEM - Use the item [Ruler]
+187 - ITEM - Use the item [Protractor]
+188 - ITEM - Item - [Pak of Bubble Gum] effect
+189 - ITEM - Item - [Fly Honey] effect
+190 - ITEM - Put the item on one's nose [Piggy nose]
+191 - ITEM - Use the item [For Sale sign]
+192 - ITEM - Item - [Shyness book] effect
+193 - ITEM - Feel sad and empty [Picture postcard]
+194 - NORMAL - *Beta testing team's error message*
+195 - ITEM - Item - [Chick] effect
+196 - ITEM - Item - [Chicken] effect
+197 - ITEM - Item - [ATM card] effect
+198 - ITEM - Place the item on the floor [Zombie paper]
+199 - ITEM - Use the item [Hawk Eye]
+200 - ITEM - Item - [Bicycle] effect
+201 - NORMAL - Emit a glorious light
+202 - NORMAL - Use an electrical shock attack
+203 - NORMAL - Scatter one's pollen around
+204 - NORMAL - Reach out with one's icy hand
+205 - NORMAL - Play flute with one's poisonous breath
+206 - NORMAL - Spew exhaust fumes
+207 - NORMAL - Start laughing maniacally
+208 - NORMAL - Breath in through one's flute
+209 - NORMAL - Leap forward and spread one's wings
+210 - NORMAL - Become friendly and affectionate
+211 - NORMAL - Make a loud rumble
+212 - NORMAL - Give target a great big hug
+213 - NORMAL - Let loose with a hacking cough
+214 - NORMAL - Use one's misery attack
+215 - NORMAL - Utilize paint attack
+216 - NORMAL - Come out swinging
+217 - NORMAL - Scratch with one's claws
+218 - NORMAL - Peck at target's eyes
+219 - NORMAL - Ram and trample
+220 - NORMAL - Throw a punch
+221 - NORMAL - Spit one's pumpkin seeds
+222 - NORMAL - Fire a beam
+223 - NORMAL - Jab with a spear
+224 - NORMAL - Stomp with one's huge foot
+225 - NORMAL - Swing one's hula hoop
+226 - NORMAL - Charge forward
+227 - NORMAL - Shred fiercely on a skateboard
+228 - NORMAL - Bite target hard (Diamondize)
+229 - NORMAL - Grumble about today's youth
+230 - NORMAL - Start lecturing target
+231 - NORMAL - Scowl sharply
+232 - NORMAL - Vent a terrible odor
+233 - NORMAL - Shout in a loud voice
+234 - NORMAL - Shriek a war cry
+235 - NORMAL - Knit one's brow
+236 - NORMAL - Random Text [Clumsy Robot antics]
+237 - NORMAL - Scatter some spores
+238 - NORMAL - Use a biting attack
+239 - ITEM - Equip weapon and attack
+240 - ITEM - Equip armor
+241 - NORMAL - Shoot a night-time stuffiness beam
+242 - NORMAL - Coil around target and attack
+243 - NORMAL - Event [Clumsy Robot defeat]
+244 - NORMAL - Event [Master Barf defeat]
+245 - CALL - Enemy AI Extender function
+246 - ITEM - Equip weapon and attack (Duplicate?)
+247 - ITEM - Use the item [Neutralizer]
+248 - NORMAL - Emit a pale green light
+249 - ITEM - Food Effect (General use)
+250 - ITEM - Food Effect (Whole party)
+251 - NORMAL - Affliction Text (Homesickness)
+252 - NORMAL - Affliction Text (Paralysis)
+253 - NORMAL - Affliction Text (Sleep)
+254 - NORMAL - Affliction Text (Solidified)
+255 - NORMAL - Affliction Text (Solidification healed)
+256 - PSI - Tried PSI, but it didn't work very well
+257 - NORMAL - Lose one's mind by wolfing down "Fly Honey"
+258 - ITEM - Touch the item to one's forehead [Sound Stone]
+259 - ITEM - Item - [Exit mouse] effect
+260 - NORMAL - Random Text [Pokey antics]
+261 - NORMAL - Pokey played dead
+262 - NORMAL - Pokey pretended to cry
+263 - NORMAL - Pokey apologized profusely
+264 - NORMAL - Bark
+265 - NORMAL - Chant a magic spell
+266 - NORMAL - No effect
+267 - NORMAL - Scratch one's head
+268 - ITEM - Throw the item [Snake]
+269 - ITEM - Throw the item [Viper]
+270 - ITEM - Read the hieroglyphics [Hieroglyph copy]
+271 - ITEM - Item - [Town Map] effect
+272 - ITEM - Item - [Video Relaxant] effect (No effect)
+273 - NORMAL - Discharge a very stinky gas
+274 - NORMAL - "...[NESS]..." Incomprehensible attack
+275 - NORMAL - Pokey's first speech during final battle
+276 - NORMAL - Unknown effect
+277 - NORMAL - Unknown effect
+278 - NORMAL - Pokey's second speech
+279 - NORMAL - Try to get away
+280 - NORMAL - Mirror command
+281 - ITEM - Item - [Suporma] effect
+282 - ITEM - Item - [Insignificant Item] effect
+283 - ITEM - Use the Monkey Love [Monkey's love]
+284 - ITEM - Item - [Tendakraut] effect
+285 - ITEM - Item - [King Banana] effect
+286 - ITEM - Item - [Receiver phone] effect
+287 - ITEM - Item - [Letter from mom] effect
+288 - ITEM - Item - [Letter from Tony] effect
+289 - ITEM - Item - [Letter from kids] effect
+290 - NORMAL - Suddenly give off a rainbow of colors
+291 - NORMAL - Pray from the bottom of one's heart (First prayer)
+292 - NORMAL - Pray from the bottom of one's heart (Second prayer)
+293 - NORMAL - Pray from the bottom of one's heart (Third prayer)
+294 - NORMAL - Pray from the bottom of one's heart (Fourth prayer)
+295 - NORMAL - Pray from the bottom of one's heart (Fifth prayer)
+296 - NORMAL - Pray from the bottom of one's heart (Sixth prayer)
+297 - NORMAL - Pray from the bottom of one's heart (Seventh prayer)
+298 - NORMAL - Pray from the bottom of one's heart (Eighth prayer)
+299 - NORMAL - Pray from the bottom of one's heart (Ninth prayer)
+300 - NORMAL - "...[NESS]..." Incomprehensible attack (Damage)
+301 - NORMAL -"...[NESS]..." Incomprehensible attack (Feel strange)
+302 - NORMAL - Incomprehensible attack (Unknown, 1 quote)
+303 - NORMAL - Incomprehensible attack (Solidify, 1 quote)
+304 - NORMAL - Incomprehensible attack (Crying, 1 quote)
+305 - NORMAL - Incomprehensible attack (Unknown, 3 quotes)
+306 - NORMAL - Incomprehensible attack (3 random attacks, 3 quotes)
+307 - NORMAL - Incomprehensible attack (3 death attacks, 3 quotes)
+308 - NORMAL - Random Giygas quote
+309 - NORMAL - Three random Giygas quotes
+310 - ITEM - Fire the item [Bazooka]
+311 - ITEM - Fire the item [Heavy Bazooka]
+312 - NORMAL - ".....[NESS]..."
+313 - NORMAL - Eat a bologne sandwich
+314 - NORMAL - Lose a gear and some bolts
+315 - NORMAL - Re-apply a bandage
+316 - NORMAL - Clean the area
+317 - NORMAL - Want to go and get a battery
+318 - NORMAL - You cannot use the item here

@@ -1,0 +1,65 @@
+[42 64 A9 C0] XX XX YY YY
+
+C0/A964: 22 94 9D C0  JSR $C09D94
+C0/A968: 48           PHA              Push said two bytes onto the stack
+C0/A969: 84 94        STY $94          Store the parser position to $1E94
+C0/A96B: 22 94 9D C0  JSR $C09D94      Note: same as last JSR
+C0/A96F: 84 94        STY $94          Store parser position to $1E94 again
+C0/A971: FA           PLX              Get the first value from the stack to X
+C0/A972: 22 25 72 C4  JSR $C47225      and the second one still in the accumulator.
+C0/A976: 6B           RTL 
+
+C0/9D94: B7 80        LDA [$80],Y      Load the next two bytes in the movement pattern
+C0/9D96: C8           INY              Update the parser position past them
+C0/9D97: C8           INY 
+C0/9D98: 6B           RTL 
+
+C4/7225: C2 31        REP #$31         Flag junk.
+C4/7227: 0B           PHD              Push the direct page register
+C4/7228: 48           PHA              and the accumulator onto the stack.
+C4/7229: 7B           TDC              Take the direct page register,
+C4/722A: 69 F2 FF     ADC #$FFF2       subtract 0x0E from it,
+C4/722D: 5B           TCD              and toss it back.
+C4/722E: 68           PLA              Get that 'argument' that was just pushed back.
+C4/722F: 86 02        STX $02          So basically, store XXXX in $1DF4,
+C4/7231: 85 04        STA $04          and store YYYY in $1DF6.
+C4/7233: AD 42 1A     LDA $1A42        Load $7E1A42, a mystery value of doom. (n)
+C4/7236: 0A           ASL              Multiply it by two,
+C4/7237: A8           TAY              and copy it to Y.
+C4/7238: 18           CLC              Clear the carry flag
+C4/7239: 69 8E 0B     ADC #$0B8E       Add 0x0B8E to it,
+C4/723C: AA           TAX              send it on over to X,
+C4/723D: BD 00 00     LDA $0000,X      Load from $7E0B8E+2n. (x-coord)
+C4/7240: 38           SEC              Set ye olde carry flag.
+C4/7241: E5 02        SBC $02          Subtract $1DF4 (XXXX) from the accumulator.
+C4/7243: 99 5E 0E     STA $0E5E,Y      And store the new x-coord at $7E0E5E+2n
+C4/7246: BD 00 00     LDA $0000,X      Now load the X-coord again.
+C4/7249: 18           CLC              Clear ye olde carry flag.
+C4/724A: 65 02        ADC $02          This time, add $1DF4 (XXXX) from the accumulator.
+C4/724C: 99 9A 0E     STA $0E9A,Y      And store this new x-coord at $7E0E9A+2n.
+C4/724F: 98           TYA              Now copy n to the accumulator.
+C4/7250: 18           CLC              Clear ye olde carry flag.
+C4/7251: 69 CA 0B     ADC #$0BCA       Add 0x0BCA to the 2n,
+C4/7254: AA           TAX              and copy that into x.
+C4/7255: BD 00 00     LDA $0000,X      Load from $7E0BCA+2n (y-coord)
+C4/7258: 38           SEC              Set ye olde carry flag.
+C4/7259: E5 04        SBC $04          Subtract $1DF6 (YYYY) from the accumulator.
+C4/725B: 99 D6 0E     STA $0ED6,Y      Store the new x-coord at $7E0ED6+2n
+C4/725E: BD 00 00     LDA $0000,X      Load the Y-coord again.
+C4/7261: 18           CLC              Clear ye olde carry flag.
+C4/7262: 65 04        ADC $04          Add $1DF6 (YYYY) to the accumulator.
+C4/7264: 99 12 0F     STA $0F12,Y      Store the new y-coord at $7E0F12+2n
+C4/7267: 2B           PLD              Pull the old DP back.
+C4/7268: 6B           RTL 
+
+Conclusion:
+
+[42 64 A9 C0] XX XX YY YY
+
+int n = $7E1A42;
+int xcoord = $7E0B8E+2n;
+$7E0E5E+2n = xcoord - XXXX;
+$7E0E9A+2n - xcoord + XXXX;
+int ycoord = $7E0BCA+2n;
+$7E0ED6+2n = ycoord - YYYY;
+$7E0F12+2n = ycoord + YYYY;

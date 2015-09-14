@@ -1,0 +1,529 @@
+This function causes the garble when pressing Select in battle debug mode.
+A is loaded with $4A8C initially. See C2/4B77.
+
+Looks like it's trying to display the battle group number.
+Unfortunately, it wasn't updated to reflect the changes between Mother 2
+  and EarthBound's fonts, so it ends up hurling garble.
+
+Change these four:
+  C1/E21A: A9 10 00     LDA #$0010
+  C1/E21F: A9 30 00     LDA #$0030
+  C1/E237: A9 10 00     LDA #$0010
+  C1/E23C: A9 30 00     LDA #$0030
+To LDA #$0060 and the window will show the battle group number properly.
+
+
+
+C1/E1A5: C2 31        REP #$31
+C1/E1A7: 0B           PHD 
+C1/E1A8: 48           PHA 
+C1/E1A9: 7B           TDC 
+C1/E1AA: 69 DA FF     ADC #$FFDA
+C1/E1AD: 5B           TCD 
+C1/E1AE: 68           PLA 
+C1/E1AF: 85 04        STA $04                   $04 = origA
+C1/E1B1: 85 24        STA $24                   $24 = origA
+C1/E1B3: A5 04        LDA $04
+C1/E1B5: 85 22        STA $22
+C1/E1B7: 22 D4 E4 C3  JSR $C3E4D4               7E9622 = 1 (What does this mean?)
+C1/E1BB: A9 0E 00     LDA #$000E
+C1/E1BE: 20 EE 04     JSR $04EE                 Create window 0x0E (Battle messages window)
+C1/E1C1: AD 00 89     LDA $8900                 A = Which $8650 entry has the stats on window 0x0E
+C1/E1C4: A0 52 00     LDY #$0052
+C1/E1C7: 22 F7 8F C0  JSR $C08FF7
+C1/E1CB: 18           CLC 
+C1/E1CC: 69 50 86     ADC #$8650
+C1/E1CF: AA           TAX 
+C1/E1D0: BD 0E 00     LDA $000E,X
+C1/E1D3: 85 20        STA $20                   $20 = Text drawing position (X coord)
+C1/E1D5: BD 10 00     LDA $0010,X
+C1/E1D8: 85 1E        STA $1E                   $1E = Text drawing position (Y coord)
+C1/E1DA: A9 01 00     LDA #$0001
+C1/E1DD: 85 1C        STA $1C                   $1C = 0x0001
+C1/E1DF: 85 1A        STA $1A                   $1A = 0x0001
+
+
+
+Some later code jumps back to here.
+
+
+
+C1/E1E1: 22 D4 E4 C3  JSR $C3E4D4               7E9622 = 1 (What does this mean?)
+C1/E1E5: A6 1E        LDX $1E                   X = Text drawing position (Y coord)
+C1/E1E7: A5 20        LDA $20                   A = Text drawing position (X coord)
+C1/E1E9: 22 A5 38 C4  JSR $C438A5
+
+   C4/38A5: C2 31        REP #$31
+   C4/38A7: 9B           TXY                    Y = Text drawing position (Y coord)
+   C4/38A8: AA           TAX                    X = Text drawing position (X coord)
+   C4/38A9: AD 58 89     LDA $8958              A = Current window with focus
+   C4/38AC: 22 74 38 C4  JSR $C43874
+
+      C4/3874: C2 31        REP #$31
+      C4/3876: 0B           PHD 
+      C4/3877: 48           PHA 
+      C4/3878: 7B           TDC 
+      C4/3879: 69 EE FF     ADC #$FFEE
+      C4/387C: 5B           TCD 
+      C4/387D: 68           PLA 
+      C4/387E: 84 02        STY $02             $02 = Text drawing position (Y coord)
+      C4/3880: 9B           TXY 
+      C4/3881: 84 10        STY $10             $10 = Text drawing position (X coord)
+      C4/3883: 85 0E        STA $0E             $0E = Current window with focus
+      C4/3885: 22 AA 3C C4  JSR $C43CAA
+
+         C4/3CAA: C2 31        REP #$31
+         C4/3CAC: AD 25 9E     LDA $9E25
+         C4/3CAF: 1A           INC 
+         C4/3CB0: 8D 25 9E     STA $9E25        Increment $9E25 (What does this mean?)
+         C4/3CB3: C9 33 00     CMP #$0033
+         C4/3CB6: 90 0A        BCC $3CC2
+         C4/3CB8: F0 08        BEQ $3CC2
+
+         C4/3CBA: 9C 25 9E     STZ $9E25        $9E25 > 0x33 case
+         C4/3CBD: 9C 23 9E     STZ $9E23        Zero out $9E25, $9E23
+         C4/3CC0: 80 06        BRA $3CC8        Skip ahead
+
+         C4/3CC2: 0A           ASL              $9E25 <= 0x33 case
+         C4/3CC3: 0A           ASL 
+         C4/3CC4: 0A           ASL 
+         C4/3CC5: 8D 23 9E     STA $9E23        $9E23 = $9E25 * 0x08
+
+         C4/3CC8: 9C 54 96     STZ $9654
+         C4/3CCB: AD 23 9E     LDA $9E23
+         C4/3CCE: 8D 52 96     STA $9652
+         C4/3CD1: 6B           RTL 
+
+      C4/3889: A5 0E        LDA $0E
+      C4/388B: 0A           ASL 
+      C4/388C: AA           TAX 
+      C4/388D: BD E4 88     LDA $88E4,X
+      C4/3890: A0 52 00     LDY #$0052
+      C4/3893: 22 F7 8F C0  JSR $C08FF7
+      C4/3897: AA           TAX 
+      C4/3898: A4 10        LDY $10
+      C4/389A: 98           TYA 
+      C4/389B: 9D 5E 86     STA $865E,X         Update text drawing position
+      C4/389E: A5 02        LDA $02
+      C4/38A0: 9D 60 86     STA $8660,X
+      C4/38A3: 2B           PLD 
+      C4/38A4: 6B           RTL 
+
+   C4/38B0: 6B           RTL 
+
+C1/E1ED: A5 24        LDA $24
+C1/E1EF: 85 04        STA $04                   $04 = origA
+C1/E1F1: 85 06        STA $06                   $06 = origA
+C1/E1F3: 64 08        STZ $08                   $08 = 0x0000
+C1/E1F5: A5 06        LDA $06
+C1/E1F7: 85 0E        STA $0E                   $0E = origA
+C1/E1F9: A5 08        LDA $08
+C1/E1FB: 85 10        STA $10                   $10 = 0x0000
+C1/E1FD: 20 7C 0D     JSR $0D7C
+
+   Does this count the length of origA (as measured in base-10 characters)?
+   I think it writes origA, in expanded form, to a scratch space that ends at $8960...
+   eg. 896 --> 8 9 6 in memory, 8 at $895E
+
+   C1/0D7C: C2 31        REP #$31
+   C1/0D7E: 0B           PHD 
+   C1/0D7F: 7B           TDC 
+   C1/0D80: 69 E8 FF     ADC #$FFE8
+   C1/0D83: 5B           TCD 
+   C1/0D84: A5 26        LDA $26
+   C1/0D86: 85 06        STA $06                $06 = origA
+   C1/0D88: A5 28        LDA $28                $08 = 0x0000
+   C1/0D8A: 85 08        STA $08
+   C1/0D8C: A5 06        LDA $06
+   C1/0D8E: 85 14        STA $14                $14 = origA
+   C1/0D90: A5 08        LDA $08                $16 = 0x0000
+   C1/0D92: 85 16        STA $16
+   C1/0D94: A2 60 89     LDX #$8960             X = 0x8960
+   C1/0D97: A9 01 00     LDA #$0001             A = 0x0001
+   C1/0D9A: 85 12        STA $12                $12 = 0x0001
+   C1/0D9C: 80 2F        BRA $0DCD
+
+   C1/0D9E: 22 37 92 C0  JSR $C09237            Modulo by 10
+   C1/0DA2: E2 20        SEP #$20
+   C1/0DA4: A5 06        LDA $06
+   C1/0DA6: 9D 00 00     STA $0000,X            Write a digit to the scratch space
+   C1/0DA9: CA           DEX 
+   C1/0DAA: C2 20        REP #$20
+   C1/0DAC: A5 0E        LDA $0E
+   C1/0DAE: 85 0A        STA $0A
+   C1/0DB0: A5 10        LDA $10
+   C1/0DB2: 85 0C        STA $0C
+   C1/0DB4: A5 14        LDA $14
+   C1/0DB6: 85 06        STA $06
+   C1/0DB8: A5 16        LDA $16
+   C1/0DBA: 85 08        STA $08
+   C1/0DBC: 22 A6 91 C0  JSR $C091A6            Divide the rest by 10
+   C1/0DC0: A5 06        LDA $06
+   C1/0DC2: 85 14        STA $14
+   C1/0DC4: A5 08        LDA $08
+   C1/0DC6: 85 16        STA $16
+   C1/0DC8: A5 12        LDA $12
+   C1/0DCA: 1A           INC 
+   C1/0DCB: 85 12        STA $12                Increment the digit count
+
+   C1/0DCD: A9 0A 00     LDA #$000A
+   C1/0DD0: 85 0A        STA $0A                $0A = 0x000A
+   C1/0DD2: A9 00 00     LDA #$0000
+   C1/0DD5: 85 0C        STA $0C                $0C = 0x0000
+   C1/0DD7: A5 0A        LDA $0A
+   C1/0DD9: 85 0E        STA $0E                $0E = 0x000A
+   C1/0DDB: A5 0C        LDA $0C
+   C1/0DDD: 85 10        STA $10                $10 = 0x0000
+   C1/0DDF: A5 06        LDA $06
+   C1/0DE1: C5 0A        CMP $0A
+   C1/0DE3: A5 08        LDA $08
+   C1/0DE5: E5 0C        SBC $0C
+   C1/0DE7: B0 B5        BCS $0D9E              If origA >= 0x000A, skip back?
+   C1/0DE9: E2 20        SEP #$20
+   C1/0DEB: A5 06        LDA $06
+   C1/0DED: 9D 00 00     STA $0000,X
+   C1/0DF0: C2 20        REP #$20
+   C1/0DF2: A5 12        LDA $12
+   C1/0DF4: 2B           PLD 
+   C1/0DF5: 60           RTS 
+
+C1/E200: 85 02        STA $02                   $02 = Length of origA in decimal digits
+C1/E202: A9 07 00     LDA #$0007
+C1/E205: 38           SEC 
+C1/E206: E5 02        SBC $02
+C1/E208: 18           CLC 
+C1/E209: 69 5A 89     ADC #$895A
+C1/E20C: A8           TAY 
+C1/E20D: 84 18        STY $18                   $18 = Pointer to decimal representation of origA
+C1/E20F: A2 03 00     LDX #$0003
+C1/E212: 86 16        STX $16                   $16 = 0x0003
+C1/E214: 80 14        BRA $E22A
+
+Prefix numbers less than 1000 with zeroes?
+e.g.   25 ->  025
+e.g. 1234 -> 1234
+
+C1/E216: E4 1C        CPX $1C
+C1/E218: D0 05        BNE $E21F
+C1/E21A: A9 10 00     LDA #$0010                Mother 2: Underlined zero? Not sure if this case can ever happen...
+C1/E21D: 80 03        BRA $E222
+C1/E21F: A9 30 00     LDA #$0030                Mother 2: Non-underlined zero
+C1/E222: 20 B6 0C     JSR $0CB6                 UNKNOWN FUNCTION - Print one character?
+C1/E225: A6 16        LDX $16
+C1/E227: CA           DEX 
+C1/E228: 86 16        STX $16
+C1/E22A: 8A           TXA 
+C1/E22B: C5 02        CMP $02
+C1/E22D: F0 02        BEQ $E231
+C1/E22F: B0 E5        BCS $E216
+
+C1/E231: 80 24        BRA $E257
+
+C1/E233: E4 1C        CPX $1C
+C1/E235: D0 05        BNE $E23C
+C1/E237: A9 10 00     LDA #$0010                Mother 2: Character for underlined number
+C1/E23A: 80 03        BRA $E23F
+C1/E23C: A9 30 00     LDA #$0030                Mother 2: Character for a number
+C1/E23F: 85 02        STA $02
+C1/E241: A4 18        LDY $18
+C1/E243: B9 00 00     LDA $0000,Y
+C1/E246: 29 FF 00     AND #$00FF
+C1/E249: 18           CLC 
+C1/E24A: 65 02        ADC $02
+C1/E24C: C8           INY 
+C1/E24D: 84 18        STY $18
+C1/E24F: 20 B6 0C     JSR $0CB6
+C1/E252: A6 16        LDX $16
+C1/E254: CA           DEX 
+C1/E255: 86 16        STX $16
+C1/E257: E0 00 00     CPX #$0000
+C1/E25A: D0 D7        BNE $E233
+
+
+
+I think the code above prints origA as a decimal number, character by character.
+At least, it does in Mother 2.
+It explodes in EarthBound due to font changes.
+Maybe changing:
+  LDA #$0030 --> LDA #$0060
+will make it work?
+
+UPDATE: It does. Change:
+  C1/E21A: A9 10 00     LDA #$0010
+  C1/E21F: A9 30 00     LDA #$0030
+  C1/E237: A9 10 00     LDA #$0010
+  C1/E23C: A9 30 00     LDA #$0030
+To LDA #$0060 and the window will show the battle group number properly.
+
+The LDA #$0010 case is to underline the currently "selected" digit.
+The overall effect is like the ATM amount selector.
+...At least, it is in Mother 2, which has the "underlined digit" characters.
+Is there a way to do this conveniently in EarthBound?
+
+
+
+C1/E25C: 22 CA E4 C3  JSR $C3E4CA               7E9622 = 0 (That address again!)
+C1/E260: 22 D5 2D C1  JSR $C12DD5
+C1/E264: 22 D5 2D C1  JSR $C12DD5
+
+C1/E268: AD 6D 00     LDA $006D
+C1/E26B: 29 00 02     AND #$0200                Has 0x0200 (D-Pad Left) been pressed?
+C1/E26E: F0 17        BEQ $E287                 If no, skip ahead.
+C1/E270: A5 1C        LDA $1C
+C1/E272: C9 03 00     CMP #$0003
+C1/E275: B0 10        BCS $E287
+C1/E277: E6 1C        INC $1C                   D-Pad Left: Increment $1C, to a maximum of 3 (Hundreds case?)
+C1/E279: A5 1A        LDA $1A
+C1/E27B: 85 04        STA $04
+C1/E27D: 0A           ASL 
+C1/E27E: 0A           ASL 
+C1/E27F: 65 04        ADC $04
+C1/E281: 0A           ASL 
+C1/E282: 85 1A        STA $1A                   $1A = $1A * 10
+C1/E284: 4C E1 E1     JMP $E1E1
+
+C1/E287: AD 6D 00     LDA $006D
+C1/E28A: 29 00 01     AND #$0100                Has 0x0200 (D-Pad Right) been pressed?
+C1/E28D: F0 26        BEQ $E2B5                 If no, skip ahead.
+C1/E28F: A5 1C        LDA $1C
+C1/E291: C9 01 00     CMP #$0001
+C1/E294: 90 1F        BCC $E2B5
+C1/E296: F0 1D        BEQ $E2B5
+C1/E298: C6 1C        DEC $1C                   D-Pad Right: Decrement $1C, to a minimum of 1 (Ones case?)
+C1/E29A: A9 0A 00     LDA #$000A
+C1/E29D: 85 0A        STA $0A
+C1/E29F: A9 00 00     LDA #$0000
+C1/E2A2: 85 0C        STA $0C
+C1/E2A4: A5 1A        LDA $1A
+C1/E2A6: 85 06        STA $06
+C1/E2A8: 64 08        STZ $08
+C1/E2AA: 22 FF 90 C0  JSR $C090FF
+C1/E2AE: A5 06        LDA $06
+C1/E2B0: 85 1A        STA $1A                   $1A = $1A / 10
+C1/E2B2: 4C E1 E1     JMP $E1E1
+
+C1/E2B5: AD 69 00     LDA $0069
+C1/E2B8: 29 00 08     AND #$0800                Has 0x0800 (D-Pad Up) been pressed?
+C1/E2BB: F0 55        BEQ $E312                 If no, skip ahead.
+C1/E2BD: A9 0A 00     LDA #$000A
+C1/E2C0: 85 0A        STA $0A
+C1/E2C2: A9 00 00     LDA #$0000
+C1/E2C5: 85 0C        STA $0C
+C1/E2C7: A4 1A        LDY $1A
+C1/E2C9: A5 04        LDA $04
+C1/E2CB: 22 5B 91 C0  JSR $C0915B
+C1/E2CF: 85 06        STA $06
+C1/E2D1: 64 08        STZ $08
+C1/E2D3: 22 06 92 C0  JSR $C09206
+C1/E2D7: A9 09 00     LDA #$0009
+C1/E2DA: 85 0A        STA $0A
+C1/E2DC: A9 00 00     LDA #$0000
+C1/E2DF: 85 0C        STA $0C
+C1/E2E1: A5 08        LDA $08
+C1/E2E3: C5 0C        CMP $0C
+C1/E2E5: D0 04        BNE $E2EB
+C1/E2E7: A5 06        LDA $06
+C1/E2E9: C5 0A        CMP $0A
+C1/E2EB: F0 0C        BEQ $E2F9
+C1/E2ED: A5 04        LDA $04
+C1/E2EF: 18           CLC 
+C1/E2F0: 65 1A        ADC $1A
+C1/E2F2: 85 04        STA $04
+C1/E2F4: 85 24        STA $24
+C1/E2F6: 4C 8E E3     JMP $E38E
+C1/E2F9: A5 1A        LDA $1A
+C1/E2FB: 85 04        STA $04
+C1/E2FD: 0A           ASL 
+C1/E2FE: 0A           ASL 
+C1/E2FF: 0A           ASL 
+C1/E300: 65 04        ADC $04
+C1/E302: 85 02        STA $02
+C1/E304: A5 24        LDA $24
+C1/E306: 85 04        STA $04
+C1/E308: 38           SEC 
+C1/E309: E5 02        SBC $02
+C1/E30B: 85 04        STA $04
+C1/E30D: 85 24        STA $24
+C1/E30F: 4C 8E E3     JMP $E38E
+
+C1/E312: AD 69 00     LDA $0069
+C1/E315: 29 00 04     AND #$0400                Has 0x0400 (D-Pad Down) been pressed?
+C1/E318: F0 53        BEQ $E36D                 If no, skip ahead.
+C1/E31A: A9 0A 00     LDA #$000A
+C1/E31D: 85 0A        STA $0A
+C1/E31F: A9 00 00     LDA #$0000
+C1/E322: 85 0C        STA $0C
+C1/E324: A4 1A        LDY $1A
+C1/E326: A5 04        LDA $04
+C1/E328: 22 5B 91 C0  JSR $C0915B
+C1/E32C: 85 06        STA $06
+C1/E32E: 64 08        STZ $08
+C1/E330: 22 06 92 C0  JSR $C09206
+C1/E334: A9 00 00     LDA #$0000
+C1/E337: 85 0A        STA $0A
+C1/E339: A9 00 00     LDA #$0000
+C1/E33C: 85 0C        STA $0C
+C1/E33E: A5 08        LDA $08
+C1/E340: C5 0C        CMP $0C
+C1/E342: D0 04        BNE $E348
+C1/E344: A5 06        LDA $06
+C1/E346: C5 0A        CMP $0A
+C1/E348: F0 0B        BEQ $E355
+C1/E34A: A5 04        LDA $04
+C1/E34C: 38           SEC 
+C1/E34D: E5 1A        SBC $1A
+C1/E34F: 85 04        STA $04
+C1/E351: 85 24        STA $24
+C1/E353: 80 39        BRA $E38E
+C1/E355: A5 1A        LDA $1A
+C1/E357: 85 04        STA $04
+C1/E359: 0A           ASL 
+C1/E35A: 0A           ASL 
+C1/E35B: 0A           ASL 
+C1/E35C: 65 04        ADC $04
+C1/E35E: 85 02        STA $02
+C1/E360: A5 24        LDA $24
+C1/E362: 85 04        STA $04
+C1/E364: 18           CLC 
+C1/E365: 65 02        ADC $02
+C1/E367: 85 04        STA $04
+C1/E369: 85 24        STA $24
+C1/E36B: 80 21        BRA $E38E
+
+C1/E36D: AD 6D 00     LDA $006D
+C1/E370: 29 A0 00     AND #$00A0                Has 0x00A0 (A or L) been pressed?
+C1/E373: F0 07        BEQ $E37C                 If no, skip ahead.
+C1/E375: A6 04        LDX $04
+C1/E377: 86 16        STX $16
+C1/E379: 4C 7F E4     JMP $E47F
+
+C1/E37C: AD 6D 00     LDA $006D
+C1/E37F: 29 00 A0     AND #$A000                Has 0xA000 (B or Select) been pressed?
+C1/E382: D0 03        BNE $E387
+C1/E384: 4C 64 E2     JMP $E264                 If no, skip back.
+C1/E387: A6 22        LDX $22
+C1/E389: 86 16        STX $16
+C1/E38B: 4C 7F E4     JMP $E47F
+
+
+
+This is common end-code for the D-Pad Up and Down cases.
+
+C1/E38E: A5 04        LDA $04
+C1/E390: D0 03        BNE $E395
+C1/E392: 4C E1 E1     JMP $E1E1
+C1/E395: A5 04        LDA $04
+C1/E397: C9 E2 01     CMP #$01E2                Battle groups capped above at 0x1E2
+C1/E39A: 90 09        BCC $E3A5
+C1/E39C: F0 07        BEQ $E3A5
+C1/E39E: A9 E2 01     LDA #$01E2
+C1/E3A1: 85 04        STA $04
+C1/E3A3: 85 24        STA $24
+C1/E3A5: A5 04        LDA $04
+C1/E3A7: 8D 8C 4A     STA $4A8C
+C1/E3AA: A9 0D C6     LDA #$C60D
+C1/E3AD: 85 0A        STA $0A
+C1/E3AF: A9 D0 00     LDA #$00D0
+C1/E3B2: 85 0C        STA $0C
+C1/E3B4: A5 04        LDA $04
+C1/E3B6: 0A           ASL 
+C1/E3B7: 0A           ASL 
+C1/E3B8: 0A           ASL 
+C1/E3B9: 18           CLC 
+C1/E3BA: 65 0A        ADC $0A
+C1/E3BC: 85 0A        STA $0A
+C1/E3BE: A0 02 00     LDY #$0002
+C1/E3C1: B7 0A        LDA [$0A],Y
+C1/E3C3: A8           TAY 
+C1/E3C4: A7 0A        LDA [$0A]
+C1/E3C6: 85 06        STA $06
+C1/E3C8: 84 08        STY $08
+C1/E3CA: 9C 8A 9F     STZ $9F8A
+C1/E3CD: 80 23        BRA $E3F2
+C1/E3CF: AD 8A 9F     LDA $9F8A
+C1/E3D2: 0A           ASL 
+C1/E3D3: AA           TAX 
+C1/E3D4: A0 01 00     LDY #$0001
+C1/E3D7: B7 06        LDA [$06],Y
+C1/E3D9: 9D 8C 9F     STA $9F8C,X
+C1/E3DC: EE 8A 9F     INC $9F8A
+C1/E3DF: A6 14        LDX $14
+C1/E3E1: 9B           TXY 
+C1/E3E2: CA           DEX 
+C1/E3E3: 86 14        STX $14
+C1/E3E5: C0 00 00     CPY #$0000
+C1/E3E8: D0 E5        BNE $E3CF
+C1/E3EA: A9 03 00     LDA #$0003
+C1/E3ED: 18           CLC 
+C1/E3EE: 65 06        ADC $06
+C1/E3F0: 85 06        STA $06
+C1/E3F2: A5 06        LDA $06
+C1/E3F4: 85 0A        STA $0A
+C1/E3F6: A5 08        LDA $08
+C1/E3F8: 85 0C        STA $0C
+C1/E3FA: A7 0A        LDA [$0A]
+C1/E3FC: 29 FF 00     AND #$00FF
+C1/E3FF: AA           TAX 
+C1/E400: 86 14        STX $14
+C1/E402: E0 FF 00     CPX #$00FF
+C1/E405: D0 D8        BNE $E3DF
+C1/E407: 22 26 87 C0  JSR $C08726
+C1/E40B: 22 E7 EE C2  JSR $C2EEE7
+C1/E40F: A0 08 00     LDY #$0008
+C1/E412: 84 16        STY $16
+C1/E414: 80 1C        BRA $E432
+C1/E416: E2 20        SEP #$20
+C1/E418: 64 0E        STZ $0E
+C1/E41A: A2 4E 00     LDX #$004E
+C1/E41D: C2 20        REP #$20
+C1/E41F: 98           TYA 
+C1/E420: 9B           TXY 
+C1/E421: 22 F7 8F C0  JSR $C08FF7
+C1/E425: 18           CLC 
+C1/E426: 69 AC 9F     ADC #$9FAC
+C1/E429: 22 FC 8E C0  JSR $C08EFC
+C1/E42D: A4 16        LDY $16
+C1/E42F: C8           INY 
+C1/E430: 84 16        STY $16
+C1/E432: C0 20 00     CPY #$0020
+C1/E435: 90 DF        BCC $E416
+C1/E437: A0 00 00     LDY #$0000
+C1/E43A: 84 18        STY $18
+C1/E43C: 80 22        BRA $E460
+C1/E43E: 98           TYA 
+C1/E43F: A0 4E 00     LDY #$004E
+C1/E442: 22 F7 8F C0  JSR $C08FF7
+C1/E446: 18           CLC 
+C1/E447: 69 1C A2     ADC #$A21C
+C1/E44A: AA           TAX 
+C1/E44B: 86 12        STX $12
+C1/E44D: A4 18        LDY $18
+C1/E44F: 98           TYA 
+C1/E450: 0A           ASL 
+C1/E451: AA           TAX 
+C1/E452: BD 8C 9F     LDA $9F8C,X
+C1/E455: A6 12        LDX $12
+C1/E457: 22 EB B6 C2  JSR $C2B6EB
+C1/E45B: A4 18        LDY $18
+C1/E45D: C8           INY 
+C1/E45E: 84 18        STY $18
+C1/E460: CC 8A 9F     CPY $9F8A
+C1/E463: 90 D9        BCC $E43E
+C1/E465: 22 21 F1 C2  JSR $C2F121
+C1/E469: A9 18 00     LDA #$0018
+C1/E46C: 22 6B 85 C0  JSR $C0856B
+C1/E470: 22 44 87 C0  JSR $C08744
+C1/E474: A2 01 00     LDX #$0001
+C1/E477: 8A           TXA 
+C1/E478: 22 6C 88 C0  JSR $C0886C
+C1/E47C: 4C E1 E1     JMP $E1E1
+
+C1/E47F: A9 0E 00     LDA #$000E
+C1/E482: 20 7E 00     JSR $007E                 Give focus to the battle messages window
+C1/E485: 20 84 00     JSR $0084
+C1/E488: A6 16        LDX $16
+C1/E48A: 8A           TXA 
+C1/E48B: 2B           PLD 
+C1/E48C: 6B           RTL 
+
+.

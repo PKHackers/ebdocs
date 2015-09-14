@@ -1,0 +1,24 @@
+Some tips for beginning hackers:
+1. Are you really up to the challenge?
+Most people come to the field of PK Hacking without any previous ROM hacking experience. And while some people are up to just 'diving in', others just aren't. Before you announce to the world that you're going to have to ask yourself some fundamental questions.
+ a. Do I have the time? 
+If you're already juggling school, a part-time job, a boyfriend/girlfriend, and a social life, do you really have the time to complete a full hack of Earthbound in 6 months? The record is a year, and that was done on a rigorous schedule of a whole lot of hacking and little else. You're going to have to learn all the fundamentals of hacking, do all your text editing, your sprite editing, map editing, etc etc etc...and not ONE of these things is easy by itself.
+b. Do I  have the patience?
+Like I said, learning to hack requires a LOT of reading of technical documents, a lot of experimentation, and a lot of time just sitting down and working. The people who make programs to assist in PKhacking did all this stuff by HAND, first. Then, they spent hours, days, sometimes even weeks figuring out HOW this works, sitting down and coding it, making sure their code works, and polishing it into a presentable application. Of course, this saves quite a bit of YOUR time, but it's still not as simple as throwing a few sprites in, changing 3 lines of text and calling it a hack.
+c.Do I have the resources?
+If you're not going to be able to sit down at a computer and work for extended periods, be able to save your files, install the myriad programs you're going to use, plan out your hack and actuall execute it, chances are hacking Earthbound is probably not for you. There's no shame in that...ROM hacking isn't for everyone. But, if you think you do have what it takes, read on....
+
+2. Preparing to hack
+Ok, you're all set, got your ROM in hand, got PkHack open, so....now what?
+1.Close the program. (Yes I'm serious).
+2.Open a text editor. (Not the EB text editor, silly, a plain text editor.)
+3.Begin.
+
+Ok, now I'm getting a lot of strange looks at this point, so let me explain.
+First of all, PKHack itself, as great as it may be, is NOT the tool you'll be using for the majority of your hacking. While it's a very versatile tool, it really doesn't cover the bulk of your hacking.
+So, what DO you do?
+ First, educate yourself. Look at the tools you have available. Remember, there are certian things you CAN hack in Earthbound, and some you just can't. For example, you can hack just about any of the text in Earthbound that you can think of...but don't expect to plug an mp3 of Spybreak by Propellerheads in and have it play in the background. You need to know what you can and cannot do before you even think of planning your hack.
+Second, plan. Plan plan plan plan plan. A good hack is generally quite a while in planning...a hack that takes a player one hour to play could be the result of an entire month's worth of planning (and certianly that much in actual hacking.)
+Third, more reading. Once you have a solid plan in hand that you believe would make a hack OTHERS would enjoy playing, it's time to learn how to execute it. This is probably one of the hardest and most frustrating parts of hacking. Fortunately, there's a great wealth of documentation on HOW to hack and WHAT to hack, thanks to the hardworking people in this community. (Generally, they're the ones with the PK badges.)
+a. What the heck am I reading?
+  So you're actually LOOKING at these documents, and trying to figure them out, and drawing a blank. You don't know where to begin, right? Well, your first step should be, for now, BlueAntoid's Help File. Though extremely outdated, and soon to be replaced by a much nicer tutorial section of the PKHack website, it's still an invaluable trove of information on the subject of text hacking...probably what you'll be spending most of your time doing.You see, text hacking encompasses not only the actual text, but also handles the exectution of all the events in the game. Everything from the Onett Sunrise scene, to battling Gigyas involves using the text system.

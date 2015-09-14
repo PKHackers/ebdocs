@@ -1,0 +1,949 @@
+C2/7550
+Knock a target unconscious?
+
+A = 7E9FAC battler pointer
+
+
+
+C2/7550: C2 31        REP #$31
+C2/7552: 0B           PHD 
+C2/7553: 48           PHA 
+C2/7554: 7B           TDC 
+C2/7555: 69 DC FF     ADC #$FFDC
+C2/7558: 5B           TCD 
+C2/7559: 68           PLA 
+C2/755A: 85 02        STA $02                   $02 = origA
+C2/755C: 9C 92 AA     STZ $AA92                 $AA92 = 0x0000
+C2/755F: A6 02        LDX $02
+C2/7561: BD 0E 00     LDA $000E,X
+C2/7564: 29 FF 00     AND #$00FF                A = Ally/Opponent flag of target
+C2/7567: F0 03        BEQ $756C                 Ally case: $756C
+C2/7569: 4C CA 77     JMP $77CA                 Opponent case: $77CA
+
+
+
+The target was an ally
+
+C2/756C: A6 02        LDX $02
+C2/756E: BD 1E 00     LDA $001E,X
+C2/7571: 29 FF 00     AND #$00FF                A = Status ailment byte #2 (Mushroomized/Possessed)
+C2/7574: C9 02 00     CMP #$0002                Was the target possessed?
+C2/7577: F0 03        BEQ $757C
+C2/7579: 4C 39 76     JMP $7639
+
+
+
+The targeted ally was possessed
+
+C2/757C: A0 00 00     LDY #$0000
+C2/757F: 84 22        STY $22                   $22 = 0x0000
+C2/7581: 4C 2F 76     JMP $762F
+
+Loop over the six party member spaces
+
+C2/7584: 98           TYA 
+C2/7585: A0 4E 00     LDY #$004E
+C2/7588: 22 F7 8F C0  JSR $C08FF7
+C2/758C: 85 20        STA $20                   $20 = Iteration number * 0x4E  (Used with battlers table)
+C2/758E: AA           TAX 
+C2/758F: BD B8 9F     LDA $9FB8,X
+C2/7592: 29 FF 00     AND #$00FF                A = Living flag of this iteration's character
+C2/7595: D0 03        BNE $759A
+C2/7597: 4C 2A 76     JMP $762A                 Skip incapacitated party members
+C2/759A: A5 20        LDA $20
+C2/759C: AA           TAX 
+C2/759D: BD BB 9F     LDA $9FBB,X
+C2/75A0: 29 FF 00     AND #$00FF                A = Character number for NPCs
+C2/75A3: F0 03        BEQ $75A8
+C2/75A5: 4C 2A 76     JMP $762A                 Skip party NPCs
+C2/75A8: A5 20        LDA $20                   So this is a loop for the Chosen Four exclusively...
+C2/75AA: 18           CLC 
+C2/75AB: 69 C9 9F     ADC #$9FC9
+C2/75AE: AA           TAX                       X = Root of status ailments for this iteration's character
+C2/75AF: BD 01 00     LDA $0001,X
+C2/75B2: 29 FF 00     AND #$00FF
+C2/75B5: C9 02 00     CMP #$0002                Is the character on this iteration possessed?
+C2/75B8: D0 70        BNE $762A                 If no, skip the rest of this iteration
+C2/75BA: A5 20        LDA $20
+C2/75BC: 18           CLC 
+C2/75BD: 69 AC 9F     ADC #$9FAC
+C2/75C0: 85 04        STA $04                   $04 = Root of this iteration's battler entry
+C2/75C2: A5 02        LDA $02                   Is the $04 root the same as origA?
+C2/75C4: C5 04        CMP $04
+C2/75C6: D0 71        BNE $7639                 If no, there's a ghost in someone else. Break out of here.
+C2/75C8: AD 8F A1     LDA $A18F
+C2/75CB: 29 FF 00     AND #$00FF                Is the seventh battler slot occupied by a Tiny Li'l Ghost?
+C2/75CE: C9 D5 00     CMP #$00D5                If not, break out of here.
+C2/75D1: D0 66        BNE $7639                 We don't want to incapacitate a non-Ghost!
+C2/75D3: E2 20        SEP #$20
+C2/75D5: 9C 8C A1     STZ $A18C                 Mark that the Ghost is incapacitated.
+C2/75D8: 80 47        BRA $7621
+
+C2/75DA: C2 20        REP #$20
+C2/75DC: 98           TYA 
+C2/75DD: A0 4E 00     LDY #$004E
+C2/75E0: 22 F7 8F C0  JSR $C08FF7
+C2/75E4: AA           TAX 
+C2/75E5: BD B8 9F     LDA $9FB8,X
+C2/75E8: 29 FF 00     AND #$00FF
+C2/75EB: F0 2F        BEQ $761C                 Skip incapacitated party members
+C2/75ED: BD BB 9F     LDA $9FBB,X
+C2/75F0: 29 FF 00     AND #$00FF
+C2/75F3: D0 27        BNE $761C                 Skip party NPCs
+C2/75F5: 8A           TXA 
+C2/75F6: 18           CLC 
+C2/75F7: 69 C9 9F     ADC #$9FC9
+C2/75FA: AA           TAX                       X = Root of status ailments again
+C2/75FB: BD 01 00     LDA $0001,X
+C2/75FE: 29 FF 00     AND #$00FF
+C2/7601: C9 02 00     CMP #$0002
+C2/7604: D0 16        BNE $761C                 Skip the non-possessed
+C2/7606: A2 80 A1     LDX #$A180
+C2/7609: A9 D5 00     LDA #$00D5
+C2/760C: 22 EB B6 C2  JSR $C2B6EB               Load the Tiny Li'l Ghost into the seventh battler slot again
+C2/7610: E2 20        SEP #$20
+C2/7612: A9 D5        LDA #$D5
+C2/7614: 8D 8F A1     STA $A18F                 The Tiny Li'l Ghost has NPC number 0xD5
+C2/7617: A9 01        LDA #$01
+C2/7619: 8D 8D A1     STA $A18D                 Byte 0x0D of the Ghost's battler entry becomes 0x01 (what does this do?)
+C2/761C: A4 22        LDY $22
+C2/761E: C8           INY 
+C2/761F: 84 22        STY $22
+C2/7621: A4 22        LDY $22
+C2/7623: C0 06 00     CPY #$0006
+C2/7626: 90 B2        BCC $75DA
+C2/7628: 80 0F        BRA $7639
+
+C2/762A: A4 22        LDY $22
+C2/762C: C8           INY 
+C2/762D: 84 22        STY $22
+C2/762F: C0 06 00     CPY #$0006
+C2/7632: B0 05        BCS $7639
+C2/7634: F0 03        BEQ $7639
+
+C2/7636: 4C 84 75     JMP $7584                 Loop back to the top
+
+End of "target ally was possessed"
+
+
+
+A summary of the possession logic follows.
+- If the target is possessed:
+  - Search through the Chosen Four for possession.
+  - If we find a case of possession in someone other than the 
+    origA target, there are multiple ghosts in this party.
+    Break from the loop.
+  - When we reach the origA target, verify the seventh battler
+    slot is occupied by the Tiny Li'l Ghost. If it is, 
+    incapacitate the Ghost.
+  - Search through the remaining Chosen Four for possession.
+    If we find another case, reload the Tiny Li'l Ghost into
+    the seventh battler slot.
+
+Slight nuance:
+Suppose Jeff was possessed and knocked out.
+If Ness or Paula was possessed, the Ghost's stats would be 
+  unchanged... but if Poo was possessed, the Ghost would be
+  restored due to the reloading of its data! :O
+If we want consistent behaviour, we should change:
+
+  C2/75C6: D0 71        BNE $7639
+
+...To point to the code that reloads the Ghost into the
+seventh slot, and have the loop breakout right after.
+Not terribly important, but whatever.
+
+
+
+Continuing with the "target is an ally" case...
+
+C2/7639: E2 20        SEP #$20                  Adjust the status ailment bytes
+C2/763B: A9 01        LDA #$01
+C2/763D: A6 02        LDX $02
+C2/763F: 9D 1D 00     STA $001D,X               The target is now Unconscious
+C2/7642: A6 02        LDX $02
+C2/7644: 9E 23 00     STZ $0023,X
+C2/7647: A6 02        LDX $02                   These LDXes are superfluous...
+C2/7649: 9E 22 00     STZ $0022,X               All other status ailments are removed.
+C2/764C: A6 02        LDX $02
+C2/764E: 9E 21 00     STZ $0021,X
+C2/7651: A6 02        LDX $02
+C2/7653: 9E 20 00     STZ $0020,X
+C2/7656: A6 02        LDX $02
+C2/7658: 9E 1F 00     STZ $001F,X
+C2/765B: A6 02        LDX $02
+C2/765D: 9E 1E 00     STZ $001E,X
+C2/7660: C2 20        REP #$20
+C2/7662: A5 02        LDA $02                   A = origA
+C2/7664: 18           CLC 
+C2/7665: 69 0F 00     ADC #$000F
+C2/7668: AA           TAX 
+C2/7669: 86 22        STX $22                   $22 = origA + 0x000F
+C2/766B: BD 00 00     LDA $0000,X
+C2/766E: 29 FF 00     AND #$00FF                A = Character number for NPCs
+C2/7671: D0 03        BNE $7676
+C2/7673: 4C 84 77     JMP $7784
+
+
+
+The targetted ally was an NPC
+
+C2/7676: A9 89 95     LDA #$9589
+C2/7679: 85 0A        STA $0A
+C2/767B: A9 D5 00     LDA #$00D5
+C2/767E: 85 0C        STA $0C                   $0A+0C = Root of enemy data
+C2/7680: A6 02        LDX $02
+C2/7682: BD 00 00     LDA $0000,X
+C2/7685: A0 5E 00     LDY #$005E
+C2/7688: 22 F7 8F C0  JSR $C08FF7
+C2/768C: 18           CLC 
+C2/768D: 69 31 00     ADC #$0031                Get the death text pointer
+C2/7690: 18           CLC 
+C2/7691: 65 0A        ADC $0A
+C2/7693: 85 0A        STA $0A
+C2/7695: A0 02 00     LDY #$0002
+C2/7698: B7 0A        LDA [$0A],Y
+C2/769A: A8           TAY 
+C2/769B: A7 0A        LDA [$0A]
+C2/769D: 85 06        STA $06
+C2/769F: 84 08        STY $08
+C2/76A1: A5 06        LDA $06
+C2/76A3: 85 0E        STA $0E
+C2/76A5: A5 08        LDA $08
+C2/76A7: 85 10        STA $10
+C2/76A9: 22 1C DC C1  JSR $C1DC1C               Display the death text
+C2/76AD: A6 02        LDX $02
+C2/76AF: E2 20        SEP #$20
+C2/76B1: 9E 0C 00     STZ $000C,X               Mark the NPC as incapacitated
+C2/76B4: A6 22        LDX $22
+C2/76B6: C2 20        REP #$20
+C2/76B8: BD 00 00     LDA $0000,X
+C2/76BB: 29 FF 00     AND #$00FF
+C2/76BE: AA           TAX 
+C2/76BF: E0 10 00     CPX #$0010
+C2/76C2: F0 05        BEQ $76C9
+C2/76C4: E0 11 00     CPX #$0011
+C2/76C7: D0 6C        BNE $7735
+
+
+
+The targetted ally NPC was a teddy bear
+...
+This code is kind of strange.
+It doesn't look like death code.
+What's going on here?
+
+C2/76C9: A5 02        LDA $02
+C2/76CB: 18           CLC 
+C2/76CC: 69 10 00     ADC #$0010
+C2/76CF: AA           TAX 
+C2/76D0: 86 1E        STX $1E                   $1E = origA + 0x0010
+C2/76D2: BD 00 00     LDA $0000,X
+C2/76D5: 29 FF 00     AND #$00FF
+C2/76D8: AA           TAX 
+C2/76D9: BD 3A 98     LDA $983A,X
+C2/76DC: 29 FF 00     AND #$00FF
+C2/76DF: D0 03        BNE $76E4
+C2/76E1: 4C 92 7C     JMP $7C92
+C2/76E4: E2 20        SEP #$20
+C2/76E6: A9 01        LDA #$01
+C2/76E8: A6 02        LDX $02
+C2/76EA: 9D 0C 00     STA $000C,X               The target is now alive (whuh?)
+C2/76ED: A6 02        LDX $02
+C2/76EF: 9E 1D 00     STZ $001D,X               No status ailments in the first byte (whuh?)
+C2/76F2: A6 1E        LDX $1E
+C2/76F4: C2 20        REP #$20
+C2/76F6: BD 00 00     LDA $0000,X
+C2/76F9: 29 FF 00     AND #$00FF
+C2/76FC: 0A           ASL 
+C2/76FD: AA           TAX 
+C2/76FE: BD 3C 98     LDA $983C,X
+C2/7701: A6 02        LDX $02
+C2/7703: 9D 13 00     STA $0013,X               HP (rolling target) and HP (current) updated
+C2/7706: A6 02        LDX $02
+C2/7708: 9D 11 00     STA $0011,X
+C2/770B: A6 1E        LDX $1E
+C2/770D: BD 00 00     LDA $0000,X
+C2/7710: 29 FF 00     AND #$00FF
+C2/7713: AA           TAX 
+C2/7714: E2 20        SEP #$20
+C2/7716: BD 3A 98     LDA $983A,X
+C2/7719: A6 02        LDX $02
+C2/771B: 9D 0F 00     STA $000F,X               Update NPC number
+C2/771E: C2 20        REP #$20
+C2/7720: 29 FF 00     AND #$00FF
+C2/7723: 0A           ASL 
+C2/7724: AA           TAX 
+C2/7725: E8           INX 
+C2/7726: BF 23 8F D5  LDA $D58F23,X
+C2/772A: 29 FF 00     AND #$00FF                A = NPC battle AI table, enemy number byte
+C2/772D: A6 02        LDX $02
+C2/772F: 9D 00 00     STA $0000,X               Update enemy number
+C2/7732: 4C 92 7C     JMP $7C92                 And we're done
+
+End of "target ally NPC was a teddy bear" case
+
+
+
+The targetted ally NPC was not a teddy bear
+
+C2/7735: AD 3A 98     LDA $983A
+C2/7738: 29 FF 00     AND #$00FF
+C2/773B: D0 03        BNE $7740
+C2/773D: 4C 92 7C     JMP $7C92
+C2/7740: A2 AC 9F     LDX #$9FAC
+C2/7743: A0 00 00     LDY #$0000
+C2/7746: 80 29        BRA $7771
+
+Loop over all of the battlers
+
+C2/7748: BD 0C 00     LDA $000C,X
+C2/774B: 29 FF 00     AND #$00FF
+C2/774E: F0 18        BEQ $7768                 Skip incapacitated battlers
+C2/7750: BD 0E 00     LDA $000E,X
+C2/7753: 29 FF 00     AND #$00FF
+C2/7756: D0 10        BNE $7768                 Skip opponents
+C2/7758: E2 20        SEP #$20
+C2/775A: BD 0F 00     LDA $000F,X
+C2/775D: CD 3A 98     CMP $983A
+C2/7760: D0 06        BNE $7768                 We're looking for Party NPC #1, it seems
+C2/7762: 9E 10 00     STZ $0010,X               Indicate they are, in fact, Party NPC #1
+C2/7765: 4C 92 7C     JMP $7C92                 And we're done
+C2/7768: C2 20        REP #$20
+C2/776A: 8A           TXA 
+C2/776B: 18           CLC 
+C2/776C: 69 4E 00     ADC #$004E
+C2/776F: AA           TAX 
+C2/7770: C8           INY 
+C2/7771: 84 02        STY $02
+C2/7773: A9 20 00     LDA #$0020
+C2/7776: 18           CLC 
+C2/7777: E5 02        SBC $02
+C2/7779: 70 04        BVS $777F
+C2/777B: 10 CB        BPL $7748
+C2/777D: 80 02        BRA $7781
+C2/777F: 30 C7        BMI $7748
+C2/7781: 4C 92 7C     JMP $7C92                 And we're done
+
+End of "target ally NPC was not a teddy bear" case
+End of "target ally was an NPC"
+
+
+
+The targetted ally was not an NPC (Chosen Four case)
+
+C2/7784: A6 02        LDX $02
+C2/7786: 9E 13 00     STZ $0013,X               HP rolling target (in-battle) is set to zero
+C2/7789: A5 02        LDA $02
+C2/778B: 18           CLC 
+C2/778C: 69 10 00     ADC #$0010
+C2/778F: AA           TAX 
+C2/7790: 86 1C        STX $1C                   $1C = origA + 0x0010
+C2/7792: BD 00 00     LDA $0000,X
+C2/7795: 29 FF 00     AND #$00FF
+C2/7798: A0 5F 00     LDY #$005F
+C2/779B: 22 F7 8F C0  JSR $C08FF7
+C2/779F: AA           TAX 
+C2/77A0: 9E 15 9A     STZ $9A15,X               HP rolling target (out-of-battle) is set to zero
+C2/77A3: A6 1C        LDX $1C
+C2/77A5: BD 00 00     LDA $0000,X
+C2/77A8: 29 FF 00     AND #$00FF
+C2/77AB: A0 5F 00     LDY #$005F
+C2/77AE: 22 F7 8F C0  JSR $C08FF7
+C2/77B2: AA           TAX 
+C2/77B3: A9 01 00     LDA #$0001
+C2/77B6: 9D 13 9A     STA $9A13,X               HP current (out-of-battle) is set to one. (Survive if you win?)
+C2/77B9: A9 6B 6C     LDA #$6C6B
+C2/77BC: 85 0E        STA $0E
+C2/77BE: A9 EF 00     LDA #$00EF
+C2/77C1: 85 10        STA $10
+C2/77C3: 22 1C DC C1  JSR $C1DC1C               Display text: "@<target> got hurt and collapsed."
+C2/77C7: 4C 92 7C     JMP $7C92                 And we're done.
+
+End of "target ally was not an NPC (Chosen Four)" case
+End of "target was an ally" case
+
+
+
+Take a deep breath.
+We're almost halfway through!
+
+
+
+Target was an opponent
+
+C2/77CA: A6 02        LDX $02
+C2/77CC: BD 00 00     LDA $0000,X
+C2/77CF: C9 DA 00     CMP #$00DA
+C2/77D2: D0 03        BNE $77D7
+C2/77D4: 4C 92 7C     JMP $7C92                 Enemy 0xDA (Giygas) cannot be knocked out
+C2/77D7: C9 DB 00     CMP #$00DB
+C2/77DA: D0 03        BNE $77DF
+C2/77DC: 4C 92 7C     JMP $7C92                 Enemy 0xDB (Giygas) cannot be knocked out
+C2/77DF: C9 DD 00     CMP #$00DD
+C2/77E2: D0 03        BNE $77E7
+C2/77E4: 4C 92 7C     JMP $7C92                 Enemy 0xDD (Giygas) cannot be knocked out
+C2/77E7: C9 E5 00     CMP #$00E5
+C2/77EA: D0 03        BNE $77EF
+C2/77EC: 4C 92 7C     JMP $7C92                 Enemy 0xE5 (Giygas) cannot be knocked out
+
+C2/77EF: A9 01 00     LDA #$0001
+C2/77F2: 22 C5 BA C2  JSR $C2BAC5
+C2/77F6: C9 01 00     CMP #$0001
+C2/77F9: F0 03        BEQ $77FE                 If C2/BAC5 returns 1, execute the loop below
+C2/77FB: 4C 79 78     JMP $7879                 Otherwise, skip over it
+
+C2/77FE: 22 9A 0F C2  JSR $C20F9A
+C2/7802: A9 00 00     LDA #$0000                I think this is the code that gives mortally-wounded Chosen 
+C2/7805: 85 22        STA $22                     one HP if they survive a battle having rolled to zero HP
+C2/7807: 80 6B        BRA $7874                   (but without being declared unconscious)
+C2/7809: A0 4E 00     LDY #$004E
+C2/780C: 22 F7 8F C0  JSR $C08FF7
+C2/7810: AA           TAX 
+C2/7811: 86 1E        STX $1E
+C2/7813: BD B8 9F     LDA $9FB8,X
+C2/7816: 29 FF 00     AND #$00FF
+C2/7819: F0 54        BEQ $786F                 Skip incapacitated party members
+C2/781B: BD BA 9F     LDA $9FBA,X
+C2/781E: 29 FF 00     AND #$00FF
+C2/7821: D0 4C        BNE $786F                 Skip opponents
+C2/7823: BD C9 9F     LDA $9FC9,X
+C2/7826: 29 FF 00     AND #$00FF
+C2/7829: C9 01 00     CMP #$0001
+C2/782C: F0 41        BEQ $786F                 Skip the unconscious
+C2/782E: BD BB 9F     LDA $9FBB,X
+C2/7831: 29 FF 00     AND #$00FF
+C2/7834: D0 39        BNE $786F                 Skip NPCs
+C2/7836: 8A           TXA 
+C2/7837: 18           CLC 
+C2/7838: 69 BC 9F     ADC #$9FBC
+C2/783B: A8           TAY 
+C2/783C: 84 20        STY $20
+C2/783E: B9 00 00     LDA $0000,Y
+C2/7841: 29 FF 00     AND #$00FF
+C2/7844: A0 5F 00     LDY #$005F
+C2/7847: 22 F7 8F C0  JSR $C08FF7
+C2/784B: AA           TAX 
+C2/784C: BD 13 9A     LDA $9A13,X
+C2/784F: D0 1E        BNE $786F                 Skip party members with nonzero current HP
+C2/7851: A9 01 00     LDA #$0001
+C2/7854: A6 1E        LDX $1E
+C2/7856: 9D BF 9F     STA $9FBF,X               Set rolling HP target (battlers table variable) to one
+C2/7859: A4 20        LDY $20
+C2/785B: B9 00 00     LDA $0000,Y
+C2/785E: 29 FF 00     AND #$00FF
+C2/7861: A0 5F 00     LDY #$005F
+C2/7864: 22 F7 8F C0  JSR $C08FF7
+C2/7868: AA           TAX 
+C2/7869: A9 01 00     LDA #$0001
+C2/786C: 9D 15 9A     STA $9A15,X               Set rolling HP target (player stats variable) to one
+C2/786F: A5 22        LDA $22
+C2/7871: 1A           INC 
+C2/7872: 85 22        STA $22
+C2/7874: C9 06 00     CMP #$0006
+C2/7877: 90 90        BCC $7809
+
+C2/7879: A5 02        LDA $02                   A = origA
+C2/787B: 18           CLC 
+C2/787C: 69 3F 00     ADC #$003F
+C2/787F: A8           TAY 
+C2/7880: B9 00 00     LDA $0000,Y
+C2/7883: 85 0A        STA $0A
+C2/7885: B9 02 00     LDA $0002,Y
+C2/7888: 85 0C        STA $0C                   0A+0C = Experience of target opponent
+C2/788A: AD 74 A9     LDA $A974
+C2/788D: 85 06        STA $06
+C2/788F: AD 76 A9     LDA $A976
+C2/7892: 85 08        STA $08
+C2/7894: 18           CLC 
+C2/7895: A5 06        LDA $06
+C2/7897: 65 0A        ADC $0A
+C2/7899: 85 06        STA $06
+C2/789B: A5 08        LDA $08
+C2/789D: 65 0C        ADC $0C
+C2/789F: 85 08        STA $08
+C2/78A1: A5 06        LDA $06
+C2/78A3: 8D 74 A9     STA $A974
+C2/78A6: A5 08        LDA $08
+C2/78A8: 8D 76 A9     STA $A976                 $A974+76 = Running total of experience earned this battle
+C2/78AB: A6 02        LDX $02
+C2/78AD: BD 3D 00     LDA $003D,X
+C2/78B0: 18           CLC 
+C2/78B1: 6D 78 A9     ADC $A978
+C2/78B4: 8D 78 A9     STA $A978                 Similar to experience w/ money
+C2/78B7: A9 89 95     LDA #$9589
+C2/78BA: 85 18        STA $18
+C2/78BC: A9 D5 00     LDA #$00D5
+C2/78BF: 85 1A        STA $1A                   $18+1A = Root of enemy data
+C2/78C1: A6 02        LDX $02
+C2/78C3: BD 00 00     LDA $0000,X               A = Enemy number of target opponent
+C2/78C6: A0 5E 00     LDY #$005E
+C2/78C9: 22 F7 8F C0  JSR $C08FF7
+C2/78CD: 18           CLC 
+C2/78CE: 69 4E 00     ADC #$004E
+C2/78D1: A8           TAY 
+C2/78D2: B7 18        LDA [$18],Y               A = Final action
+C2/78D4: D0 03        BNE $78D9
+C2/78D6: 4C 07 7A     JMP $7A07                 If no final action, skip ahead
+
+
+
+Final action stuff
+
+C2/78D9: A9 01 00     LDA #$0001
+C2/78DC: 8D 90 AA     STA $AA90
+C2/78DF: AE 70 A9     LDX $A970
+C2/78E2: 86 1E        STX $1E                   $1E = Current attacker (battler pointer)
+C2/78E4: AC 72 A9     LDY $A972
+C2/78E7: 84 16        STY $16                   $16 = Current target (battler pointer)
+C2/78E9: AD 6C A9     LDA $A96C
+C2/78EC: 85 06        STA $06
+C2/78EE: AD 6E A9     LDA $A96E
+C2/78F1: 85 08        STA $08                   $06+08 = Battler bit flags
+C2/78F3: A5 06        LDA $06
+C2/78F5: 85 12        STA $12
+C2/78F7: A5 08        LDA $08
+C2/78F9: 85 14        STA $14                   $12+14 = Battler bit flags
+C2/78FB: A5 02        LDA $02
+C2/78FD: 8D 70 A9     STA $A970                 Change the current attacker to origA
+C2/7900: A6 02        LDX $02
+C2/7902: BD 00 00     LDA $0000,X
+C2/7905: A0 5E 00     LDY #$005E
+C2/7908: 22 F7 8F C0  JSR $C08FF7
+C2/790C: 18           CLC 
+C2/790D: 69 4E 00     ADC #$004E
+C2/7910: A8           TAY 
+C2/7911: B7 18        LDA [$18],Y               A = Final action
+C2/7913: A6 02        LDX $02
+C2/7915: 9D 04 00     STA $0004,X               Next action is final action
+C2/7918: A6 02        LDX $02
+C2/791A: BD 00 00     LDA $0000,X
+C2/791D: A0 5E 00     LDY #$005E
+C2/7920: 22 F7 8F C0  JSR $C08FF7
+C2/7924: 18           CLC 
+C2/7925: 69 54 00     ADC #$0054
+C2/7928: A8           TAY 
+C2/7929: E2 20        SEP #$20
+C2/792B: B7 18        LDA [$18],Y               A = Final action argument
+C2/792D: A6 02        LDX $02
+C2/792F: 9D 08 00     STA $0008,X               We're using that next too
+C2/7932: C2 20        REP #$20
+C2/7934: AD 70 A9     LDA $A970
+C2/7937: 22 77 44 C2  JSR $C24477
+C2/793B: AD 70 A9     LDA $A970
+C2/793E: 22 03 47 C2  JSR $C24703
+C2/7942: A9 00 00     LDA #$0000
+C2/7945: 22 CF 3B C2  JSR $C23BCF
+C2/7949: 22 32 3E C2  JSR $C23E32
+C2/794D: A9 68 7B     LDA #$7B68
+C2/7950: 85 0A        STA $0A
+C2/7952: A9 D5 00     LDA #$00D5
+C2/7955: 85 0C        STA $0C                   $0A+0C = Root of battle actions table
+C2/7957: A6 02        LDX $02
+C2/7959: BD 00 00     LDA $0000,X
+C2/795C: A0 5E 00     LDY #$005E
+C2/795F: 22 F7 8F C0  JSR $C08FF7
+C2/7963: 18           CLC 
+C2/7964: 69 4E 00     ADC #$004E
+C2/7967: A8           TAY 
+C2/7968: B7 18        LDA [$18],Y               A = Final action
+C2/796A: 85 04        STA $04
+C2/796C: 0A           ASL 
+C2/796D: 65 04        ADC $04
+C2/796F: 0A           ASL 
+C2/7970: 0A           ASL 
+C2/7971: 1A           INC 
+C2/7972: 1A           INC 
+C2/7973: 1A           INC 
+C2/7974: 1A           INC 
+C2/7975: A6 0A        LDX $0A
+C2/7977: 86 06        STX $06
+C2/7979: A6 0C        LDX $0C
+C2/797B: 86 08        STX $08
+C2/797D: 18           CLC 
+C2/797E: 65 06        ADC $06
+C2/7980: 85 06        STA $06
+C2/7982: A0 02 00     LDY #$0002
+C2/7985: B7 06        LDA [$06],Y
+C2/7987: A8           TAY 
+C2/7988: A7 06        LDA [$06]
+C2/798A: 85 06        STA $06
+C2/798C: 84 08        STY $08
+C2/798E: A5 06        LDA $06
+C2/7990: 85 0E        STA $0E
+C2/7992: A5 08        LDA $08
+C2/7994: 85 10        STA $10
+C2/7996: 22 1C DC C1  JSR $C1DC1C               Print text of final action
+C2/799A: A6 02        LDX $02
+C2/799C: BD 00 00     LDA $0000,X
+C2/799F: A0 5E 00     LDY #$005E
+C2/79A2: 22 F7 8F C0  JSR $C08FF7
+C2/79A6: 18           CLC 
+C2/79A7: 69 4E 00     ADC #$004E
+C2/79AA: A8           TAY 
+C2/79AB: B7 18        LDA [$18],Y               A = Final action
+C2/79AD: 85 04        STA $04
+C2/79AF: 0A           ASL 
+C2/79B0: 65 04        ADC $04
+C2/79B2: 0A           ASL 
+C2/79B3: 0A           ASL 
+C2/79B4: 18           CLC 
+C2/79B5: 69 08 00     ADC #$0008
+C2/79B8: 18           CLC 
+C2/79B9: 65 0A        ADC $0A
+C2/79BB: 85 0A        STA $0A
+C2/79BD: A0 02 00     LDY #$0002
+C2/79C0: B7 0A        LDA [$0A],Y
+C2/79C2: A8           TAY 
+C2/79C3: A7 0A        LDA [$0A]
+C2/79C5: 85 06        STA $06
+C2/79C7: 84 08        STY $08
+C2/79C9: A5 06        LDA $06
+C2/79CB: 85 0E        STA $0E
+C2/79CD: A5 08        LDA $08
+C2/79CF: 85 10        STA $10
+C2/79D1: 22 A4 40 C2  JSR $C240A4               Execute final action?
+C2/79D5: 9C 90 AA     STZ $AA90
+C2/79D8: A6 1E        LDX $1E
+C2/79DA: 8E 70 A9     STX $A970
+C2/79DD: A4 16        LDY $16
+C2/79DF: 8C 72 A9     STY $A972
+C2/79E2: A5 12        LDA $12
+C2/79E4: 85 06        STA $06
+C2/79E6: A5 14        LDA $14
+C2/79E8: 85 08        STA $08
+C2/79EA: A5 06        LDA $06
+C2/79EC: 8D 6C A9     STA $A96C
+C2/79EF: A5 08        LDA $08
+C2/79F1: 8D 6E A9     STA $A96E
+C2/79F4: A9 00 00     LDA #$0000
+C2/79F7: 22 CF 3B C2  JSR $C23BCF
+C2/79FB: 22 05 3D C2  JSR $C23D05
+C2/79FF: AD 0E AA     LDA $AA0E
+C2/7A02: F0 03        BEQ $7A07
+C2/7A04: 4C 92 7C     JMP $7C92
+
+End of final action stuff
+
+
+
+C2/7A07: AD 92 AA     LDA $AA92
+C2/7A0A: F0 03        BEQ $7A0F
+C2/7A0C: 4C 92 7C     JMP $7C92
+C2/7A0F: A9 89 95     LDA #$9589
+C2/7A12: 85 0A        STA $0A
+C2/7A14: A9 D5 00     LDA #$00D5
+C2/7A17: 85 0C        STA $0C                   $0A+0C = Root of enemy data
+C2/7A19: A6 02        LDX $02
+C2/7A1B: BD 00 00     LDA $0000,X
+C2/7A1E: A0 5E 00     LDY #$005E
+C2/7A21: 22 F7 8F C0  JSR $C08FF7
+C2/7A25: 18           CLC 
+C2/7A26: 69 31 00     ADC #$0031                We're fetching the death text pointer
+C2/7A29: 18           CLC 
+C2/7A2A: 65 0A        ADC $0A
+C2/7A2C: 85 0A        STA $0A
+C2/7A2E: A0 02 00     LDY #$0002
+C2/7A31: B7 0A        LDA [$0A],Y
+C2/7A33: A8           TAY 
+C2/7A34: A7 0A        LDA [$0A]
+C2/7A36: 85 06        STA $06
+C2/7A38: 84 08        STY $08
+C2/7A3A: A5 06        LDA $06
+C2/7A3C: 85 0E        STA $0E
+C2/7A3E: A5 08        LDA $08
+C2/7A40: 85 10        STA $10
+C2/7A42: 22 1C DC C1  JSR $C1DC1C               Print text: death text
+
+C2/7A46: A9 AC 9F     LDA #$9FAC                I have no idea what this little loop is doing.
+C2/7A49: A2 00 00     LDX #$0000
+C2/7A4C: 86 22        STX $22
+C2/7A4E: 80 11        BRA $7A61
+C2/7A50: AA           TAX 
+C2/7A51: E2 20        SEP #$20
+C2/7A53: 9E 4B 00     STZ $004B,X
+C2/7A56: 18           CLC 
+C2/7A57: C2 20        REP #$20
+C2/7A59: 69 4E 00     ADC #$004E
+C2/7A5C: A6 22        LDX $22
+C2/7A5E: E8           INX 
+C2/7A5F: 86 22        STX $22
+C2/7A61: E0 20 00     CPX #$0020
+C2/7A64: 90 EA        BCC $7A50
+
+C2/7A66: E2 20        SEP #$20
+C2/7A68: A9 01        LDA #$01
+C2/7A6A: A6 02        LDX $02
+C2/7A6C: 9D 4B 00     STA $004B,X
+C2/7A6F: C2 20        REP #$20
+C2/7A71: A9 0A 00     LDA #$000A
+C2/7A74: 22 D8 FA C2  JSR $C2FAD8
+
+C2/7A78: A9 01 00     LDA #$0001                Another mystery loop. Related to battle sprites?
+C2/7A7B: 85 04        STA $04
+C2/7A7D: 80 20        BRA $7A9F
+C2/7A7F: A9 1F 00     LDA #$001F
+C2/7A82: 85 0E        STA $0E
+C2/7A84: A8           TAY 
+C2/7A85: AA           TAX 
+C2/7A86: 86 1E        STX $1E
+C2/7A88: A6 02        LDX $02
+C2/7A8A: BD 43 00     LDA $0043,X
+C2/7A8D: 29 FF 00     AND #$00FF
+C2/7A90: 0A           ASL 
+C2/7A91: 0A           ASL 
+C2/7A92: 0A           ASL 
+C2/7A93: 0A           ASL 
+C2/7A94: 18           CLC 
+C2/7A95: 65 04        ADC $04
+C2/7A97: A6 1E        LDX $1E
+C2/7A99: 22 35 FB C2  JSR $C2FB35
+C2/7A9D: E6 04        INC $04
+C2/7A9F: A5 04        LDA $04
+C2/7AA1: C9 10 00     CMP #$0010
+C2/7AA4: 90 D9        BCC $7A7F
+
+C2/7AA6: A9 0A 00     LDA #$000A
+C2/7AA9: 20 BE 69     JSR $69BE
+C2/7AAC: A9 14 00     LDA #$0014
+C2/7AAF: 22 D8 FA C2  JSR $C2FAD8
+
+C2/7AB3: A9 01 00     LDA #$0001                And again...
+C2/7AB6: 85 04        STA $04
+C2/7AB8: 80 1F        BRA $7AD9
+C2/7ABA: 64 0E        STZ $0E
+C2/7ABC: A0 00 00     LDY #$0000
+C2/7ABF: BB           TYX 
+C2/7AC0: 86 1E        STX $1E
+C2/7AC2: A6 02        LDX $02
+C2/7AC4: BD 43 00     LDA $0043,X
+C2/7AC7: 29 FF 00     AND #$00FF
+C2/7ACA: 0A           ASL 
+C2/7ACB: 0A           ASL 
+C2/7ACC: 0A           ASL 
+C2/7ACD: 0A           ASL 
+C2/7ACE: 18           CLC 
+C2/7ACF: 65 04        ADC $04
+C2/7AD1: A6 1E        LDX $1E
+C2/7AD3: 22 35 FB C2  JSR $C2FB35
+C2/7AD7: E6 04        INC $04
+C2/7AD9: A5 04        LDA $04
+C2/7ADB: C9 10 00     CMP #$0010
+C2/7ADE: 90 DA        BCC $7ABA
+
+C2/7AE0: A9 14 00     LDA #$0014
+C2/7AE3: 20 BE 69     JSR $69BE
+C2/7AE6: E2 20        SEP #$20
+C2/7AE8: A9 01        LDA #$01
+C2/7AEA: A6 02        LDX $02
+C2/7AEC: 9D 1D 00     STA $001D,X               Inflict unconsciousness, clear all other status ailments
+C2/7AEF: A6 02        LDX $02
+C2/7AF1: 9E 23 00     STZ $0023,X
+C2/7AF4: A6 02        LDX $02
+C2/7AF6: 9E 22 00     STZ $0022,X
+C2/7AF9: A6 02        LDX $02
+C2/7AFB: 9E 21 00     STZ $0021,X
+C2/7AFE: A6 02        LDX $02
+C2/7B00: 9E 20 00     STZ $0020,X
+C2/7B03: A6 02        LDX $02
+C2/7B05: 9E 1F 00     STZ $001F,X
+C2/7B08: A6 02        LDX $02
+C2/7B0A: 9E 1E 00     STZ $001E,X
+C2/7B0D: A6 02        LDX $02
+C2/7B0F: C2 20        REP #$20
+C2/7B11: 9E 13 00     STZ $0013,X               Zero HP
+C2/7B14: A6 02        LDX $02
+C2/7B16: BD 00 00     LDA $0000,X
+C2/7B19: A0 5E 00     LDY #$005E
+C2/7B1C: 22 F7 8F C0  JSR $C08FF7
+C2/7B20: 18           CLC 
+C2/7B21: 69 5A 00     ADC #$005A
+C2/7B24: AA           TAX 
+C2/7B25: BF 89 95 D5  LDA $D59589,X
+C2/7B29: 29 FF 00     AND #$00FF                A = +0x5A of enemy data ("Death sound")
+C2/7B2C: D0 03        BNE $7B31
+C2/7B2E: 4C ED 7B     JMP $7BED
+
+
+
+Death sound nonzero case
+I think there might be some nomenclature mixup here...
+Does death sound handle the "kill all other enemies" case of some bosses?
+
+C2/7B31: A2 1C A2     LDX #$A21C
+
+C2/7B34: A0 08 00     LDY #$0008                Do something to all enemies (battlers 08-1F)
+C2/7B37: 80 18        BRA $7B51
+C2/7B39: BD 0C 00     LDA $000C,X
+C2/7B3C: 29 FF 00     AND #$00FF
+C2/7B3F: F0 07        BEQ $7B48
+C2/7B41: E2 20        SEP #$20
+C2/7B43: A9 01        LDA #$01
+C2/7B45: 9D 4B 00     STA $004B,X
+C2/7B48: C2 20        REP #$20
+C2/7B4A: 8A           TXA 
+C2/7B4B: 18           CLC 
+C2/7B4C: 69 4E 00     ADC #$004E
+C2/7B4F: AA           TAX 
+C2/7B50: C8           INY 
+C2/7B51: C0 20 00     CPY #$0020
+C2/7B54: 90 E3        BCC $7B39
+
+C2/7B56: A9 21 00     LDA #$0021
+C2/7B59: 22 E0 AB C0  JSR $C0ABE0               Play "enemy defeated" sound
+C2/7B5D: A9 0A 00     LDA #$000A
+C2/7B60: 22 D8 FA C2  JSR $C2FAD8
+
+C2/7B64: A9 01 00     LDA #$0001                Another mystery loop
+C2/7B67: 85 04        STA $04
+C2/7B69: 80 16        BRA $7B81
+C2/7B6B: A5 04        LDA $04
+C2/7B6D: 29 0F 00     AND #$000F
+C2/7B70: F0 0D        BEQ $7B7F
+C2/7B72: A9 1F 00     LDA #$001F
+C2/7B75: 85 0E        STA $0E
+C2/7B77: A8           TAY 
+C2/7B78: AA           TAX 
+C2/7B79: A5 04        LDA $04
+C2/7B7B: 22 35 FB C2  JSR $C2FB35
+C2/7B7F: E6 04        INC $04
+C2/7B81: A5 04        LDA $04
+C2/7B83: C9 40 00     CMP #$0040
+C2/7B86: 90 E3        BCC $7B6B
+
+C2/7B88: A9 0A 00     LDA #$000A
+C2/7B8B: 20 BE 69     JSR $69BE
+C2/7B8E: A9 14 00     LDA #$0014
+C2/7B91: 22 D8 FA C2  JSR $C2FAD8
+
+C2/7B95: A9 01 00     LDA #$0001                Another mystery loop
+C2/7B98: 85 04        STA $04
+C2/7B9A: 80 15        BRA $7BB1
+C2/7B9C: A5 04        LDA $04
+C2/7B9E: 29 0F 00     AND #$000F
+C2/7BA1: F0 0C        BEQ $7BAF
+C2/7BA3: 64 0E        STZ $0E
+C2/7BA5: A0 00 00     LDY #$0000
+C2/7BA8: BB           TYX 
+C2/7BA9: A5 04        LDA $04
+C2/7BAB: 22 35 FB C2  JSR $C2FB35
+C2/7BAF: E6 04        INC $04
+C2/7BB1: A5 04        LDA $04
+C2/7BB3: C9 40 00     CMP #$0040
+C2/7BB6: 90 E4        BCC $7B9C
+
+C2/7BB8: A9 14 00     LDA #$0014
+C2/7BBB: 20 BE 69     JSR $69BE
+C2/7BBE: A2 1C A2     LDX #$A21C
+
+C2/7BC1: A0 08 00     LDY #$0008                Knock out all enemies (battlers 08-1F)
+C2/7BC4: 80 18        BRA $7BDE
+C2/7BC6: BD 0C 00     LDA $000C,X
+C2/7BC9: 29 FF 00     AND #$00FF
+C2/7BCC: F0 07        BEQ $7BD5
+C2/7BCE: E2 20        SEP #$20
+C2/7BD0: A9 01        LDA #$01
+C2/7BD2: 9D 1D 00     STA $001D,X
+C2/7BD5: C2 20        REP #$20
+C2/7BD7: 8A           TXA 
+C2/7BD8: 18           CLC 
+C2/7BD9: 69 4E 00     ADC #$004E
+C2/7BDC: AA           TAX 
+C2/7BDD: C8           INY 
+C2/7BDE: C0 20 00     CPY #$0020
+C2/7BE1: 90 E3        BCC $7BC6
+
+C2/7BE3: 22 F9 F8 C2  JSR $C2F8F9
+C2/7BE7: A9 02 00     LDA #$0002
+C2/7BEA: 8D 0E AA     STA $AA0E
+
+End of death sound nonzero case
+
+
+
+C2/7BED: A6 02        LDX $02
+C2/7BEF: BD 0F 00     LDA $000F,X
+C2/7BF2: 29 FF 00     AND #$00FF
+C2/7BF5: C9 D5 00     CMP #$00D5
+C2/7BF8: F0 03        BEQ $7BFD
+C2/7BFA: 4C 92 7C     JMP $7C92
+
+
+
+Tiny L'il Ghost case
+
+C2/7BFD: A0 00 00     LDY #$0000                Loop over the Chosen, remove Possessed status from exactly one
+C2/7C00: 84 22        STY $22
+C2/7C02: 80 39        BRA $7C3D
+C2/7C04: 98           TYA 
+C2/7C05: A0 4E 00     LDY #$004E
+C2/7C08: 22 F7 8F C0  JSR $C08FF7
+C2/7C0C: AA           TAX 
+C2/7C0D: BD B8 9F     LDA $9FB8,X
+C2/7C10: 29 FF 00     AND #$00FF
+C2/7C13: F0 23        BEQ $7C38
+C2/7C15: BD BB 9F     LDA $9FBB,X
+C2/7C18: 29 FF 00     AND #$00FF
+C2/7C1B: D0 1B        BNE $7C38
+C2/7C1D: 8A           TXA 
+C2/7C1E: 18           CLC 
+C2/7C1F: 69 C9 9F     ADC #$9FC9
+C2/7C22: AA           TAX 
+C2/7C23: E8           INX 
+C2/7C24: BD 00 00     LDA $0000,X
+C2/7C27: 29 FF 00     AND #$00FF
+C2/7C2A: C9 02 00     CMP #$0002
+C2/7C2D: D0 09        BNE $7C38
+C2/7C2F: E2 20        SEP #$20
+C2/7C31: A9 00        LDA #$00
+C2/7C33: 9D 00 00     STA $0000,X
+C2/7C36: 80 53        BRA $7C8B
+C2/7C38: A4 22        LDY $22
+C2/7C3A: C8           INY 
+C2/7C3B: 84 22        STY $22
+C2/7C3D: C0 06 00     CPY #$0006
+C2/7C40: 90 C2        BCC $7C04
+C2/7C42: 80 47        BRA $7C8B
+
+C2/7C44: C2 20        REP #$20
+C2/7C46: 98           TYA 
+C2/7C47: A0 4E 00     LDY #$004E
+C2/7C4A: 22 F7 8F C0  JSR $C08FF7
+C2/7C4E: AA           TAX 
+C2/7C4F: BD B8 9F     LDA $9FB8,X
+C2/7C52: 29 FF 00     AND #$00FF
+C2/7C55: F0 2F        BEQ $7C86
+C2/7C57: BD BB 9F     LDA $9FBB,X
+C2/7C5A: 29 FF 00     AND #$00FF
+C2/7C5D: D0 27        BNE $7C86
+C2/7C5F: 8A           TXA 
+C2/7C60: 18           CLC 
+C2/7C61: 69 C9 9F     ADC #$9FC9
+C2/7C64: AA           TAX 
+C2/7C65: BD 01 00     LDA $0001,X
+C2/7C68: 29 FF 00     AND #$00FF
+C2/7C6B: C9 02 00     CMP #$0002
+C2/7C6E: D0 16        BNE $7C86
+C2/7C70: A2 80 A1     LDX #$A180
+C2/7C73: A9 D5 00     LDA #$00D5
+C2/7C76: 22 EB B6 C2  JSR $C2B6EB
+C2/7C7A: E2 20        SEP #$20
+C2/7C7C: A9 D5 8D     LDA #$8DD5
+C2/7C7F: 8F A1 A9 01  STA $01A9A1
+C2/7C83: 8D 8D A1     STA $A18D
+C2/7C86: A4 22        LDY $22
+C2/7C88: C8           INY 
+C2/7C89: 84 22        STY $22
+C2/7C8B: A4 22        LDY $22
+C2/7C8D: C0 06 00     CPY #$0006
+C2/7C90: 90 B2        BCC $7C44
+
+End of "target was an opponent" case
+
+
+
+C2/7C92: C2 20        REP #$20
+C2/7C94: 2B           PLD 
+C2/7C95: 6B           RTL 
+
+.

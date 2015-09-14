@@ -1,0 +1,73 @@
+1) Beginning Hex Manipulation
+
+Downloads/Links = Hex editor, all table files
+
+Objectives:
+  - Learn the basic functionality of the hex editor
+  - Understand what bytes are and how they're structured
+  - Become comfortable with using a hex editor
+  - Understand what tables are and how to utilize them
+
+Project: Modify text and data with a hex editor, particularly
+         that which can be modified with other programs.  (To
+         give a feeling for how the data is arranged in the ROM)
+
+2) Video Game Storywriting 101
+
+Downloads/Links = None
+
+Objectives
+  - 
+  - 
+
+Project: 
+
+3) 
+
+Downloads/Links = 
+
+Objectives
+  - 
+  - 
+
+Project: 
+
+4) 
+
+Downloads/Links = 
+
+Objectives
+  - 
+  - 
+
+Project: 
+
+5) 
+
+Downloads/Links = 
+
+Objectives
+  - 
+  - 
+
+Project: 
+
+6) 
+
+Downloads/Links = 
+
+Objectives
+  - 
+  - 
+
+Project: 
+
+7) 
+
+Downloads/Links = 
+
+Objectives
+  - 
+  - 
+
+Project: 

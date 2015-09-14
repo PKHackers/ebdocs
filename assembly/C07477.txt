@@ -1,0 +1,111 @@
+C0/7477: C2 31        REP #$31
+C0/7479: 0B           PHD 
+C0/747A: 48           PHA 
+C0/747B: 7B           TDC 
+C0/747C: 69 EE FF     ADC #$FFEE
+C0/747F: 5B           TCD 
+C0/7480: 68           PLA 
+C0/7481: 9B           TXY                       Y = origX
+C0/7482: 84 10        STY $10                   $10 = origX
+C0/7484: 85 0E        STA $0E                   $0E = origA
+C0/7486: A9 00 00     LDA #$0000
+C0/7489: 85 0A        STA $0A
+C0/748B: A9 D0 00     LDA #$00D0
+C0/748E: 85 0C        STA $0C                   $0A+0C = $D00000
+C0/7490: A5 0E        LDA $0E
+C0/7492: 4A           LSR 
+C0/7493: 4A           LSR 
+C0/7494: 4A           LSR 
+C0/7495: 4A           LSR 
+C0/7496: 4A           LSR 
+C0/7497: 85 02        STA $02                   $02 = origA / 32
+C0/7499: 98           TYA 
+C0/749A: 29 E0 FF     AND #$FFE0
+C0/749D: 18           CLC 
+C0/749E: 65 02        ADC $02                   A = (origX & 0xFFE0) + origA / 32
+C0/74A0: 0A           ASL 
+C0/74A1: 0A           ASL 
+C0/74A2: 18           CLC                       A = 4 * ((origX & 0xFFE0) + (orig / 32))
+C0/74A3: 65 0A        ADC $0A
+C0/74A5: 85 0A        STA $0A                   Calculate where the door pointer is
+C0/74A7: A0 02 00     LDY #$0002
+C0/74AA: B7 0A        LDA [$0A],Y
+C0/74AC: A8           TAY 
+C0/74AD: A7 0A        LDA [$0A]
+C0/74AF: 85 06        STA $06
+C0/74B1: 84 08        STY $08                   $06+08 = Door pointer
+
+C0/74B3: A7 06        LDA [$06]
+C0/74B5: AA           TAX                       X = First two bytes of specified door's data (Number of doors)
+C0/74B6: D0 06        BNE $74BE                 If nonzero, continue
+C0/74B8: E2 20        SEP #$20                  If zero, return 0xFF
+C0/74BA: A9 FF        LDA #$FF
+C0/74BC: 80 66        BRA $7524
+
+C0/74BE: E6 06        INC $06
+C0/74C0: E6 06        INC $06
+C0/74C2: A5 0E        LDA $0E                   A = origA
+C0/74C4: 29 1F 00     AND #$001F
+C0/74C7: 85 02        STA $02                   $02 = origA & 0x001F
+C0/74C9: A4 10        LDY $10                   Y = origX
+C0/74CB: 98           TYA 
+C0/74CC: 29 1F 00     AND #$001F
+C0/74CF: 85 0E        STA $0E                   $0E = origX & 0x001F
+C0/74D1: 80 48        BRA $751B
+
+
+
+Having read the number of doors into X, we now do a loop with X as the loop iterator.
+[2 bytes: number of doors] (5-byte blocks, one for each door)
+
+The five-byte blocks:
+  Y-coordinate, X-coordinate, [??? one byte], [??? two bytes]
+
+C0/74D3: E2 20        SEP #$20
+C0/74D5: A0 01 00     LDY #$0001
+C0/74D8: B7 06        LDA [$06],Y
+C0/74DA: C2 20        REP #$20
+C0/74DC: 29 FF 00     AND #$00FF                A = SECOND byte of the current 5-byte block
+C0/74DF: C5 02        CMP $02                   Compare to (origA & 0x001F)
+C0/74E1: D0 2F        BNE $7512                 If not equal, skip handling this door
+
+C0/74E3: A5 0E        LDA $0E
+C0/74E5: 85 04        STA $04                   $04 = origX & 0x001F
+C0/74E7: A5 06        LDA $06
+C0/74E9: 85 0A        STA $0A
+C0/74EB: A5 08        LDA $08
+C0/74ED: 85 0C        STA $0C                   $0A+0C = Start address of current 5-byte block
+C0/74EF: A7 0A        LDA [$0A]
+C0/74F1: 29 FF 00     AND #$00FF                A = First byte of the current 5-byte block
+C0/74F4: C5 04        CMP $04                   Compare to (origX & 0x001F)
+C0/74F6: D0 1A        BNE $7512                 If not equal, skip handling this door
+
+C0/74F8: A0 03 00     LDY #$0003
+C0/74FB: B7 06        LDA [$06],Y
+C0/74FD: 8D BC 5D     STA $5DBC                 $5DBC = Fourth and fifth bytes of current 5-byte block
+C0/7500: E6 06        INC $06
+C0/7502: E6 06        INC $06
+C0/7504: A7 06        LDA [$06]
+C0/7506: 29 FF 00     AND #$00FF
+C0/7509: 8D BE 5D     STA $5DBE                 $5DBE = Third byte of current 5-byte block
+C0/750C: E2 20        SEP #$20
+C0/750E: A7 06        LDA [$06]
+C0/7510: 80 12        BRA $7524                 Return the third byte of the current 5-byte block
+
+C0/7512: A9 05 00     LDA #$0005
+C0/7515: 18           CLC 
+C0/7516: 65 06        ADC $06
+C0/7518: 85 06        STA $06
+C0/751A: CA           DEX 
+C0/751B: E0 00 00     CPX #$0000                Have we read all of the doors?
+C0/751E: D0 B3        BNE $74D3                 If no, loop.
+
+
+
+C0/7520: E2 20        SEP #$20
+C0/7522: A9 FF        LDA #$FF                  Default return is 0xFF
+
+C0/7524: 2B           PLD 
+C0/7525: 6B           RTL 
+
+.
