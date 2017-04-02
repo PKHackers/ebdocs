@@ -1,0 +1,39 @@
+Item types listing broken down by binary pairs
+by AnyoneEB
+ 
+ COLUMNS      NL MT ST OP (null, main type, sub type, options)
+    type 00 - 00 00 00 00 - franklin badge
+    type 04 - 00 00 01 00 - teddy bears
+    type 08 - 00 00 10 00 - broken item
+
+eqipable items
+weapon - options = [00] bash or [01] shoot
+    type 16 - 00 01 00 00 - bash
+    type 17 - 00 01 00 01 - shoot
+armor
+    type 20 - 00 01 01 00 - body
+    type 24 - 00 01 10 00 - arm
+    type 28 - 00 01 11 00 - other
+
+food items - no options
+    type 32 - 00 10 00 00 - eatten
+    type 36 - 00 10 01 00 - drinks
+    type 40 - 00 10 10 00 - condiment
+    type 44 - 00 10 11 00 - food for all
+
+special (healing, battle, and plot) items
+healing - no options
+    type 48 - 00 11 00 00 - hand-aid, protractor, ruler - healing items
+battle items - direction [00] = enemy
+                         [01] = party
+    type 52 - 00 11 01 00 - battle offensive items
+    type 53 - 00 11 01 01 - battle defensive items
+plot items - [00] = regular
+             [10] = works only in specifc area
+             [11] = works only when talking to right sprite (door, atm, person)
+    type 56 - 00 11 10 00 - sound stone, meterornium
+    type 58 - 00 11 10 10 - zom paper, hawk eye, bike - limited area
+    type 59 - 00 11 10 11 - keys, ATM, plot items - used at someone
+    
+    
+    type255 - 11 11 11 11 - Null (item #0)

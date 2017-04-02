@@ -1,0 +1,30 @@
+Text Pointer Table Entries
+
+The TPT is a very important block of code that identifies all of the various options and stuff set for the different objects and people you encounter - Like how they move, what sprite they use, what text address they link to, and so on.
+
+      [AA][BB][BB][CC][DD][EE][EE][EE][EE][FF][FF][FF][FF][GG][GG][GG][GG]
+
+AA = Type Identifier.  The value is always 01, 02, or 03 - 01 for people, 02 for items, and 03 for objects.  Modifying this number does not seem to change the talk/check status, so it may change the usage of some of the following data.
+
+BB = Sprite.  It uses the standard outside sprite list in standard reverse hex notation.
+
+CC = Direction to face.
+
+DD = Movement value.  
+
+EE = Variable.  In Item entries, it stores the box's control event flag (i.e. what flag will control it's empty/full status).  Format is [00 XX XX 00], in standard reverse notation.  In Person and Object entries it seems to store some kind of data, but its nature is unknown.  In some entries, it stores an event flag that (when set) will cause the sprite to not appear. [02 XX XX 01]
+
+FF = Primary Text Address.  Uses the standard EB address format.
+
+GG = Variable.  In Item entries, it stores the item contained within the present box, trash can, or what not.  Format is [XX 00 00 00], in standard reverse notation.  In NON-ITEM entries, it acts as a secondary text pointer.  If a type-59 object is used in proximity with this TPT entry, the primary address will by bypassed and this one will be used.  Format is [XX XX XX 00].  This is important for making Key item checking things (see below).
+
+
+On making Key Item scenes:
+
+The standard code which your secondary text address links to should look pretty much like this.
+
+    [19 00 00 1B 04 0B XX 1B 03 YY YY YY 00]@Blah Blah Blah[13 02]
+
+[19 00 00] has a questionable use.  Seemingly it sets the number of the type-59 item being used into active form, allowing it to be passed into the next code with [1B 04].  [1B 04] takes the active number and shunts it into [0B XX].  This will set the true/false flag.  If the active number is equal to XX, the flag is set to true.  If not, it's set to false.  After that, it's simple.  [1B 03] is the false pointer, so you should use the address of a failure message ("What do you think I want with that?" or something along those lines.)  After the [1B 03 YY YY YY 00], add in the text for the scene in which your item is examined, given away, used, or whatever.
+
+You could also change the order of control flow by using [1B 02 YY YY YY 00] to link to the message if the item number was the one coded in, and follow that with the text used if it's the wrong item.
