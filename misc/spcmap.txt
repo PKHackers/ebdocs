@@ -1,0 +1,134 @@
+0x00000-0x00020	: File Header : SNES-SPC700 Sound File Data v0.30
+0x00021-0x00023	: 26,26,26
+0x00024		: Version #(/100)
+0x00025-0x00026	: PC Register value (1 Word)
+0x00027		: A Register Value (1 byte)
+0x00028		: X Register Value (1 byte)
+0x00029		: Y Register Value (1 byte)
+0x0002A		: Status Flags Value (1 byte)
+0x0002B		: Stack Register Value (1 byte)
+0x0002C-0x0002D	: Empty area
+
+Extended header (Ignore when offset 0x00023 has a value of 27)
+
+0x0002E-0x0004D	: SubTitle/Song Name
+0x0004E-0x0006D	: Title of Game
+0x0006E-0x0007D	: Name of Dumper
+0x0007E-0x0009D	: Comments
+0x0009E-0x000A4	: Date of SPC Dumped in decimal (DD/MM/YYYY)
+0x000A5-0x000A8	: unused
+0x000A9-0x000AB	: Time in seconds for the spc to play before fading
+0x000AC-0x000AF	: Fade out time in milliseconds(Ascii if > 48*256, else decimal)
+0x000B0-0x000CF	: Author of Song
+0x000D0		: Default Channel Disables (0 = enable, 1 = disable)
+0x000D1		: Emulator used to dump .spc file (0 = UNKNOWN, 1 = ZSNES, 2 = SNES9X)
+0x000D2-0x000DB	: Unused
+0x000DC-0x000FF	: Reserved For Future Use (Please Keep 0 for now)
+0x00100-0x100FF	: SPCRam (where samples, music data, and music program are stored)
+(Beginning of DSPRam)
+0x10100		: Channel 1 Left Volume
+0x10101		: Channel 1 Right Volume
+0x10102		: Channel 1 Pitch Low
+0x10103		: Channel 1 Pitch High
+0x10104		: Channel 1 Instrument
+0x10105		: Channel 1 ADSR 1
+0x10106		: Channel 1 ADSR 2
+0x10107		: Channel 1 Gain
+0x10108		: ENVX
+0x10109		: VALX
+0x1010A-0x1010B	: Unknown
+0x1010C		: Master Volume Left
+0x1010D		: Echo (in binary, 1 bit for each channel)
+0x1010E		: Unknown
+0x1010F		: Channel 1 Filter
+0x10110		: Channel 2 Left Volume
+0x10111		: Channel 2 Right Volume
+0x10112		: Channel 2 Pitch Low
+0x10113		: Channel 2 Pitch High
+0x10114		: Channel 2 Instrument
+0x10115		: Channel 2 ADSR 1
+0x10116		: Channel 2 ADSR 2
+0x10117		: Channel 2 Gain
+0x10118-0x1011B	: Unknown
+0x1011C		: Master Volume Right
+0x1011D-0x1011E	: Unknown
+0x1011F		: Channel 2 Filter
+0x10120		: Channel 3 Left Volume
+0x10121		: Channel 3 Right Volume
+0x10122		: Channel 3 Pitch Low
+0x10123		: Channel 3 Pitch High
+0x10124		: Channel 3 Instrument
+0x10125		: Channel 3 ADSR 1
+0x10126		: Channel 3 ADSR 2
+0x10127		: Channel 3 Gain
+0x10128-0x1012B	: Unknown
+0x1012C		: Echo Volume Left
+0x1012D		: Pitch Modulation (binary)
+0x1012E		: Unknown
+0x1012F		: Channel 3 Filter
+0x10130		: Channel 4 Left Volume
+0x10131		: Channel 4 Right Volume
+0x10132		: Channel 4 Pitch Low
+0x10133		: Channel 4 Pitch High
+0x10134		: Channel 4 Instrument
+0x10135		: Channel 4 ADSR 1
+0x10136		: Channel 4 ADSR 2
+0x10137		: Channel 4 Gain
+0x10138-0x1013B	: Unknown
+0x1013D		: Echo Volume Right
+0x1013E		: Noise Enable (binary)
+0x1013F		: Channel 4 Filter
+0x10140		: Channel 5 Left Volume
+0x10141		: Channel 5 Right Volume
+0x10142		: Channel 5 Pitch Low
+0x10143		: Channel 5 Pitch High
+0x10144		: Channel 5 Instrument
+0x10145		: Channel 5 ADSR 1
+0x10146		: Channel 5 ADSR 2
+0x10147		: Channel 5 Gain
+0x10148-0x1014B	: Unknown
+0x1014C		: Key-On (Enable channel, Binary)
+0x1014D		: Echo Enable (Binary)
+0x1014E		: Unknown
+0x1014F		: Channel 5 Filter
+0x10150		: Channel 6 Left Volume
+0x10151		: Channel 6 Right Volume
+0x10152		: Channel 6 Pitch Low
+0x10153		: Channel 6 Pitch High
+0x10154		: Channel 6 Instrument
+0x10155		: Channel 6 ADSR 1
+0x10156		: Channel 6 ADSR 2
+0x10157		: Channel 6 Gain
+0x10158-0x1015B	: Unknown
+0x1015C		: Key-Off (Mute channel, Binary)
+0x1015D		: Sample Location (Hi-byte of mem address for the sample directory table)
+0x1015E		: Unknown
+0x1015F		: Channel 6 Filter
+0x10160		: Channel 7 Left Volume
+0x10161		: Channel 7 Right Volume
+0x10162		: Channel 7 Pitch Low
+0x10163		: Channel 7 Pitch High
+0x10164		: Channel 7 Instrument
+0x10165		: Channel 7 ADSR 1
+0x10166		: Channel 7 ADSR 2
+0x10167		: Channel 7 Gain
+0x10168-0x1016B	: Unknown
+0x1016C		: Misc Voice Control (binary, ???)
+0x1016D		: Echo Location (same as 0x1015D?)
+0x1016E		: Unknown
+0x1016F		: Channel 7 Filter
+0x10170		: Channel 8 Left Volume
+0x10171		: Channel 8 Right Volume
+0x10172		: Channel 8 Pitch Low
+0x10173		: Channel 8 Pitch High
+0x10174		: Channel 8 Instrument
+0x10175		: Channel 8 ADSR 1
+0x10176		: Channel 8 ADSR 2
+0x10177		: Channel 8 Gain
+0x10178-0x1017C	: Unknown
+0x1017D		: Echo Delay (Binary)
+0x1017E		: Unknown
+0x1017F		: Channel 8 Filter
+(End of DSPRam)
+0x10180-0x001BF	: Unused
+0x101C0-0x101FF	: SPC ExRAM (not sure what this is for)

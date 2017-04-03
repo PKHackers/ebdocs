@@ -1,0 +1,15 @@
+Spc note length, volume, and staccato-ness.
+Written by BlueStone.
+
+
+
+In the Hotel Theme SPC go to 0x49c5. You should see 9F A4 A6 A7 A9 24 AB 06 AC AB. That means:
+G note, C note, D note, D# note, F note, Set folling notes to 24 duration, G note, Set following notes to 06 duration, G# note, G note.
+
+As you can see, any numbers that appear after a note set the duration for all the notes that are played after.
+
+Now for the next part. Volume and staccato-ness.
+
+In the Hotel Theme SPC again, go to 0x49c0. That 6D sets the volume and staccato-ness of all the notes after until it is set again. The D in 6D sets the volume. If you change it to 0, that instrument's volume gets set to 0. If you change it to F, the volume gets changed to the loudest.
+
+The 6 in 6D sets the staccato-ness. If you change it to 0, the notes will be played very suddenly. If you set it to 7 (which is the highest you can set it because it goes buggy if it's any higher) the notes will be played legato (smoothly).
