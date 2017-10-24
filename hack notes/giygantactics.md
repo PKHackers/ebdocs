@@ -15,6 +15,7 @@ About the Neural Control Being:
 - The Conservation of Temporal Probability Theorem states that changes in the timeline will only occur at the point of the initial time travel.
 
 Fig. 1
+
               /¯¯¯<¯¯¯¯¯¯¯¯<¯¯¯¯¯¯¯<¯¯¯\
     -------- * ------------------------ % --------
               \___>________>_______>___/
