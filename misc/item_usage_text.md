@@ -1,6 +1,6 @@
 This area seems to load the pointers for item usage text. It's organized by the item type.
 
-##TOP LEVEL: $C1AFDC
+## TOP LEVEL: $C1AFDC
 
     <Michael1> Type 0n = Store 0x1 at $02/24, load the root of battle effects to $0A/0C, get the 1Dth byte of an item entry (battle effect presumably), multiply by 12 and add four for the text pointer, stash it in $06/08 and $26/28.
     <Michael1> Type 1n = Load the address of "The ___ is one of the items that can be equipped." to $06/06 and $26/28.
@@ -13,13 +13,13 @@ This area seems to load the pointers for item usage text. It's organized by the 
     <Michael1> B0AF: Continue parsing.
     <Michael1> B28C = Common point code goes to after loading a text pointer to $06/08 and $26/28.
 
-##SUB LEVEL: $C1B0B2
+## SUB LEVEL: $C1B0B2
 
     <Michael1> Continued parsing, Type C: Same as 0n and 2n.
     <Michael1> Continued parsing, Type 4: Load "The ___ can't be used here." to $06/08 and $26/28.
     <Michael1> Continued parsing, Type 8: Even more parsing.
 
-##LOW LEVEL: $C1B117
+## LOW LEVEL: $C1B117
 
     <Michael1> Final parsing, Type 0: Same as 0n and 2n.
     <Michael1> Final parsing, Type 1: Same as 0n and 2n.
