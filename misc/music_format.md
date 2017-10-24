@@ -46,4 +46,4 @@ continue to 480E's pointers, then 481E and 483E in turn. Finally, it would
 jump back to $4802 and parse 480E's pointers again, creating a loop.
 
 The values pointed to in the groups of eight pointers are parsed as described
-in [hotelspcstuff2.md](hotelspcstuff2.md).
+in [hotelspcstuff.md](hotelspcstuff.md).
