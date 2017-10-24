@@ -1,9 +1,9 @@
-Spc stuff with the Hotel SPC from EarthBound
+# Spc stuff with the Hotel SPC from EarthBound
 Written by BlueStone.
 
 
 
-In the Hotel Theme SPC go to 0x0049c5. You should see 9F A4 A6 A7 A9 24 AB 06 AC AB. That means:
+In the Hotel Theme SPC go to 0x0049C5. You should see 9F A4 A6 A7 A9 24 AB 06 AC AB. That means:
 G note, C note, D note, D# note, F note, Set folling notes to 24 duration, G note, Set following notes to 06 duration, G# note, G note.
 
 As you can see, any numbers that appear after a note set the duration for all the notes that are played after.
@@ -75,60 +75,52 @@ E5 ##  Sets volume of whole song. 00 = No sound, FF = Loudest
 E6 ## ##  Makes the volume of the whole song fade.
    The first ## is how long it takes to fade. 00=Does nothing, 01=Instant, FF=Longest
    The second ## controls what the volume will become. 00=No sound, FF=Loudest
-E7 ## Changes the speed of the whole song. 00 Freezes the music, 01=Really slow, FF=Really fast
-E8 ## ## Works like E6 only with the speed of the song.
-   The first ## controls how long it takes to change the speed of the song. 00=Does nothing, 01=Instant, FF=Longest
-   The second ## cotrols what the speed will become. 00=Slows until song is frozen, 01=Really slow, FF=Really fast
-E9 ## Increases the pitch of the song by ## notes.
-EA ## Increases the pitch of the current instrument by ## notes.
-EB ## ## ## This one is a bit trickier. It makes the note fade out and in very fast to make a tremelo sound.
-   The first ## controls how long until the tremelo begins. 00=Instant, FF=Really long time
-   The second ## controls how fast it fades out and in. 00=Slow, FF=Really Fast
-   The third ## controls how low the volume can get before it starts fading back in. 00=Never fade out, 01=No sound, FE=Loudest, FF=Never fade back in
-
-EC Unknown
-
-ED ##  Sets the volume of the current instrument. 00=No sound, FF=Loudest
-EE ## ## Works like E6 only with the volume of the current instrument.
-   The first ## controls how fast the volume changes. 00=Does nothing, 01=Instant, FF=Slow
-   The second ## controls what the volume will become. 00=No sound, FF=Loudest
-EF ## ## ## Points to different areas of the spc.
-   The first and second ## controls what area of the spc it points to. Ex: EF C9 49 would point to 0x48C9 (Subtracted 0x100 for the header)
-   The third ## controls how many times it loops. After being pointed to, when the code reaches a 00, it gets pointed back to itself ## times.
-F0 ## Makes a rotary effect to the current instrument. 00=Rotary, FF=No rotary
-F1 ## ## ##  Makes a pitch bend effect for each note of the current instrument.
-   The first ## controls how long before the pitch bend takes place. 00=Instant, FF=Really long time
-   The second ## controls how fast the pitch bend is. 00=Do nothing, 01=Instant, FF=Slow
-   The third ## controls how high or low note will bend in notes. 01,81=Bend to 1 note up, 7F,FF=Bend to 1 note down
-F2 ## ## ##  Makes an upward pitchbend effect to the notes of the current instrument
-   The first ## controls how long before the pitchbend takes effect. 00=Instant, FF=Long time
-   The second ## controls how fast the pitchbend is. 00=No effect, 01=Instant, FF=Slow
-   The third ## is how many notes below the note playing is where the pitch bend starts
-
-F3 Unknown
-
-F4 ## Increases frequency of the current instrument. 00=Don't increase, FF=Increase by 1 note
-F5 ## ## ## Changes the reverb for both left and right speakers.
-   The first ## changes 2 values, one of which I do not know what it does. The second digit controls what instuments get the reverb effect. 0=No instruments, F=All instruments
-   The second ## controls how much reverb the left speaker gives. 00=None, 80=All, FF=None
-   The third ## controls how much reverb the right speaker gives. 00=None, 80=All, FF=None
-
-F6 Unknown
-
-F7 ## ## ## I'm not sure what this one does. I think it has something to do with reverb.
-F8 ## ## ## Changes the reverb of all the instruments over a set ammount of time.
-   The first ## is how long the change in reverb takes. 00=Does nothing, 01=Instant, FF=Slow
-   The second ## controls what the reverb is going to change to for the left speaker. 00=None, 80=All, FF=None
-   The third ## controls what the reverb is going to change to for the right speaker. 00=None, 80=All, FF=None
-
-F9 ## ## ##  Unknown
-FA ##  Unknown
-FB ## ##  Unknown
-
-FC Mutes the current instrument
-FD Mutes all instruments
-FE Unmutes all the instruments after FD was used
-FF Mutes all instrumets. Can't use FE to unmute them.
+- E7 ## Changes the speed of the whole song. 00 Freezes the music, 01=Really slow, FF=Really fast
+- E8 ## ## Works like E6 only with the speed of the song.
+    - The first ## controls how long it takes to change the speed of the song. 00=Does nothing, 01=Instant, FF=Longest
+    - The second ## cotrols what the speed will become. 00=Slows until song is frozen, 01=Really slow, FF=Really fast
+- E9 ## Increases the pitch of the song by ## notes.
+- EA ## Increases the pitch of the current instrument by ## notes.
+- EB ## ## ## This one is a bit trickier. It makes the note fade out and in very fast to make a tremelo sound.
+    - The first ## controls how long until the tremelo begins. 00=Instant, FF=Really long time
+    - The second ## controls how fast it fades out and in. 00=Slow, FF=Really Fast
+    - The third ## controls how low the volume can get before it starts fading back in. 00=Never fade out, 01=No sound, FE=Loudest, FF=Never fade back in
+- EC Unknown
+- ED ##  Sets the volume of the current instrument. 00=No sound, FF=Loudest
+- EE ## ## Works like E6 only with the volume of the current instrument.
+    - The first ## controls how fast the volume changes. 00=Does nothing, 01=Instant, FF=Slow
+    - The second ## controls what the volume will become. 00=No sound, FF=Loudest
+- EF ## ## ## Points to different areas of the spc.
+    - The first and second ## controls what area of the spc it points to. Ex: EF C9 49 would point to 0x48C9 (Subtracted 0x100 for the header)
+    - The third ## controls how many times it loops. After being pointed to, when the code reaches a 00, it gets pointed back to itself ## times.
+- F0 ## Makes a rotary effect to the current instrument. 00=Rotary, FF=No rotary
+- F1 ## ## ##  Makes a pitch bend effect for each note of the current instrument.
+    - The first ## controls how long before the pitch bend takes place. 00=Instant, FF=Really long time
+    - The second ## controls how fast the pitch bend is. 00=Do nothing, 01=Instant, FF=Slow
+    - The third ## controls how high or low note will bend in notes. 01,81=Bend to 1 note up, 7F,FF=Bend to 1 note down
+- F2 ## ## ##  Makes an upward pitchbend effect to the notes of the current instrument
+    - The first ## controls how long before the pitchbend takes effect. 00=Instant, FF=Long time
+    - The second ## controls how fast the pitchbend is. 00=No effect, 01=Instant, FF=Slow
+    - The third ## is how many notes below the note playing is where the pitch bend starts
+- F3 Unknown
+- F4 ## Increases frequency of the current instrument. 00=Don't increase, FF=Increase by 1 note
+- F5 ## ## ## Changes the reverb for both left and right speakers.
+    - The first ## changes 2 values, one of which I do not know what it does. The second digit controls what instuments get the reverb effect. 0=No instruments, F=All instruments
+    - The second ## controls how much reverb the left speaker gives. 00=None, 80=All, FF=None
+    - The third ## controls how much reverb the right speaker gives. 00=None, 80=All, FF=None
+- F6 Unknown
+- F7 ## ## ## I'm not sure what this one does. I think it has something to do with reverb.
+- F8 ## ## ## Changes the reverb of all the instruments over a set ammount of time.
+    - The first ## is how long the change in reverb takes. 00=Does nothing, 01=Instant, FF=Slow
+    - The second ## controls what the reverb is going to change to for the left speaker. 00=None, 80=All, FF=None
+    - The third ## controls what the reverb is going to change to for the right speaker. 00=None, 80=All, FF=None
+- F9 ## ## ##  Unknown
+- FA ##  Unknown
+- FB ## ##  Unknown
+- FC Mutes the current instrument
+- FD Mutes all instruments
+- FE Unmutes all the instruments after FD was used
+- FF Mutes all instrumets. Can't use FE to unmute them.
 
 *Whew!*
 

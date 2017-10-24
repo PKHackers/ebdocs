@@ -1,6 +1,5 @@
---------------------------
-The Format of Music Blocks
---------------------------
+# The Format of Music Blocks
+
 Created by michael_cayer on Mar 30 2005, 21:28 EST
 Last updated by michael_cayer on Mar 30 2005, 21:28 EST
 
@@ -22,9 +21,7 @@ For example:
   Spcroot is "00 48", or $4800.
   $4800 = vv, 4801 = ww, and so on to 4804 = zz.
 
--------------------------------------------------------------------------
-The Format of the Block of Bytes
--------------------------------------------------------------------------
+# The Format of the Block of Bytes
 
 The block of bytes is composed of byte pairs that indicate addresses in
 the SPC700's memory. These pairs continue until a 00 00 is reached.
@@ -49,5 +46,4 @@ continue to 480E's pointers, then 481E and 483E in turn. Finally, it would
 jump back to $4802 and parse 480E's pointers again, creating a loop.
 
 The values pointed to in the groups of eight pointers are parsed as described
-in hotelspcstuff2.txt, currently available at:
-  http://pkhack.fobby.net/misc/spc/hotelspcstuff2.txt
+in [hotelspcstuff2.md](hotelspcstuff2.md).
