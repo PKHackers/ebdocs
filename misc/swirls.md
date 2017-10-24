@@ -15,6 +15,6 @@ Standard two-byte pointer table; base address is E0200.
 ## E6B14
 
 See:
- [../CE6914_SWIRL_DATA.md](CE6914_SWIRL_DATA.md)
+ [CE6914_SWIRL_DATA.md](../structures/CE6914_SWIRL_DATA.md)
 
 Not everything is known yet, unfortunately.
