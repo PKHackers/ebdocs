@@ -1,4 +1,4 @@
-Text Pointer Table Entries
+# Text Pointer Table Entries
 
 The TPT is a very important block of code that identifies all of the various options and stuff set for the different objects and people you encounter - Like how they move, what sprite they use, what text address they link to, and so on.
 
@@ -19,7 +19,7 @@ FF = Primary Text Address.  Uses the standard EB address format.
 GG = Variable.  In Item entries, it stores the item contained within the present box, trash can, or what not.  Format is [XX 00 00 00], in standard reverse notation.  In NON-ITEM entries, it acts as a secondary text pointer.  If a type-59 object is used in proximity with this TPT entry, the primary address will by bypassed and this one will be used.  Format is [XX XX XX 00].  This is important for making Key item checking things (see below).
 
 
-On making Key Item scenes:
+## On making Key Item scenes
 
 The standard code which your secondary text address links to should look pretty much like this.
 
