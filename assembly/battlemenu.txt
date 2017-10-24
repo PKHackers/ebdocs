@@ -1,12 +1,12 @@
 BATTLE MENU ANALYSIS
 --------------------
-The oft-referenced (01DFDA / C1DDDA) is believed to be a final step (perhaps printing code/references to it). A, X 
+The oft-referenced (01DFDA / C1DDDA) is believed to be a final step (perhaps printing code/references to it). A, X
 and Y seem to be written to right before each reference. Probably very important, INVESTIGATE!
 
 JSR indicates go-and-return. JMP indicates go. These may not be the actual instructions used (branch stuff may be
 used instead) - this is just what's done.
 
-(0237E5 / C235E5) 
+(0237E5 / C235E5)
 Load accumulator with value at $20
 Affects first entry in battle menu text
    0 = "Bash", JSR(01DFDA / C1DDDA), JMP(023856 / C23656)
@@ -14,7 +14,7 @@ Affects first entry in battle menu text
    2 = "Do Nothing", JSR(01DFDA / C1DDDA), JMP(023856 / C23656)
  DEF = JMP(023856 / C23656)
 
-(023856 / C23656) 
+(023856 / C23656)
 Load accumulator with value at $20
    2 = JMP(0238E2 / C236E2)
   !2 = JMP(023860 / C23660), "Bash", (01DFDA / C1DDDA), JMP(0238E2 / C236E2)
@@ -71,12 +71,12 @@ Load accumulator with value at $24
 ************************************************************************************************************************
 
 C1/DDDA: C2 31        REP #$31
-C1/DDDC: 0B           PHD 
-C1/DDDD: 48           PHA 
-C1/DDDE: 7B           TDC 
+C1/DDDC: 0B           PHD
+C1/DDDD: 48           PHA
+C1/DDDE: 7B           TDC
 C1/DDDF: 69 E4 FF     ADC #$FFE4
-C1/DDE2: 5B           TCD 
-C1/DDE3: 68           PLA 
+C1/DDE2: 5B           TCD
+C1/DDE3: 68           PLA
 C1/DDE4: 85 1A        STA $1A
 C1/DDE6: A5 2E        LDA $2E
 C1/DDE8: 85 06        STA $06
@@ -108,5 +108,5 @@ C1/DE1A: A5 08        LDA $08
 C1/DE1C: 85 14        STA $14
 C1/DE1E: A5 1A        LDA $1A
 C1/DE20: 20 3B 15     JSR $153B
-C1/DE23: 2B           PLD 
-C1/DE24: 6B           RTL 
+C1/DE23: 2B           PLD
+C1/DE24: 6B           RTL

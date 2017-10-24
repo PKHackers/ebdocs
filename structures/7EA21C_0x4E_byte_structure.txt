@@ -14,14 +14,14 @@ Relevant routine:
 C2B6EB - Copies enemy data into 7EA21C for in-battle use?
 
 Observation on shield health:
-  Newly created shields can withstand three hits. Stacking the same type 
+  Newly created shields can withstand three hits. Stacking the same type
   of shield will increase the number of hits the shield can take by 3, to
   a maximum of eight hits.
 
 
 
 UPDATE:
-Technically this starts at 7E9FAC, and the first eight 0x4E blocks are 
+Technically this starts at 7E9FAC, and the first eight 0x4E blocks are
 used for party members - the Chosen Four and combat NPCs.
 
 

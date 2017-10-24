@@ -1,21 +1,21 @@
 Enemy Placement
 
 Involved databanks:
-•101A80 to 10BA7F = Enemy Placement data 
-•10BA80 to 10BDAB = Enemy Placement groups pointer table 
-•10BDAC to 10C80C = Enemy Placement groups data 
-•10C80D to 10D72F = [1F 23 XX XX] Battle Entries Pointer Table 
-•10D74C to 10E1B3 = [1F 23 XX XX] Battle Entries 
+â€¢101A80 to 10BA7F = Enemy Placement data
+â€¢10BA80 to 10BDAB = Enemy Placement groups pointer table
+â€¢10BDAC to 10C80C = Enemy Placement groups data
+â€¢10C80D to 10D72F = [1F 23 XX XX] Battle Entries Pointer Table
+â€¢10D74C to 10E1B3 = [1F 23 XX XX] Battle Entries
 
-•Enemy Placement Data Formatting: AA 00
+â€¢Enemy Placement Data Formatting: AA 00
 
 The data here is stored in two-byte increments.  Each two bytes represents a 2-tile block (horizontally arranged) for which placement is indicated.  The value for AA indicates a particular enemy group that will appear in the block.  That value can range from 00 (none) to 0xCB - the value being an entry in the Enemy Placement groups pointer table at 0x10BA80.
 
-•Enemy Placement Group Data Formatting: XX XX XX 00
+â€¢Enemy Placement Group Data Formatting: XX XX XX 00
 
 This is a standard, no frills 4-byte pointer table.  It links to the Enemy Placement groups data blocks.  Each entry in this table is equivalent to a byte value in the Enemy Placement Data.
 
-•Enemy Placement Group Data Formatting:
+â€¢Enemy Placement Group Data Formatting:
  AA AA ?? ?? [(BB CC CC) (DD EE EE)]
 
 Now this is the good shit.  As far as we can tell, this appears to be some sort of probability table for how the enemies appear.  More on how that works in a second.
@@ -49,7 +49,7 @@ It seems a bit odd...  I don't remember the chance exceeding 8.  But still, this
 
 This group, in case you're wondering, is the primary enemy placement for the Sharks around Onett.  If flag 0x40 is set, they don't show up any more.  Now you know why... maybe.
 
-•[1F 23 XX XX] Battle Entries Pointer Table Formatting:
+â€¢[1F 23 XX XX] Battle Entries Pointer Table Formatting:
 AA AA AA 00 BB BB CC DD
 
 [1F 23 XX XX] is the battle-initating control code.  It also is used for enemy identification in the placement groups.
@@ -59,9 +59,9 @@ AA AA AA 00 BB BB CC DD
 -CC is flag usage.  Assuming there's a flag in use:
   00 = Run away while the flag is unset.
   01 = Run away while the flag is set.
--DD seems to indicate the size of the battle "letterbox."  Values range from 00 to 03.    
-              
-•[1F 23 XX XX] Battle Entries Formatting:
+-DD seems to indicate the size of the battle "letterbox."  Values range from 00 to 03.
+
+â€¢[1F 23 XX XX] Battle Entries Formatting:
 (AA BB BB) FF
 
 These entries are as simple as it gets.  (AA BB BB) is repeated as many times as one desires.  FF is exactly that - 0xFF and indicates the end of the [1F 23] group.

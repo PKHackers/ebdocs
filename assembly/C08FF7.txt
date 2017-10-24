@@ -3,12 +3,12 @@ C08FF7
 
 C0/8FF7: C2 10        REP #$10            // X flag clear; index registers are 16 bits.
 C0/8FF9: EB           XBA                 // Swap the low and high order portions of the accumulator.
-C0/8FFA: F0 26        BEQ $9022           // If the low order byte became 0x00 after the previous 
+C0/8FFA: F0 26        BEQ $9022           // If the low order byte became 0x00 after the previous
                                              instruction (XBA), this jump occurs. That would occur if
                                              the accumulator value was less than 0x100. Documentation
                                              of this follows the C08FF7 section.
 C0/8FFC: E2 20        SEP #$20            // If greater than/equal to 0x100, A becomes eight-bit.
-C0/8FFE: EB           XBA                 // Swap back. 
+C0/8FFE: EB           XBA                 // Swap back.
 
    |-----------------------------------------------------------|
    | The overall result at this point is a modulus operation:  |
@@ -32,8 +32,8 @@ C0/9001: C2 20        REP #$20            // M flag clear; the accumulator becom
    |-----------------------------------|
 
 C0/9003: 8F 02 42 00  STA $004202         // Store the accumulator at $004202 - the multiplication register.
-C0/9007: EA           NOP 
-C0/9008: EA           NOP 
+C0/9007: EA           NOP
+C0/9008: EA           NOP
 C0/9009: AF 16 42 00  LDA $004216         // Wait two cycles for the result and then read it.
 C0/900D: A8           TAY                 // Move result to Y.
 
@@ -61,7 +61,7 @@ C0/9017: 98           TYA                 // Transfer Y to A.
    |---------------------------------------------|
 
 C0/9018: EB           XBA                 // Swap low/high order.
-C0/9019: 29 00 FF     AND #$FF00          // And axe the new low order. 
+C0/9019: 29 00 FF     AND #$FF00          // And axe the new low order.
                                              Overall, the accumulator equals: (11 * 44)'s low order * 0x100
 C0/901C: 18           CLC                 // Clear carry flag.
 C0/901D: 6F 16 42 00  ADC $004216         // Add the accumulator and the multiplication result.
@@ -84,7 +84,7 @@ C0/9021: 6B           RTL                 // Return.
    |----------------------------------------------------------------------------|
 
 ACCUMULATOR RESULT
-1. Multiply the Y register by the high order of the accumulator. 
+1. Multiply the Y register by the high order of the accumulator.
 2. Get the low order of the result of Step 1 and multiply it by 0x100.
 3. Add (Y register * the initial low order of the accumulator) to the result of Step 2.
 
@@ -100,8 +100,8 @@ C0/9022: E2 20        SEP #$20            // The accumulator becomes eight-bit.
 C0/9024: 98           TYA                 // Transfer Y to A.
 C0/9025: C2 20        REP #$20            // The accumulator resumes being sixteen-bit.
 C0/9027: 8F 02 42 00  STA $004202         // Multiplication.
-C0/902B: EA           NOP 
-C0/902C: EA           NOP 
+C0/902B: EA           NOP
+C0/902C: EA           NOP
 C0/902D: AF 16 42 00  LDA $004216         // Wait two cycles for the result and then read it.
 C0/9031: 6B           RTL                 // Return.
 

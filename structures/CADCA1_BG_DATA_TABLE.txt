@@ -7,7 +7,7 @@ BATTLE BACKGROUND DATA
 
 
 AA - Graphics and arrangement.
-     Corresponds to a graphics pointer from the AD9A1 table, as well as 
+     Corresponds to a graphics pointer from the AD9A1 table, as well as
      an arrangement pointer from the ADB3D table.
 
 BB - Palette.
@@ -36,7 +36,7 @@ HH - Palette cycle #2: Last 7E0240 palette.
      The format of all of these is the same.
      Some examples:
 
-        08 --> 2 * 08 = 10 
+        08 --> 2 * 08 = 10
            --> 7E0240 + 10
            --> Palette at 7E0250
 
@@ -81,9 +81,9 @@ AA - Arrangement. Corresponds to the arrangement pointer entry in the table at A
 BB - Palette. Corresponds to the palette pointer entry in the table at ADCD9.
 
 CC - UNKNOWN
-       Always 04 or 02. 
+       Always 04 or 02.
        04 = All entries not listed below
-       02 = 0, 45, 163-188, 190-194, 200-207, 210-219, 221-224, 
+       02 = 0, 45, 163-188, 190-194, 200-207, 210-219, 221-224,
             248, 252, 258, 263, 264, 266, 267, 269, 270, 272-277,
             281, 282, 292, 293, 306, 307, 326 (Numbers = decimal)
 

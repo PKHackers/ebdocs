@@ -14,8 +14,8 @@ Battlers can be:
      - Poo
 
   - Party NPCs
-    These are computer-controlled and have behaviour based on an 
-    entry in enemy data. They use the NPC slots in the out-of-battle 
+    These are computer-controlled and have behaviour based on an
+    entry in enemy data. They use the NPC slots in the out-of-battle
     statistics table (7E9B4A, 7E9BA9) when they are in your party.
     As such, they have persistent stats (eg. HP) between battles.
      - Pokey
@@ -65,7 +65,7 @@ Relevant routine:
 C2B6EB - Copies enemy data into 7EA21C for in-battle use?
 
 Observation on shield health:
-  Newly created shields can withstand three hits. Stacking the same type 
+  Newly created shields can withstand three hits. Stacking the same type
   of shield will increase the number of hits the shield can take by 3, to
   a maximum of eight hits.
 

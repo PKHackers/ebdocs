@@ -477,10 +477,10 @@ WindowStat Footnote
 * The first entry is the first window opened (the window with 0x0000 in the
   7E88E4 table); the second entry, the second window (0x0001); etc.
 * Strictly speaking, the end of this table is not known. However, assuming
-  it takes up all the space it can (that is, all the space up until the next 
-  known region) and factoring in the length of entries (0x52), then 7E88DF 
+  it takes up all the space it can (that is, all the space up until the next
+  known region) and factoring in the length of entries (0x52), then 7E88DF
   provides eight 0x52-byte-entries. That being said, this also means all hell
-  should (theoretically) break loose if you try to have more than eight 
+  should (theoretically) break loose if you try to have more than eight
   windows open.
 * For more details, refer to:
   http://pkhack.fobby.net/misc/txt/7E8650_0x52_byte_structure.txt
@@ -562,9 +562,9 @@ Hypnosis/Brainshock Footnote
 
 Status Footnote
 ---------------
-* Add the first number to the start address of the 
+* Add the first number to the start address of the
   status section of the chosen character.
-* Place the second number at the address found in 
+* Place the second number at the address found in
   the previous step.
 
   [00 00] = Normal
@@ -600,7 +600,7 @@ Status Footnote
 7EB549 Footnote
 ---------------
 00 = When crossing sector boundaries, the game does NOT check for music changes.
-01 = When crossing sector boundaries, the game DOES check for music changes. 
+01 = When crossing sector boundaries, the game DOES check for music changes.
      (This is the default behaviour.)
 
 .

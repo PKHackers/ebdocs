@@ -476,7 +476,7 @@ $0030-3F holds some channelset stuff (the pointers).
 08C0: 68 E0       CMP      A, #$E0              --- 80-FF CASE: start ---
 08C2: 90 05       BCC      $08C9
 08C4: 3F 43 09    CALL     $0943                --- E0-FF CASE: Go to 0943 ---
-08C7: 2F B9       BRA      $0882 
+08C7: 2F B9       BRA      $0882
 08C9: F5 00 04    MOV      A, $0400+X           --- 80-DF CASE ---
 08CC: 04 1B       OR       A, $1B
 08CE: D0 04       BNE      $08D4                No idea what this is... maybe skips $0654 for non-notes?
@@ -484,7 +484,7 @@ $0030-3F holds some channelset stuff (the pointers).
 
 ; 0654 handles note parsing. The code is scary, though...
 
-08D1: 3F 54 06    CALL     $0654 
+08D1: 3F 54 06    CALL     $0654
 08D4: F5 00 02    MOV      A, $0200+X
 08D7: D4 70       MOV      $70+X, A             $70+X = $200+X = Duration
 08D9: FD          MOV      Y, A
@@ -590,7 +590,7 @@ $0030-3F holds some channelset stuff (the pointers).
 0996: 2F 07       BRA      $099F
 0998: E4 47       MOV      A, $47
 099A: 4E 49 00    TCLR1    $0049
-099D: F7 14       MOV      A, [$14]+Y 
+099D: F7 14       MOV      A, [$14]+Y
 099F: C9 F2 00    MOV      $00F2, X             If you null this opcode, and the next, you'll get no sound.
 09A2: C5 F3 00    MOV      $00F3, A             Update: this messes with SRCN, ADSR1+2, and GAIN for channels.
 09A5: 3D          INC      X                     It uses values from 6E00 + n for this task. Then it dumps a

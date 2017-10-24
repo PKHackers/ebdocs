@@ -23,14 +23,14 @@ numbers you want activated.  (I.E. 80, 40, and 08 -
 * Bit 0x80 - Teleportation inhibitor.
  [X---|----] PSI Teleport may not be used in this sector
              if this bit is toggled on.
-   
+
 * Bit 0x40 - As far as we can tell, this bit is
  [-X--|----] unused.  We believe it may have been
              part of the town map section below.
 
 * Bit 0x20 --\  Controls town map data.   There are 8
 * Bit 0x10   |- different possible settings to pick.
-* Bit 0x08 --/  
+* Bit 0x08 --/
  [--XX|X---]    000 - No Map      100 - Fourside
                 001 - Onett       101 - Scaraba
                 010 - Twoson      110 - Summers

@@ -1,14 +1,14 @@
 [1F 81 XX YY] - Works with items and the item usability byte in some unknown way.
 
 C1/4F6F: C2 31        REP #$31         Flags and direct page madness
-C1/4F71: 0B           PHD 
-C1/4F72: 48           PHA 
-C1/4F73: 7B           TDC 
+C1/4F71: 0B           PHD
+C1/4F72: 48           PHA
+C1/4F73: 7B           TDC
 C1/4F74: 69 EA FF     ADC #$FFEA
-C1/4F77: 5B           TCD 
-C1/4F78: 68           PLA 
+C1/4F77: 5B           TCD
+C1/4F78: 68           PLA
 C1/4F79: A9 01 00     LDA #$0001       A = 1
-C1/4F7C: 18           CLC 
+C1/4F7C: 18           CLC
 C1/4F7D: ED CA 97     SBC $97CA        V- N+ : 4F98
 C1/4F80: 50 04        BVC $4F86        V+ N- : 4F98
 C1/4F82: 10 17        BPL $4F9B        V+ N+ : 4F88
@@ -31,7 +31,7 @@ C1/4FA8: 86 12        STX $12            Store it in $12
 C1/4FAA: 80 08        BRA $4FB4          Branch to 4FB4
 C1/4FAC: 20 DC 03     JSR $03DC          If not, get the value through the variable-pass-handling stuff.
 C1/4FAF: A5 06        LDA $06
-C1/4FB1: AA           TAX 
+C1/4FB1: AA           TAX
 C1/4FB2: 86 12        STX $12
 C1/4FB4: A5 14        LDA $14            Restore the moduloed-97BA accumulator.
 C1/4FB6: D0 05        BNE $4FBD          If nonzero, jump to C14FBD.
@@ -41,21 +41,21 @@ C1/4FBD: A6 12        LDX $12            Load X with parameter
 C1/4FBF: 22 14 EE C3  JSR $C3EE14        C3EE14; A = moduloed-97BA accumulator or C1040A result, X = parameter
 
 C3/EE14: C2 31        REP #$31           Flags and direct page madness
-C3/EE16: 0B           PHD 
-C3/EE17: 48           PHA 
-C3/EE18: 7B           TDC 
+C3/EE16: 0B           PHD
+C3/EE17: 48           PHA
+C3/EE18: 7B           TDC
 C3/EE19: 69 F0 FF     ADC #$FFF0
-C3/EE1C: 5B           TCD 
-C3/EE1D: 68           PLA 
+C3/EE1C: 5B           TCD
+C3/EE1D: 68           PLA
 C3/EE1E: 9B           TXY                Transfer X to Y and A to X, then store X at $0E; then transfer Y to A.
 C3/EE1F: AA           TAX                Result: A = parameter, X & $0E = moduloed-97BA accumulator or C1040A result.
 C3/EE20: 86 0E        STX $0E
-C3/EE22: 98           TYA 
+C3/EE22: 98           TYA
 C3/EE23: A0 27 00     LDY #$0027         Y = 0x27, A = parameter.
 C3/EE26: 22 F7 8F C0  JSR $C08FF7        A = parameter * 0x27. Parameter = AN ITEM NUMBER.
-C3/EE2A: 18           CLC 
+C3/EE2A: 18           CLC
 C3/EE2B: 69 1C 00     ADC #$001C         Clear carry, add 0x1C and transfer to X.
-C3/EE2E: AA           TAX 
+C3/EE2E: AA           TAX
 C3/EE2F: E2 20        SEP #$20           A = eight bit.
 C3/EE31: BF 00 50 D5  LDA $D55000,X      Get one byte from position 0x1C in item number (parameter).
 C3/EE35: A6 0E        LDX $0E            X = moduloed-97BA accumulator or C1040A result.
@@ -67,7 +67,7 @@ C3/EE41: F0 05        BEQ $EE48          If zero, accumulator = 0.
 C3/EE43: A9 01 00     LDA #$0001         If nonzero, accumulator = 1.
 C3/EE46: 80 03        BRA $EE4B
 C3/EE48: A9 00 00     LDA #$0000
-C3/EE4B: 2B           PLD 
+C3/EE4B: 2B           PLD
 C3/EE4C: 6B           RTL                Return.
 
 C1/4FC3: 85 06        STA $06            Store accumulator in $06 and $0E
@@ -79,18 +79,18 @@ C1/4FCD: 85 10        STA $10
 C1/4FCF: 20 5D 04     JSR $045D          Jump to C1045D subroutine
 
 C1/045D: C2 31        REP #$31           Flags and direct page madness
-C1/045F: 0B           PHD 
-C1/0460: 7B           TDC 
+C1/045F: 0B           PHD
+C1/0460: 7B           TDC
 C1/0461: 69 F2 FF     ADC #$FFF2
-C1/0464: 5B           TCD 
+C1/0464: 5B           TCD
 C1/0465: A5 1C        LDA $1C            Store $1C in $06 and $1E in $08.
 C1/0467: 85 06        STA $06
 C1/0469: A5 1E        LDA $1E
 C1/046B: 85 08        STA $08
 C1/046D: 20 01 03     JSR $0301          Jump to C10301, detailed in cc_0D.txt
-C1/0470: 18           CLC 
+C1/0470: 18           CLC
 C1/0471: 69 17 00     ADC #$0017         Clear carry, add 0x17 and transfer A to Y
-C1/0474: A8           TAY 
+C1/0474: A8           TAY
 C1/0475: A5 06        LDA $06            Store $06 at $0000 + Y
 C1/0477: 99 00 00     STA $0000,Y
 C1/047A: A5 08        LDA $08            Store $08 at $0002 + Y
@@ -99,9 +99,9 @@ C1/047F: A5 06        LDA $06            Store $06 at $14 and $08 at $16
 C1/0481: 85 14        STA $14
 C1/0483: A5 08        LDA $08
 C1/0485: 85 16        STA $16
-C1/0487: 2B           PLD 
+C1/0487: 2B           PLD
 C1/0488: 60           RTS                Return
 
 C1/4FD2: A9 00 00     LDA #$0000         Nullify accumulator contents
-C1/4FD5: 2B           PLD 
+C1/4FD5: 2B           PLD
 C1/4FD6: 60           RTS                Return

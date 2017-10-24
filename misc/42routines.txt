@@ -27,9 +27,9 @@ DETAILED:
        Down-left            05 (00000101)         0A (00001010)
        Left                 06 (00000110)         0C (00001100)
        Up-left              07 (00000111)         0E (00001110)
-       
+
        Then, put this value in X, and go to $C46A5E + X.
-       
+
        If X is:   Then the address is:      Value:
        00         C46A5E                    01 00
        02         C46A60                    01 00

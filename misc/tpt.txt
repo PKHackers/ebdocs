@@ -10,7 +10,7 @@ BB = Sprite.  It uses the standard outside sprite list in standard reverse hex n
 
 CC = Direction to face.
 
-DD = Movement value.  
+DD = Movement value.
 
 EE = Variable.  In Item entries, it stores the box's control event flag (i.e. what flag will control it's empty/full status).  Format is [00 XX XX 00], in standard reverse notation.  In Person and Object entries it seems to store some kind of data, but its nature is unknown.  In some entries, it stores an event flag that (when set) will cause the sprite to not appear. [02 XX XX 01]
 

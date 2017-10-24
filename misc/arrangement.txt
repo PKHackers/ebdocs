@@ -4,7 +4,7 @@ ARRAGEMENT DATA
 Arrangement data is compressed
 
 -215655 to 21569D = Nintendo arrangement
--2150C1 to 215129 = APE arrangement 
+-2150C1 to 215129 = APE arrangement
 -215374 to 2153E7 = HAL arrangement
 
 -00F0BB to 00F0C4 = Pointer to Nintendo arragnement

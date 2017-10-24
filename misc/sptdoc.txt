@@ -15,7 +15,7 @@ X2 - Second north facing sprite
 X3 - First east facing sprite
 X4 - Second east facing sprite
 X5 - First south facing sprite
-X6 - Second south facing sprite 
+X6 - Second south facing sprite
 X7 - First west facing sprite
 X8 - second west facing sprite
 X9 - First north-east facing sprite

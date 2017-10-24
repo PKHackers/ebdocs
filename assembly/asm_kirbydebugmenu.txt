@@ -44,10 +44,10 @@ EF/E578
 Handle cursor movement
 ------------------------------------------------------------------------
 EF/E578: C2 31        REP #$31
-EF/E57A: 0B           PHD 
-EF/E57B: 7B           TDC 
+EF/E57A: 0B           PHD
+EF/E57B: 7B           TDC
 EF/E57C: 69 F0 FF     ADC #$FFF0
-EF/E57F: 5B           TCD 
+EF/E57F: 5B           TCD
 EF/E580: AD 69 00     LDA $0069
 EF/E583: 85 0E        STA $0E
 EF/E585: 29 00 08     AND #$0800
@@ -68,23 +68,23 @@ EF/E5A9: EE 55 B5     INC $B555
 EF/E5AC: 80 03        BRA $E5B1
 EF/E5AE: 9C 55 B5     STZ $B555
 EF/E5B1: AD 53 B5     LDA $B553
-EF/E5B4: 0A           ASL 
-EF/E5B5: AA           TAX 
+EF/E5B4: 0A           ASL
+EF/E5B5: AA           TAX
 EF/E5B6: AD 55 B5     LDA $B555
 EF/E5B9: 85 04        STA $04
-EF/E5BB: 0A           ASL 
+EF/E5BB: 0A           ASL
 EF/E5BC: 65 04        ADC $04
-EF/E5BE: 0A           ASL 
-EF/E5BF: 0A           ASL 
-EF/E5C0: 0A           ASL 
-EF/E5C1: 18           CLC 
+EF/E5BE: 0A           ASL
+EF/E5BF: 0A           ASL
+EF/E5C0: 0A           ASL
+EF/E5C1: 18           CLC
 EF/E5C2: 69 34 00     ADC #$0034
 EF/E5C5: 9D CA 0B     STA $0BCA,X
 EF/E5C8: AD 6D 00     LDA $006D
 EF/E5CB: 29 A0 90     AND #$90A0
 EF/E5CE: 8D 57 B5     STA $B557
-EF/E5D1: 2B           PLD 
-EF/E5D2: 60           RTS 
+EF/E5D1: 2B           PLD
+EF/E5D2: 60           RTS
 
 
 
@@ -208,9 +208,9 @@ EF/E676: 22 7C 92 C0  JSR $C0927C
 EF/E67A: 20 05 DA     JSR $DA05
 EF/E67D: 20 21 DB     JSR $DB21
 EF/E680: A2 01 00     LDX #$0001
-EF/E683: 8A           TXA 
+EF/E683: 8A           TXA
 EF/E684: 22 6C 88 C0  JSR $C0886C
-EF/E688: 60           RTS 
+EF/E688: 60           RTS
 
 
 

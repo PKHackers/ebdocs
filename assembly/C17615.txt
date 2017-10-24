@@ -5,7 +5,7 @@ Copied out of ebasm.txt.
 Commented by AnyoneEB.
 Last Updated: 2004-07-13 20:12
 See also: http://pkhack.fobby.net/misc/txt/C08FF7.txt
-See also: 
+See also:
 
 Note that this code is not separated from the code around it in any way except that it logically works as a single line of C code and a complete use of JSR $C08FF7.
 
@@ -38,9 +38,9 @@ for [1E 0C 01 01]
 *($0000 + (             00             ) + 0x9A25) += (byte) *(0x0E)
                                        *($7E:9A25) += (byte) *($00:1EA5)
                                        *($7E:9A25) += 0x01
-                                       *($7E:9A25)  = 0x01 + 0x00 
+                                       *($7E:9A25)  = 0x01 + 0x00
                                        *($7E:9A25)  = 0x01
-                                       
+
 Generally:
 *($0000 + (( (CC arg XX) - 1 ) * 0x5F) + 0x9A25) += (byte) (CC arg YY)
 0x  5F = entry length of character info in wram
@@ -104,7 +104,7 @@ $C2/1B6F A9 00 00    LDA #$0000              ;set A to 0x0000
 $C2/1B72 18          CLC                     ;clear carry
 $C2/1B73 E5 04       SBC $04    [$00:1E86]   ;subtract *($04) from A; A = -(*($04))
 $C2/1B75 50 04       BVC $04    [$1B7B]      ;TODO Branch on overflow (result non-negitive)
-$C2/1B7B 30 05       BMI $05    [$1B82]      ;TODO Branch on negitive 
+$C2/1B7B 30 05       BMI $05    [$1B82]      ;TODO Branch on negitive
 $C2/1B82 A5 0F       LDA $0F    [$00:1E91]   ;load A from $0F, see above (stat value + YY)?
 $C2/1B84 C2 20       REP #$20                ;puts A into 16-bit mode, which is already is in (maybe the branch could change that?)
 $C2/1B86 29 FF 00    AND #$00FF              ;A --> byte //didn't we do this before saving it?

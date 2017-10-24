@@ -1,15 +1,15 @@
 NOTE: Some stuff below is out of date.
 
 Tomato, a hacker of renown in 2002, is frozen to prevent his death from
-the Haxiforce-Cannon that was fired against him. Centuries later he 
+the Haxiforce-Cannon that was fired against him. Centuries later he
 awakens, healed, to a changed world.
 
 * People with PK Hack badges on the boards have a form of immortality
-  in-game. A PK Hack badge is a sign of supreme power in this time, 
+  in-game. A PK Hack badge is a sign of supreme power in this time,
   and few people will refuse the request of someone bearing one.
 
-* Evil robots (made for peace but went bad) want Tomato so they 
-  can control him, make him a weapon and hack the world into a 
+* Evil robots (made for peace but went bad) want Tomato so they
+  can control him, make him a weapon and hack the world into a
   place under their supreme control.
 
 * PK Hackers are in the tubes at Stonehenge Base, and are fine; they
@@ -17,7 +17,7 @@ awakens, healed, to a changed world.
   the tubes. Some of higher power can access it without the tubes.
   (Think "The Matrix", except precautions exist to prevent death.)
 
-* Starman DX's replacement thinks the base is fine, but it's really 
+* Starman DX's replacement thinks the base is fine, but it's really
   overrun by enemies. After you fill him in, you access the master
   controls and shut them all down. When this happens the PK Hackers
   leave the tubes as part of the emergency system. This is because a
@@ -32,27 +32,27 @@ awakens, healed, to a changed world.
 
 * Zero_Diamond is the final boss.
 
-* Buzz Buzz is a bot who was activated shortly before you awoke as a 
-  reminder system, and his ship struck as Tomato reached full 
+* Buzz Buzz is a bot who was activated shortly before you awoke as a
+  reminder system, and his ship struck as Tomato reached full
   consciousness. He was sent to remind you of who you were and to fill
   the gaps in your memory, but an underground antihacker destroys him.
-  He gives you an object to collect frequencies from parts of the 
+  He gives you an object to collect frequencies from parts of the
   world to access Magicant, a world made by and for hackers.
 
 * Defeating Magicant's Power Idol in the Ocean of Knowledge will allow
-  Tomato to acquire the knowledge stored across the long centuries 
-  since the cryofreezing - his own and the flows' knowledge. This 
-  knowledge, spread across the world to those who would accept it, 
-  created new breeds of Hax0r. They weren't as strong as the 
-  originals since they only had a fraction of the original energy, but 
+  Tomato to acquire the knowledge stored across the long centuries
+  since the cryofreezing - his own and the flows' knowledge. This
+  knowledge, spread across the world to those who would accept it,
+  created new breeds of Hax0r. They weren't as strong as the
+  originals since they only had a fraction of the original energy, but
   it was enough.
 
-* Defeating the Power Idol lets Tomato realize who he once was. 
+* Defeating the Power Idol lets Tomato realize who he once was.
 
-* The Sanctuary Guardians are L33T Hax0rs of old, sent to guard the 
+* The Sanctuary Guardians are L33T Hax0rs of old, sent to guard the
   knowledge until the Great Hax0r of ancient times came to claim a copy.
-  These Hax0rs are: 
-    
+  These Hax0rs are:
+
     - `Frieza (Door Editing)
     - Falcon24 (Teleportation)
     - GuyInSummers (Compression)
@@ -64,28 +64,28 @@ awakens, healed, to a changed world.
 
 * NOTE TO SELF: Edit the above list.
 
-* Zero_Diamond was a hacker who was ignored, and who turned to the 
+* Zero_Diamond was a hacker who was ignored, and who turned to the
   strands of spacetime to try to overpower those who spurned him. He
-  located Tomato's computer, and by taking the knowledge there, tried to 
-  make robots to keep peace. It backfired and they tried to destroy the 
-  knowledge of hacking by gathering it and trying to hack the world so 
-  it was under their supreme rule. Eight L33T Hax0rs rose up and protected 
-  the knowledge, thwarting the robots. But the chaos and shattering of the 
-  knowledge flow into eight parts crippled the power...  it survived, at 
+  located Tomato's computer, and by taking the knowledge there, tried to
+  make robots to keep peace. It backfired and they tried to destroy the
+  knowledge of hacking by gathering it and trying to hack the world so
+  it was under their supreme rule. Eight L33T Hax0rs rose up and protected
+  the knowledge, thwarting the robots. But the chaos and shattering of the
+  knowledge flow into eight parts crippled the power...  it survived, at
   great cost. And no matter what was tried, the flows would not rejoin.
 
 * The robots discovered Tomato was still alive, and began searching for him
   in the belief that he held the key to global hacking - which he did.
 
 * A prophecy was stated after the robots caused this: "The Great Hax0r of
-  old, who founded our Order, shall return and destroy the Robot with 
+  old, who founded our Order, shall return and destroy the Robot with
   the power of the eight Flows of Knowledge."
 
-* A Haxiforce-Cannon hit Tomato in 2002, and caused the near death state - 
-  he was frozen to protect from death and to recover from the wounds. 
-  Z_D tried this first as revenge, which caused mass chaos in the 
-  knowledge flows. After the freeze, the core of the flow (Tomato's 
-  knowledge) was secretly hidden in Magicant. The rest remained flowing 
+* A Haxiforce-Cannon hit Tomato in 2002, and caused the near death state -
+  he was frozen to protect from death and to recover from the wounds.
+  Z_D tried this first as revenge, which caused mass chaos in the
+  knowledge flows. After the freeze, the core of the flow (Tomato's
+  knowledge) was secretly hidden in Magicant. The rest remained flowing
   until the robot forced it to be severed into the eight segments.
 
 * Z_D's plan with the Haxiforce-Cannon was to disrupt the knowledge flows
@@ -93,8 +93,8 @@ awakens, healed, to a changed world.
   protected. Barriers to keep Z_D out were formed. Then Z_D discovered
   Tomato's computer in the spacetime threads...
 
-* Each of the Sanctuary Guardians (L33T Hax0rs) provides a kind of 
-  knowledge in place of the little scenes Ness sees at Sanctuaries (i.e, 
+* Each of the Sanctuary Guardians (L33T Hax0rs) provides a kind of
+  knowledge in place of the little scenes Ness sees at Sanctuaries (i.e,
   Damage Codes, Teleport Codes, etc).
 
 * Each Hax0r has varying powers. Shyster would heal a lot, Falc would
@@ -118,11 +118,11 @@ awakens, healed, to a changed world.
 
 PREGAME EVENTS:
 
-2002 - Tomato discovers how to alter spacetime. He is attacked by Z_D, who 
-       wants the knowledge. Z_D gets SOME information before the other PK 
-       Hackers close in on his HQ - he learned to read (but not change) the 
+2002 - Tomato discovers how to alter spacetime. He is attacked by Z_D, who
+       wants the knowledge. Z_D gets SOME information before the other PK
+       Hackers close in on his HQ - he learned to read (but not change) the
        threads of spacetime. Tomato's is cryofrozen to prevent death and
-       recover from the Haxiforce Cannon blast. Tomato's mind data is 
+       recover from the Haxiforce Cannon blast. Tomato's mind data is
        copied and stored in the Hacker Realm, Magicant.
 
 2003 - Z_D uses his knowledge to find Tomato's computer. He acquires more
@@ -132,8 +132,8 @@ PREGAME EVENTS:
        liking. The knowledge flows are separated and the robots are fought
        off. The flows refuse to rejoin, and one PK Hacker states that only
        Tomato has the power to link them together. Machines are constructed
-       to allow access to Magicant - formerly only those with knowledge of 
-       all the PK Hacking arts could enter, but since the flow division, 
+       to allow access to Magicant - formerly only those with knowledge of
+       all the PK Hacking arts could enter, but since the flow division,
        this is impossible to all but the most powerful.
 
 2004 - The L33t Hackers each go to a remote part of the world. Here, they
@@ -141,13 +141,13 @@ PREGAME EVENTS:
 
 2006 - Z_D convinces the government that the Hackers have great power and
        pose a threat. For three days military forces attack the Hackers, who
-       defend themselves with alarming ease. Peace is established between 
+       defend themselves with alarming ease. Peace is established between
        the Hackers and the governments. The world learns of the arts. Z_D
        disappears mysteriously.
 
 2008 - The High Circle of Hackers, consisting of the L33T Hackers and a few
        apprentices, is formed. Over the centuries it will pick the occasional
-       person who shows the maturity, knowledge and skill in the power to 
+       person who shows the maturity, knowledge and skill in the power to
        join them.
 
 2009 - The first classes are offered to teach the arts. Extreme care is taken
@@ -155,10 +155,10 @@ PREGAME EVENTS:
        themselves or others. Most who enter drop out.
 
 2014 - The hackers discover the form of immortality - they can still die,
-       but they don't age. The hackers learn to control most aspects of 
+       but they don't age. The hackers learn to control most aspects of
        their appearance.
 
-2025 - The Antiwarper is developped for banks, homes, workplaces and other 
+2025 - The Antiwarper is developped for banks, homes, workplaces and other
        such to prevent hackers from simply teleporting in, stealing information
        or money, and warping away.
 
@@ -168,8 +168,8 @@ PREGAME EVENTS:
 
 2103 - The first reality distorter weapons are made.
 
-2147 - Knowledge is leaked from the Academy. People who were rejected by the 
-       Academy try to learn the arts. Thousands of people die from misusing 
+2147 - Knowledge is leaked from the Academy. People who were rejected by the
+       Academy try to learn the arts. Thousands of people die from misusing
        their powers. The High Circle steps in and destroys most of the leaked
        documents, but a few survive. Even by 2502, the documents last, and some
        gangs/people use the arts crudely yet efficiently to cause havoc.
@@ -197,7 +197,7 @@ PREGAME EVENTS:
 2377 - Z_D attacks Magicant for the first time.
 
 2410 - Z_D unites several guilds and cults against the Hackers and forms a small army.
-       Magicant is attacked; the hackers lose control of it. A new version of Magicant 
+       Magicant is attacked; the hackers lose control of it. A new version of Magicant
        is created and the old one is obliterated.
 
 2412 - The number of registered, known, and currently living hackers reaches 100,000.
@@ -217,7 +217,7 @@ GAME EVENTS:
    cryosuit helm).
 
  - Tomato's room has been locked for a long time, and new homeowners
-   were afraid to enter and find what was inside. Alternately, the door may 
+   were afraid to enter and find what was inside. Alternately, the door may
    have been plastered over.
 
  - Tracy is replaced by a random Japanese schoolgirl, who is taking a
@@ -229,8 +229,8 @@ GAME EVENTS:
    taking.
 
  - Ness' mom. ("Who are you?" "...I can't remember anything except my
-   name... Tomato." "Hmm... what's that medallion? <long pause> ...! 
-   Alright, you can stay here tonight! Er, as long as you like!" 
+   name... Tomato." "Hmm... what's that medallion? <long pause> ...!
+   Alright, you can stay here tonight! Er, as long as you like!"
    "<Tomato to self> What was that about?")
 
  - Ness' mom, second time. ("Wonder what that sound was...")

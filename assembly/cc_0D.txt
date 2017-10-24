@@ -2,12 +2,12 @@ C145EF
 ------
 
 C1/45EF: C2 31        REP #$31
-C1/45F1: 0B           PHD 
-C1/45F2: 48           PHA 
-C1/45F3: 7B           TDC 
+C1/45F1: 0B           PHD
+C1/45F2: 48           PHA
+C1/45F3: 7B           TDC
 C1/45F4: 69 EE FF     ADC #$FFEE
-C1/45F7: 5B           TCD 
-C1/45F8: 68           PLA 
+C1/45F7: 5B           TCD
+C1/45F8: 68           PLA
 C1/45F9: E0 00 00     CPX #$0000
 C1/45FC: F0 09        BEQ $4607
 C1/45FE: 20 00 04     JSR $0400
@@ -21,8 +21,8 @@ C1/460E: A5 08        LDA $08
 C1/4610: 85 10        STA $10
 C1/4612: 20 89 04     JSR $0489
 C1/4615: A9 00 00     LDA #$0000
-C1/4618: 2B           PLD 
-C1/4619: 60           RTS 
+C1/4618: 2B           PLD
+C1/4619: 60           RTS
 
 Direct page manipulation.
 If X is not equal to 0000:
@@ -41,9 +41,9 @@ C10400
 
 C1/0400: C2 31        REP #$31
 C1/0402: 20 01 03     JSR $0301
-C1/0405: AA           TAX 
+C1/0405: AA           TAX
 C1/0406: BD 1F 00     LDA $001F,X
-C1/0409: 60           RTS 
+C1/0409: 60           RTS
 
 Jump to the C10301 subroutine. A = 0x8650 + (0x52 * unknown).
 Transfer to accumulator to X.
@@ -56,14 +56,14 @@ C1040A
 ------
 
 C1/040A: C2 31        REP #$31
-C1/040C: 0B           PHD 
-C1/040D: 7B           TDC 
+C1/040C: 0B           PHD
+C1/040D: 7B           TDC
 C1/040E: 69 F2 FF     ADC #$FFF2
-C1/0411: 5B           TCD 
+C1/0411: 5B           TCD
 C1/0412: 20 01 03     JSR $0301
-C1/0415: 18           CLC 
+C1/0415: 18           CLC
 C1/0416: 69 17 00     ADC #$0017
-C1/0419: A8           TAY 
+C1/0419: A8           TAY
 C1/041A: B9 00 00     LDA $0000,Y
 C1/041D: 85 06        STA $06
 C1/041F: B9 02 00     LDA $0002,Y
@@ -72,8 +72,8 @@ C1/0424: A5 06        LDA $06
 C1/0426: 85 14        STA $14
 C1/0428: A5 08        LDA $08
 C1/042A: 85 16        STA $16
-C1/042C: 2B           PLD 
-C1/042D: 60           RTS 
+C1/042C: 2B           PLD
+C1/042D: 60           RTS
 
 Direct page manipulation.
 Jump to the C10301 subroutine. A = 0x8650 + (0x52 * unknown).
@@ -98,14 +98,14 @@ C1/0309: D0 05        BNE $0310
 C1/030B: A9 FE 85     LDA #$85FE
 C1/030E: 80 13        BRA $0323
 C1/0310: AD 58 89     LDA $8958
-C1/0313: 0A           ASL 
-C1/0314: AA           TAX 
+C1/0313: 0A           ASL
+C1/0314: AA           TAX
 C1/0315: BD E4 88     LDA $88E4,X
 C1/0318: A0 52 00     LDY #$0052
 C1/031B: 22 F7 8F C0  JSR $C08FF7
-C1/031F: 18           CLC 
+C1/031F: 18           CLC
 C1/0320: 69 50 86     ADC #$8650
-C1/0323: 60           RTS 
+C1/0323: 60           RTS
 
 Accumulator becomes the value at $88E0.
 If the accumulator is not equal to FFFF:

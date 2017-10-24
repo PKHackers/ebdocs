@@ -1,44 +1,44 @@
 C1/488D: C2 31        REP #$31
-C1/488F: 0B           PHD 
-C1/4890: 48           PHA 
-C1/4891: 7B           TDC 
+C1/488F: 0B           PHD
+C1/4890: 48           PHA
+C1/4891: 7B           TDC
 C1/4892: 69 F2 FF     ADC #$FFF2
-C1/4895: 5B           TCD 
-C1/4896: 68           PLA 
+C1/4895: 5B           TCD
+C1/4896: 68           PLA
 C1/4897: E0 00 00     CPX #$0000
 C1/489A: F0 03        BEQ $489F
-C1/489C: 8A           TXA 
+C1/489C: 8A           TXA
 C1/489D: 80 05        BRA $48A4
 C1/489F: 20 DC 03     JSR $03DC
 C1/48A2: A5 06        LDA $06
 C1/48A4: 20 B6 0C     JSR $0CB6
 C1/48A7: A9 00 00     LDA #$0000
-C1/48AA: 2B           PLD 
-C1/48AB: 60           RTS 
+C1/48AA: 2B           PLD
+C1/48AB: 60           RTS
 
 C1/0CB6: C2 31        REP #$31                  Flags register and direct page address
-C1/0CB8: 0B           PHD 
-C1/0CB9: 48           PHA 
-C1/0CBA: 7B           TDC 
+C1/0CB8: 0B           PHD
+C1/0CB9: 48           PHA
+C1/0CBA: 7B           TDC
 C1/0CBB: 69 EE FF     ADC #$FFEE
-C1/0CBE: 5B           TCD 
-C1/0CBF: 68           PLA 
-C1/0CC0: A8           TAY 
+C1/0CBE: 5B           TCD
+C1/0CBF: 68           PLA
+C1/0CC0: A8           TAY
 C1/0CC1: 84 10        STY $10                   Store the one and only parameter in Y and $10.
 C1/0CC3: AD 58 89     LDA $8958
 C1/0CC6: C9 FF FF     CMP #$FFFF                End if no windows are open.
 C1/0CC9: D0 03        BNE $0CCE
 C1/0CCB: 4C 5E 0D     JMP $0D5E
 C1/0CCE: AD 58 89     LDA $8958
-C1/0CD1: 0A           ASL 
-C1/0CD2: AA           TAX 
+C1/0CD1: 0A           ASL
+C1/0CD2: AA           TAX
 C1/0CD3: BD E4 88     LDA $88E4,X
 C1/0CD6: A0 52 00     LDY #$0052
 C1/0CD9: 22 F7 8F C0  JSR $C08FF7
-C1/0CDD: AA           TAX 
+C1/0CDD: AA           TAX
 C1/0CDE: BD 65 86     LDA $8665,X               A = 0x15th byte in current window structure.
 C1/0CE1: A4 10        LDY $10                   Restore Y from $10, transfer to X
-C1/0CE3: BB           TYX 
+C1/0CE3: BB           TYX
 C1/0CE4: 22 61 4E C4  JSR $C44E61               Jump to subroutine C44E61
 C1/0CE8: AD 58 89     LDA $8958                 Get most recent window, load from 7E88E4 table
 C1/0CEB: 0A           ASL                          ...but this time compare against 7E88E2. If
@@ -80,13 +80,13 @@ C1/0D43: AD 22 96     LDA $9622                 --- Skip ahead point. ---
 C1/0D46: 29 FF 00     AND #$00FF
 C1/0D49: D0 13        BNE $0D5E                 If 7E9622 is nonzero, go to end
 C1/0D4B: AE 25 96     LDX $9625                 If 7E9622 is zero, do this stuff.
-C1/0D4E: E8           INX 
+C1/0D4E: E8           INX
 C1/0D4F: 86 0E        STX $0E
 C1/0D51: 80 09        BRA $0D5C
 C1/0D53: 22 D5 2D C1  JSR $C12DD5
 C1/0D57: A6 0E        LDX $0E
-C1/0D59: CA           DEX 
+C1/0D59: CA           DEX
 C1/0D5A: 86 0E        STX $0E
 C1/0D5C: D0 F5        BNE $0D53
-C1/0D5E: 2B           PLD 
-C1/0D5F: 60           RTS 
+C1/0D5E: 2B           PLD
+C1/0D5F: 60           RTS

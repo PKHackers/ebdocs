@@ -5,7 +5,7 @@ This is a note file; stuff here is largely speculative. Stuff gets more accurate
 farther down you go.
 -------------------------------------------------------------------------------------
 
-081D: Confirmed as comparing against a pointer to a channelset - checking for 
+081D: Confirmed as comparing against a pointer to a channelset - checking for
  the end, it would seem. (BNE $0841)
 0841: Copy the pointers in the channelset to $0030 + Y, where Y = [0-F].
 
@@ -35,7 +35,7 @@ way. SPCtool is your friend.
 
 There are a lot of short routines in the 0A00s.
 
-There are calls to 0955, which seems to increment the $0030 value (and $0031 as 
+There are calls to 0955, which seems to increment the $0030 value (and $0031 as
  appropriate, every 256 turns.) It returns with A and Y equal to the address as
  it was before the increment.
 
@@ -88,18 +88,18 @@ MUSIC FORMAT - Parser at 0882
        It's described that way in freq_tsv.txt.
 
 80-C7: Notes. The code is scary and I haven't looked at it much.
-       It uses a table at 0EBD in some way, maybe messing with that would produce interesting 
+       It uses a table at 0EBD in some way, maybe messing with that would produce interesting
        results...
 
 -----------------------------------------------------------
 Music works something like this...
 1) Get a channelset.
-2) Parse a channel, handling all non-note codes, finally terminating with a note code of 
+2) Parse a channel, handling all non-note codes, finally terminating with a note code of
    some arbitrary duration.
 3) Go to the next channel.
-4) Repeat step 2 for that channel; continue until all channels have been handled. Iterate 
+4) Repeat step 2 for that channel; continue until all channels have been handled. Iterate
    back to the start and continue looping around through the channels...
-5) Check if the note on the current channel has concluded with each pass. If so, parse 
+5) Check if the note on the current channel has concluded with each pass. If so, parse
    until the next note.
 6) When all channels have no notes remaining, get the next channelset.
 
@@ -199,8 +199,8 @@ ED:
  Set $0300+X to 0.
  End.
 
-EF: 
- Move target address into $0240+X, $0241+X. 
+EF:
+ Move target address into $0240+X, $0241+X.
  Move iters into $0080+X.
  Move return location into $0230+X, $0231+X.
  Copy the target address to the current address.

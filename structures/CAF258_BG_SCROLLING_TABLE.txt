@@ -1,6 +1,6 @@
 AF458
 -----
-Battle background movement of the "full screen" style (as opposed to 
+Battle background movement of the "full screen" style (as opposed to
 mode-7-style shifting, which is controlled by AF908.)
 Ten-byte entries.
 
@@ -25,7 +25,7 @@ Vertical:
 //OLD VERSION FOLLOWS
 AF458
 -----
-Battle background movement of the "full screen" style (as opposed to 
+Battle background movement of the "full screen" style (as opposed to
 mode-7-style shifting, which is controlled by AF908.)
 Theorized ten-byte entries.
 

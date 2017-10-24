@@ -8,10 +8,10 @@ ENTRY PATTERN
 ZZ = Number of AA-HH clusters to follow
 AA = Frames of animation per cycle
 BB = Time per frame (1/60 second format)
-CC = ? - Vertical graphics offset (shift tile up C/2 pixels) 
+CC = ? - Vertical graphics offset (shift tile up C/2 pixels)
      Has an effect on the sequence used (horizontal rather than vertical?)
 DD = ? - Increasing values delete an increasing amount of map tiles
-EE = ? - Vertical graphics offset (shift tile up C/2 pixels - 0x20 = full tile) 
+EE = ? - Vertical graphics offset (shift tile up C/2 pixels - 0x20 = full tile)
 FF = ? - Changes the tiles being used?
 G? = Tile number in static tileset to start overwriting with animation effects
 ?G = Vertical graphics offset (shift tile down G pixels)
@@ -49,7 +49,7 @@ Entry 07 - $EF12C2 [02] (Summers)
 04 12 20 01 A0 0C 50 01
 
 Entry 08 - $EF12D3 [01] (Desert)
-04 14 E0 03 20 00 10 00 
+04 14 E0 03 20 00 10 00
 
 Entry 09 - $EF12DC [00] (Dalaam)
 - NO DATA -
@@ -107,47 +107,47 @@ BB = Frequency (speed)
 Rest is unknown
 
 UNDERWORLD
-04 0C 60 00 20 00 10 00 
-04 0F 60 00 A0 01 40 00 
-04 0F 80 00 20 03 70 00 
-04 15 E0 00 20 05 B0 00 
-04 15 00 01 A0 08 20 01 
+04 0C 60 00 20 00 10 00
+04 0F 60 00 A0 01 40 00
+04 0F 80 00 20 03 70 00
+04 15 E0 00 20 05 B0 00
+04 15 00 01 A0 08 20 01
 
 ONETT
-04 13 40 01 20 00 10 00 
-02 14 40 00 20 05 B0 00 
+04 13 40 01 20 00 10 00
+02 14 40 00 20 05 B0 00
 
 MAGICANT
-08 0A 00 01 20 00 10 00 
+08 0A 00 01 20 00 10 00
 
 OUTDOORS
-04 0A 80 01 20 00 10 20 
-04 15 40 02 20 06 D0 00 
+04 0A 80 01 20 00 10 20
+04 15 40 02 20 06 D0 00
 
 SUMMERS
-05 31 80 02 20 00 10 00 
-04 12 20 01 A0 0C 50 01 
+05 31 80 02 20 00 10 00
+04 12 20 01 A0 0C 50 01
 
 DESERT
-04 14 E0 03 20 00 10 00 
+04 14 E0 03 20 00 10 00
 
 STORES 1
-03 05 40 02 20 00 10 00 
+03 05 40 02 20 00 10 00
 
 CAVES 1
-08 03 40 00 20 00 10 00 
+08 03 40 00 20 00 10 00
 
 INDOORS 4
-02 1F 40 00 20 00 10 20 
-02 1F C0 00 A0 00 30 00 
-02 1F 40 00 20 02 90 20 
-02 1F 40 01 A0 02 B0 00 
-02 19 40 00 20 05 50 21 
-02 19 C0 00 A0 05 70 01 
+02 1F 40 00 20 00 10 20
+02 1F C0 00 A0 00 30 00
+02 1F 40 00 20 02 90 20
+02 1F 40 01 A0 02 B0 00
+02 19 40 00 20 05 50 21
+02 19 C0 00 A0 05 70 01
 
 WINTERS
-04 0F A0 02 20 00 10 00 
-01 04 13 00 02 20 00 10 
+04 0F A0 02 20 00 10 00
+01 04 13 00 02 20 00 10
 
 CAVES 2
 06 14 E0 01 20 00 10 00

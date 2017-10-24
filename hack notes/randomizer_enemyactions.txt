@@ -1,6 +1,6 @@
 These battle actions can be randomly assigned safely.
 
-If there is a byte after the action number, it indicates an 
+If there is a byte after the action number, it indicates an
   argument that the action needs to take.
 
 
@@ -131,9 +131,9 @@ If there is a byte after the action number, it indicates an
  85    - [USER] is making a loud, piercing howl.
  86    - [USER] is saying "tick-tock."
 
- 95 7F - Wet towel       \  These four actions behave identically to the four 
- 96 80 - Refreshing herb  \ levels of PSI Healing. The "Horn of life" action 
- 97 81 - Secret herb      / can also take 0xFC as an argument to become the 
+ 95 7F - Wet towel       \  These four actions behave identically to the four
+ 96 80 - Refreshing herb  \ levels of PSI Healing. The "Horn of life" action
+ 97 81 - Secret herb      / can also take 0xFC as an argument to become the
  98 82 - Horn of life    /  same-behaviour "Cup of Lifenoodles" action.
 
  9F 83 - Item: Counter-PSI unit

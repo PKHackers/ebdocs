@@ -1,8 +1,8 @@
 Map Music and Events
 
 Involved databanks:
-•0F5AF1 to 0F5C38 = Map music/event flag correlations pointer table 
-•0F5C39 to 0F63DF = Map music/event flag correlation table 
+â€¢0F5AF1 to 0F5C38 = Map music/event flag correlations pointer table
+â€¢0F5C39 to 0F63DF = Map music/event flag correlation table
 
 Pointer table formatting: AA AA
 

@@ -16,7 +16,7 @@ Deck 1 (Experimental)
 - Primary Library Computers
 - ROM Interface Facility
 
-Deck 2 
+Deck 2
 - Power Generation Systems
 - Propulsion
 - NIU I/O array
