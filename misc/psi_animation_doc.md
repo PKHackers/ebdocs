@@ -9,6 +9,7 @@ Compressed arrangements. The decompressed format is very simple - 1 byte / 8x8 t
 There are 1024 bytes per frame: the first 64 (corresponding to the first two lines) and the last 64 (corresponding to the last two lines) are never seen. So the data is for 32x32, but you see 32x28. :P
 
 PSEUDOCODE:
+
     while (counter < length of decompressed area divided by 1024) {
       while (y < 30) {
         while (x < 32) {
@@ -24,16 +25,17 @@ PSEUDOCODE:
     }
 
 Also located within this section: PSI tile graphics!
-    0CAE25 to 0CB12E = PSI tile graphics.
-    0CB813 to 0CBCC7 = PSI tile graphics.
-    0CDD27 to 0CDFF8 = PSI tile graphics.
-    0CE51D to 0CE76C = PSI tile graphics.
+
+    $CCAC25 to $CCAF2E = PSI tile graphics.
+    $CCB613 to $CCBAC7 = PSI tile graphics.
+    $CCDB27 to $CCDDF8 = PSI tile graphics.
+    $CCE31D to $CCE56C = PSI tile graphics.
 
 And also, a table: 34 entries, 12 bytes per entry. See CF24D.txt for full details.
-    0CF24D to 0CF3E4 = PSI animation table
+- `$CCF04D to $CCF1E4 = PSI animation table`
 
-0CF67F to 0CF78E = PSI graphics palettes.
-    Standard palettes; BGR 15-bit.
+$CCF47F to $CCF58E = PSI graphics palettes.
+- Standard palettes; BGR 15-bit.
 
-0CF78F to 0CF816 = PSI animation pointers.
-    Standard four-byte pointers to the arrangements.
+$CCF58F to $CCF616 = PSI animation pointers.
+- Standard four-byte pointers to the arrangements.
