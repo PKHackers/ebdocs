@@ -4,9 +4,9 @@ Original Author: AnyoneEB
 |Offset|Size|Meaning                                                       |
 |------|----|--------------------------------------------------------------|
 |00-18 |24  |Name of item in plain EB text.                                |
-|19    |1   |Type of item. See [Item Types](#Item Types) below.            |
+|19    |1   |Type of item. See [Item Types](#item-types) below.            |
 |1A    |2   |Cost of item. If zero, item may not be sold or dropped.       |
-|1C    |1   |Misc [Flags](#Flags).                                         |
+|1C    |1   |Misc [Flags](#flags).                                         |
 |1D    |2   |Effect.                                                       |
 |1F    |1   |"Strength" different depending on type. See below.            |
 |20    |1   |"Extra Power Increase" different depending on type. See below.|
