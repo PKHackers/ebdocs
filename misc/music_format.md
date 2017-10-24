@@ -15,7 +15,7 @@ These blocks consist of:
    memory, starting at the address "spcroot".
 
 For example:
-  05 00 00 48 vv ww xx yy zz
+`05 00 00 48 vv ww xx yy zz`
 
   Len is "05 00", or 0x5.
   Spcroot is "00 48", or $4800.
@@ -30,13 +30,13 @@ One special code is FF 00, which indicates a jump.
 This is the start of the block of bytes for the Department Store theme,
 which is dumped to $4800 in the SPC700's memory:
 
-$4800 = 2E 48
-$4802 = 0E 48
-$4804 = 1E 48
-$4806 = 3E 48
-$4808 = FF 00 <-- Loop code. Jump back...
-$480A = 02 48 <-- ...to 4802.
-$480C = 00 00 <-- End
+    $4800 = 2E 48
+    $4802 = 0E 48
+    $4804 = 1E 48
+    $4806 = 3E 48
+    $4808 = FF 00 <-- Loop code. Jump back...
+    $480A = 02 48 <-- ...to 4802.
+    $480C = 00 00 <-- End
 
 These values are pointers to blocks of 16 (0x10) bytes, which in turn are
 pointers, one for each of the eight sound channels. Returning to the

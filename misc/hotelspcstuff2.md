@@ -22,42 +22,42 @@ To change the main melody's instrument, change the byte at 0x0049c3 to one of th
 
 Here's a little command map.
 
-00 Start song back at the looping point
-01 to 7F  Set note duration
-80 to C7  Plays notes
-C8 Continues holding down for the duration of a note
-C9 Stops holding down the note for the duration of a note
-CA to DF  Changes the instruments
-E0 to FF  Makes different effects
+    00 Start song back at the looping point
+    01 to 7F  Set note duration
+    80 to C7  Plays notes
+    C8 Continues holding down for the duration of a note
+    C9 Stops holding down the note for the duration of a note
+    CA to DF  Changes the instruments
+    E0 to FF  Makes different effects
 
 
 Here's a list of the instruments and effects
-C9 Default horn sound
-CA Ness walking in Magicant
-CB Cash register
-CC Door closing
-CD Going downstairs
-CE Onett guitar
-CF Drum snare
-D0 Onett guitar 2
-D1 Onett guitar 3
-D2 Whistle instrument
+    C9 Default horn sound
+    CA Ness walking in Magicant
+    CB Cash register
+    CC Door closing
+    CD Going downstairs
+    CE Onett guitar
+    CF Drum snare
+    D0 Onett guitar 2
+    D1 Onett guitar 3
+    D2 Whistle instrument
 
 The instruments after this (D3 to DF) I'm not sure if they work or what.
 
-D3 Static
-D4 Metal sound?
-D5 Metal sound2?
-D6 Metal sound3?
-D7 Metal sound4?
-D8 Metal sound5?
-D9 Onett guitar 4?
-DA Drum sound?
-DB Drum Sound?
-DC Drum sound?
-DD Drum sound?
-DE Drum sound?
-DF Drum sound?
+    D3 Static
+    D4 Metal sound?
+    D5 Metal sound2?
+    D6 Metal sound3?
+    D7 Metal sound4?
+    D8 Metal sound5?
+    D9 Onett guitar 4?
+    DA Drum sound?
+    DB Drum Sound?
+    DC Drum sound?
+    DD Drum sound?
+    DE Drum sound?
+    DF Drum sound?
 
 Here's a bunch of commands for doing different stuff.
 
@@ -126,116 +126,116 @@ E6 ## ##  Makes the volume of the whole song fade.
 
 Now I found something else out. E0 is used to change instruments that are, and aren't, in the C8 to D9 rage. It is used E0 ##. The ## is the instrument number. Here's a list of the instruments I've found.
 
-00 Trumpet 1
-01 Trumpet 2
-02 Trumpet 3
-03 Trumpet 4
-04 Trumpet 4
-05 Trumpet 5
-06 High pitch Trumpet
-07 High pitch Trumpet that fades out
-08 Ocarina
-09 Trumpet 6
-0A Jazz guitar that fades out
-0B Vibrating whistle
-0C Arcade sound
-0D Square lead
-0E Saw lead
-0F Organ
-10 Birds chirp
-11 Phone ringing
-12 Jazz guitar that doesn't fade out
-13 Xylaphone
-14 Small drum snare
-15 Small drum kick
-16 Med drum snare
-17 Static
-18 Deep static
-19 High static
-1A Ness walking in magicant sound
-1B Metal chink
-1C Door closing sound
-1D Step (from going downstairs)
-1E Koto
-1F Wood block drum thing
-20 High Guitar that fades out
-21 Guitar that fades out
-22 Whistle
-23 Static
-24 Metal chink 2
-25 Deep metal chink
-26 Short metal chink
-27 Short metal chink 2
-28 Short metal chink 3
-29 Detuned tremelo guitar
-2A Drum sound?
-2B Drum sound?
-2C Drum sound?
-2D Drum sound?
-2E Drum sound?
-2F Drum sound?
-30 Drum sound?
+    00 Trumpet 1
+    01 Trumpet 2
+    02 Trumpet 3
+    03 Trumpet 4
+    04 Trumpet 4
+    05 Trumpet 5
+    06 High pitch Trumpet
+    07 High pitch Trumpet that fades out
+    08 Ocarina
+    09 Trumpet 6
+    0A Jazz guitar that fades out
+    0B Vibrating whistle
+    0C Arcade sound
+    0D Square lead
+    0E Saw lead
+    0F Organ
+    10 Birds chirp
+    11 Phone ringing
+    12 Jazz guitar that doesn't fade out
+    13 Xylaphone
+    14 Small drum snare
+    15 Small drum kick
+    16 Med drum snare
+    17 Static
+    18 Deep static
+    19 High static
+    1A Ness walking in magicant sound
+    1B Metal chink
+    1C Door closing sound
+    1D Step (from going downstairs)
+    1E Koto
+    1F Wood block drum thing
+    20 High Guitar that fades out
+    21 Guitar that fades out
+    22 Whistle
+    23 Static
+    24 Metal chink 2
+    25 Deep metal chink
+    26 Short metal chink
+    27 Short metal chink 2
+    28 Short metal chink 3
+    29 Detuned tremelo guitar
+    2A Drum sound?
+    2B Drum sound?
+    2C Drum sound?
+    2D Drum sound?
+    2E Drum sound?
+    2F Drum sound?
+    30 Drum sound?
 
-40 Metal chink?
-41 Weird sound
-42 Metal chink?
-43 Weird sound
-44 Drum sound?
+    40 Metal chink?
+    41 Weird sound
+    42 Metal chink?
+    43 Weird sound
+    44 Drum sound?
 
-50 Drum sound?
+    50 Drum sound?
 
-60 Wierd sound
+    60 Wierd sound
 
-70 Weird fading in instrument
-71 Weird instrument
-72 Weird fading in instrument
-73 Weird instrument
-74 Weird instrument
+    70 Weird fading in instrument
+    71 Weird instrument
+    72 Weird fading in instrument
+    73 Weird instrument
+    74 Weird instrument
 
-80 Static?
-81 Deep Static mixed with trumpet?
-82 Weird trumpet
+    80 Static?
+    81 Deep Static mixed with trumpet?
+    82 Weird trumpet
 
-90 No sound?
+    90 No sound?
 
-A0 Make instrument VERY high pitch
+    A0 Make instrument VERY high pitch
 
-B0 Lower pitch
-B1 Trumpet 2
-B2 Trumpet 3
-B3 Trumpet 4
-B4 Trumpet 4
-B5 Trumpet 5
-B6 High pitch Trumpet
-B7 High pitch Trumpet that fades out
-B8 Ocarina
-B9 Trumpet 6
-BA Jazz guitar that fades out
-BB Vibrating whistle
-BC Arcade sound
-BD Square lead
-BE Saw lead
-BF Organ
-C0 Bird chirp
-C0 Birds chirp
-C1 Phone ringing
-C2 Jazz guitar that doesn't fade out
-C3 Xylaphone
-C4 Small drum snare
-C5 Small drum kick
-C6 Med drum snare
-C7 Static
-C8 Deep static
-C9 High static
-CA Ness walking in magicant sound
-CB Metal chink
-CC Door closing sound
-CD Step (from going downstairs)
-CE Koto
-CF Wood block drum thing
-D0 High Guitar that fades out
-D1 Guitar that fades out
-D2 Whistle
+    B0 Lower pitch
+    B1 Trumpet 2
+    B2 Trumpet 3
+    B3 Trumpet 4
+    B4 Trumpet 4
+    B5 Trumpet 5
+    B6 High pitch Trumpet
+    B7 High pitch Trumpet that fades out
+    B8 Ocarina
+    B9 Trumpet 6
+    BA Jazz guitar that fades out
+    BB Vibrating whistle
+    BC Arcade sound
+    BD Square lead
+    BE Saw lead
+    BF Organ
+    C0 Bird chirp
+    C0 Birds chirp
+    C1 Phone ringing
+    C2 Jazz guitar that doesn't fade out
+    C3 Xylaphone
+    C4 Small drum snare
+    C5 Small drum kick
+    C6 Med drum snare
+    C7 Static
+    C8 Deep static
+    C9 High static
+    CA Ness walking in magicant sound
+    CB Metal chink
+    CC Door closing sound
+    CD Step (from going downstairs)
+    CE Koto
+    CF Wood block drum thing
+    D0 High Guitar that fades out
+    D1 Guitar that fades out
+    D2 Whistle
 
 I don't want to finish the list, so if you wanna know what one of the others do, go test it.
 
