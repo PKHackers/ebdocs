@@ -27,41 +27,40 @@ Original Author: AnyoneEB
 |40 |Unknown                                       |
 |80 |Item disappears after use                     |
 
-Known meanings of bytes 20-23 for various types. If the type or byte
-is not mentioned in this list it is either unknown or unused.
+Known meanings of bytes 20-23 for various types. If the type or byte is not mentioned in this list it is either unknown or unused.
 
 ## Item Types
 
 ### Type 4
-STR = Game Sprite Character Table entry(?)
+- STR = Game Sprite Character Table entry(?)
 
 ### Type 8 (broken item)
-EPI: IQ required to fix item
-EPW: Index of fixed item
+- EPI: IQ required to fix item
+- EPW: Index of fixed item
 
 ### Food Items (types 32, 36, 40, and 44)
-EPI: Regular HP recover
-EPW: Poo HP recover
+- EPI: Regular HP recover
+- EPW: Poo HP recover
 
 ### Armor Items
 
 #### Type 20
-STR: Defence
-EPW: Speed
-SPE: Protection
+- STR: Defence
+- EPW: Speed
+- SPE: Protection
 
 #### Type 24
-STR: Defence
-EPW: Luck
-SPE: Protection
+- STR: Defence
+- EPW: Luck
+- SPE: Protection
 
 #### Type 28
-STR: Defence
-EPW: Luck
-SPE: Protection
+- STR: Defence
+- EPW: Luck
+- SPE: Protection
 
 ### Weapon Items (types 16 and 17)
-STR: Offense
-EPI: Poo Offense (unsure for type 17)
-EPW: Guts (unsure for type 17)
-SPE: Miss Rate
+- STR: Offense
+- EPI: Poo Offense (unsure for type 17)
+- EPW: Guts (unsure for type 17)
+- SPE: Miss Rate

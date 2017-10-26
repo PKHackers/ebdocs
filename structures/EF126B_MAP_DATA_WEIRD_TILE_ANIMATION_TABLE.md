@@ -1,21 +1,21 @@
 # $EF126B - Tileset animation properties table
-As linked to via the related pointer table (0x2F141B)
+As linked to via the related pointer table ($EF121B)
 
 ## ENTRY PATTERN
 
-[ZZ] (AA BB CC DD EE FF GG HH)
+`[ZZ] (AA BB CC DD EE FF GG HH)`
 
-ZZ = Number of AA-HH clusters to follow
-AA = Frames of animation per cycle
-BB = Time per frame (1/60 second format)
-CC = ? - Vertical graphics offset (shift tile up C/2 pixels)
-     Has an effect on the sequence used (horizontal rather than vertical?)
-DD = ? - Increasing values delete an increasing amount of map tiles
-EE = ? - Vertical graphics offset (shift tile up C/2 pixels - 0x20 = full tile)
-FF = ? - Changes the tiles being used?
-G? = Tile number in static tileset to start overwriting with animation effects
-?G = Vertical graphics offset (shift tile down G pixels)
-HH = ? - Changes the tiles being used?
+- ZZ = Number of AA-HH clusters to follow
+- AA = Frames of animation per cycle
+- BB = Time per frame (1/60 second format)
+- CC = ? - Vertical graphics offset (shift tile up C/2 pixels)
+    - Has an effect on the sequence used (horizontal rather than vertical?)
+- DD = ? - Increasing values delete an increasing amount of map tiles
+- EE = ? - Vertical graphics offset (shift tile up C/2 pixels - 0x20 = full tile)
+- FF = ? - Changes the tiles being used?
+- G? = Tile number in static tileset to start overwriting with animation effects
+- ?G = Vertical graphics offset (shift tile down G pixels)
+- HH = ? - Changes the tiles being used?
 
 ### Entry 00 (Underworld)
 `$EF126B [05]`

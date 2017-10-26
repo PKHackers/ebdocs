@@ -1,15 +1,14 @@
-# D01400 - Screen Transition Config
+# $D01400 - Screen Transition Config
 Original Author: michael_cayer
 
-This pattern is used for the "warp style" of [1F 21 xx] data entries, and the "style" byte of door destinations.
+This pattern is used for the "warp style" of `[1F 21 xx]` data entries, and the "style" byte of door destinations.
 
 -------------------------------------------------------------------------------------
 
-[AA BB CC DD EE FF GG HH II JJ KK LL]
+`[AA BB CC DD EE FF GG HH II JJ KK LL]`
 
 - AA = Speed (start); higher numbers = longer duration. 0xFF = ~16 seconds.
-
-- BB = E6B14 animation to use (start).
+- BB = $CE6914 animation to use (start).
     - 00 = N/A
     - 01 = Normal battle swirl
     - 02 = Phase Distorter ring
@@ -17,33 +16,23 @@ This pattern is used for the "warp style" of [1F 21 xx] data entries, and the "s
     - 04 = Shield effect (ex. Shield, PSI Shield)
     - 05 = Enemy PSI
     - 06 = Giygas Battle phase switch
-
-- CC = E6B14 animation options (start).
+- CC = $CE6914 animation options (start).
     - 00 = Show once
     - 80 = Show repeatedly, going successively faster while time remains
     - There are probably more options...
-
 - DD = Fade style.
     - 00 = Fade to black
     - 31 = ???
     - 64 = Fade to white
     - There are probably more options...
-
 - EE = Direction for "slide" movements (tunnel ghosts, holes, Warp Men). 00 = North; 08 = Northeast; 10 = East; and so on (0x08 = 45 degrees). Unsure of effect of values above 3F, though they probably just wrap around to 00.
-
 - FF = E8 for ghosts and 00 for everything else; no changes were seen on corruption, so this one is still unknown.
-
 - GG = "Slide" speed - 00 is no slide (normal doors, Phase Distorter), higher values mean faster slide movement.
-
-- HH = Sound effect (start). Uses the [1F 02 xx] listing. In a hole warp, this would be the "dropping" sound.
-
+- HH = Sound effect (start). Uses the `[1F 02 xx]` listing. In a hole warp, this would be the "dropping" sound.
 - II = Speed (end). See AA.
-
 - JJ = E6B14 animation to use (end). See BB.
-
 - KK = E6B14 animation options (end). See CC.
-
-- LL = Sound effect (end). Uses the [1F 02 xx] listing. In a hole warp, this would be the "landing" sound.
+- LL = Sound effect (end). Uses the `[1F 02 xx]` listing. In a hole warp, this would be the "landing" sound.
 
 ## ENTRIES
 

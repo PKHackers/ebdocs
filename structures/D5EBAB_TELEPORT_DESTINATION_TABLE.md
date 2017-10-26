@@ -1,7 +1,7 @@
 # $D5EBAB - Teleport Destination Table
 Original Author: michael_cayer
 
-Data Table for [1F 21 XX] control code
+Data Table for `[1F 21 XX]` control code
 
 
 ## [1F 21] TELEPORT DATA
@@ -12,12 +12,12 @@ Finding entries: $D5EBAB + 0x8 * entry number. So entry 16 is $D5EBAB + 0x8 * 0x
 
 ### Data structure
 
-AA AA BB BB CC DD EE EE
+`AA AA BB BB CC DD EE EE`
 
-AA = X coordinate. This uses the same coordinate system as PSI Teleport.
-BB = Y coordinate.
-CC = What way to face after warping.
-DD = Warp style. This uses entries from $D01400; the effect list below remains for no real reason.
+- AA = X coordinate. This uses the same coordinate system as PSI Teleport.
+- BB = Y coordinate.
+- CC = What way to face after warping.
+- DD = Warp style. This uses entries from $D01400; the effect list below remains for no real reason.
     - 00 = The screen goes black instantly and fades in, standard-door style.
     - 01 = Standard door-style warp.
     - 02 = Standard door-style warp, but the screen turns white instead of black.
@@ -52,5 +52,4 @@ DD = Warp style. This uses entries from $D01400; the effect list below remains f
     - 1F = Ghost-filled tunnel warp.
     - 20 = Ghost-filled tunnel warp.
     - 21 = Touching a hole warp - falling sound and the screen slides up.
-
-EE = Unknown.
+- EE = Unknown.

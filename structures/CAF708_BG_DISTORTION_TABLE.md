@@ -1,71 +1,67 @@
-# CAF708 - BG Distortion Table
+# $CAF708 - BG Distortion Table
 
-CAF708 to CAFFFE (0008F7) = Battle BGs: Distortion Table
+$CAF708 to $CAFFFE (0008F7)
 135 17-byte entries.
 
 
 Setup:
-327 x [01 01 04 00 00 0F 00 00 00 00 00 00 00 01 00 00 00] at $CADCA1.
-Edit CAF719's entry.
+327 x `[01 01 04 00 00 0F 00 00 00 00 00 00 00 01 00 00 00]` at [$CADCA1](CADCA1_BG_DATA_TABLE.md).
+Edit $CAF719's entry.
 
 The entries seem to have a paired structure...
-  [3 bytes] (seven bytes) (seven bytes)
+- [3 bytes] (seven bytes) (seven bytes)
 Where the (seven bytes) groups are paired.
 
-  AA BB CC
-  DD EE FF GG HH II JJ
-  KK LL MM NN OO PP QQ
+`[AA BB CC DD DD EE EE FF GG HH II II JJ JJ KK LL MM]`
 
 
 
-  AABB - ???
+- AA - ???
+- BB - ???
 
-    CC - 01: Horizontal, smooth
-         02: Horizontal, interlaced
-         03: Vertical, smooth
-         04: ???
+- CC
+    - 01: Horizontal, smooth
+    - 02: Horizontal, interlaced
+    - 03: Vertical, smooth
+    - 04: ???
 
-  DDEE - Ripple frequency
-  FFGG - Ripple amplitude
-    HH - ???
-  IIJJ - ???
+- DD - Ripple frequency
+- EE - Ripple amplitude
+- FF - ???
+- GG - ???
+- HH - ???
 
-  KKLL - Increase in (ripple frequency) each iteration
-  MMNN - Increase in (ripple amplitude) each iteration
-    OO - Speed
-  PPQQ - ???
-
-
-
-
-
-
-
-
+- II - Increase in (ripple frequency) each iteration
+- JJ - Increase in (ripple amplitude) each iteration
+- KK - Speed
+- LL - ???
+- MM - ???
 
 
 Working from the assembly reference...
 
    $04 = Entry number
+
 $06+08 = AF908 table root pointer
+
 $0A+0C = Pointer to specific entry
+
    $10 = 17 * entry number
 
 What is $1B holding?
 A pointer, it would seem, but to where?
 
 
-
-$1B,66 = First and second bytes
-$1B,68 = Third byte
-$1B,69 = Fourth and fifth bytes
-$1B,6B = Sixth and seventh bytes
-$1B,6D = Eighth byte
-$1B,6E = Ninth and tenth bytes
-$1B,70 = Eleventh and twelfth bytes
-$1B,72 = Thirteenth and fourteenth bytes
-$1B,74 = Fifteenth byte
-$1B,75 = Sixteenth and seventeenth bytes
+- $1B,66 = First and second bytes
+- $1B,68 = Third byte
+- $1B,69 = Fourth and fifth bytes
+- $1B,6B = Sixth and seventh bytes
+- $1B,6D = Eighth byte
+- $1B,6E = Ninth and tenth bytes
+- $1B,70 = Eleventh and twelfth bytes
+- $1B,72 = Thirteenth and fourteenth bytes
+- $1B,74 = Fifteenth byte
+- $1B,75 = Sixteenth and seventeenth bytes
 
 
 

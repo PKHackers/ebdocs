@@ -1,4 +1,4 @@
-# 7E9FAC BATTLERS TABLE
+# $7E9FAC - Battlers' Table
 
 ## Misc Notes
 
@@ -197,14 +197,14 @@ Observation on shield health:
 
 Starting status (enemy-root + 0x59)
 
-   0x01 --> B8E5 --> X = 0x0002, A = $02, JSR 9CDC --> B92C           PSI Shield Alpha
-   0x02 --> B8EF --> X = 0x0001, A = $02, JSR 9CDC --> B92C           PSI Shield Beta
-   0x03 --> B8F9 --> X = 0x0004, A = $02, JSR 9CDC --> B92C           Shield Alpha
-   0x04 --> B903 --> X = 0x0003, A = $02, JSR 9CDC --> B92C           Shield Beta
-   0x05 --> B90D --> SEP 20, A = 0x01, X = $02, STA $001F,X --> B92C  Asleep
-   0x06 --> B918 --> SEP 20, A = 0x04, X = $02, STA $0021,X --> B92C  Can't concentrate
-   0x07 --> B923 --> SEP 20, A = 0x01, X = $02, STA $0020,X --> B92C  Feeling strange
-   else --> B92C
+    0x01 --> B8E5 --> X = 0x0002, A = $02, JSR 9CDC --> B92C           PSI Shield Alpha
+    0x02 --> B8EF --> X = 0x0001, A = $02, JSR 9CDC --> B92C           PSI Shield Beta
+    0x03 --> B8F9 --> X = 0x0004, A = $02, JSR 9CDC --> B92C           Shield Alpha
+    0x04 --> B903 --> X = 0x0003, A = $02, JSR 9CDC --> B92C           Shield Beta
+    0x05 --> B90D --> SEP 20, A = 0x01, X = $02, STA $001F,X --> B92C  Asleep
+    0x06 --> B918 --> SEP 20, A = 0x04, X = $02, STA $0021,X --> B92C  Can't concentrate
+    0x07 --> B923 --> SEP 20, A = 0x01, X = $02, STA $0020,X --> B92C  Feeling strange
+    else --> B92C
 
 ## Weakness usage
 
