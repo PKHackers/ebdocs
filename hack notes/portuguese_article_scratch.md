@@ -7,6 +7,7 @@
 
 * Entry points for the new [1F 18] and [1F 19]
 
+
     C1/6582: C2 31        REP #$31         <-- [1F 18] start point (Print Item Name with Indefinite Article)
     C1/6584: 0B           PHD
     C1/6585: F4 AD 65     PEA $65AD
@@ -15,7 +16,9 @@
     C1/658C: 0B           PHD
     C1/658D: F4 BB 65     PEA $65BB
 
+
 * Common assembly for both text codes: reserve direct page space, find what item we're talking about (handling the 00-arg case along the way), read a gender/quantity value from a new 256-byte table of our creation.
+
 
     C1/6590: 48           PHA
     C1/6591: 7B           TDC
@@ -34,7 +37,9 @@
     C1/65AC: AA           TAX                  (4 combinations of masculine/feminine and singular/plural)
     C1/65AD: 60           RTS              <-- Jump to the address we loaded with PEA earlier
 
+
 * [1F 18]: Load an indefinite article string
+
 
     C1/65AE: BF -- -- --  LDA $------,X    <-- Address of a table of four 4-byte pointers
     C1/65B2: A5 0E        STA $0E                to the strings for indefinite articles
@@ -42,19 +47,24 @@
     C1/65B8: A5 10        STA $10
     C1/65BA: 80 0C        BRA $65C8
 
+
 * [1F 19]: Load a definite article string
+
 
     C1/65BC: BF -- -- --  LDA $------,X    <-- Address of a table of four 4-byte pointers
     C1/65C0: A5 0E        STA $0E                to the strings for definite articles
     C1/65C2: BF -- -- --  LDA $------,X    <-- That address plus two
     C1/65C6: A5 10        STA $10
 
+
 * Common end assembly for both text codes
+
 
     C1/65C8: 22 B1 86 C1  JSR $C186B1      <-- Print the article string
     C1/65CC: A6 06        LDX $06          <-- Retrieve the item number from $06
     C1/65CE: 2B           PLD
     C1/65CF: 4C BF 46     JMP $46BF        <-- [1C 05 XX]
+
 
 ## Original attempt
 
@@ -96,5 +106,3 @@ If the above code was JSLed to, return now.
     A6 06        LDX $06          <-- Retrieve the item number from $06.
     2B           PLD
     4C BF 46     JMP $46BF        <-- [1C 05 xx]
-
-.
