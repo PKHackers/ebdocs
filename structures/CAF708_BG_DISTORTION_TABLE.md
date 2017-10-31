@@ -64,7 +64,6 @@ A pointer, it would seem, but to where?
 - $1B,75 = Sixteenth and seventeenth bytes
 
 
-
     C2/CE05: A7 0A        LDA [$0A]
     C2/CE07: A0 66 00     LDY #$0066
     C2/CE0A: 91 1B        STA ($1B),Y

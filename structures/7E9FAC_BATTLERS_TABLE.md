@@ -155,12 +155,12 @@ Observation on shield health:
 - 34: Speed
 - 35: Guts
 - 36: Luck
-- 37: Effectiveness of Paralysis    C2B639 used on value before storing
-- 38: Effectiveness of PSI Freeze   C2B608 "
-- 39: Effectiveness of PSI Flash    C2B639 "
-- 3A: Effectiveness of PSI Fire     C2B608 "
-- 3B: Effectiveness of Brainshock   C2B639 "
-- 3C: Effectiveness of Hypnosis     C2B639 "
+- 37: Effectiveness of Paralysis    $C2B639 used on value before storing
+- 38: Effectiveness of PSI Freeze   $C2B608 "
+- 39: Effectiveness of PSI Flash    $C2B639 "
+- 3A: Effectiveness of PSI Fire     $C2B608 "
+- 3B: Effectiveness of Brainshock   $C2B639 "
+- 3C: Effectiveness of Hypnosis     $C2B639 "
 
          C2/B608: 00 = 99% (255/256)
                   01 = 70% (179/256)
